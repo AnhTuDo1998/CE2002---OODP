@@ -46,4 +46,8 @@ public class Student{
     public int getAcadYear(){
         return this.acadYear;
     }
+
+    public char getGender(){
+        return this.gender;
+    }
 }
