@@ -15,5 +15,13 @@ public class Course{
     public String getCourseCode(){
         return this.courseCode;
     }
-    
+
+    public int getAU(){
+        return this.AU;
+    }
+
+    public String getCourseCoordinator(){
+        return this.courseCoordinator;
+    }
+
 }
