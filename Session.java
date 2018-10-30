@@ -1,8 +1,10 @@
 import java.util.*;
 public class Session{
-    private int Index;
-    private String lectureDateTime;
-    private String tutorialDateTime;
-    private String labDateTime;
+    private String type; //lec OR tut or lab
+    private String group;
+    private String dateTime;
     private String tutorName;
+    private int maxCapacity;
+    private int numberRegistered;
+    private ArrayList<Student> studentList = new ArrayList<Student>();
 }

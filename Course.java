@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Course{
-    private ArrayList<Index> indexList = new ArrayList<Index>();
+    private ArrayList<Session> indexList = new ArrayList<Session>();
     private String courseName;
     private String courseCode;
     private int AU;
