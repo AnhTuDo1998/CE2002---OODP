@@ -9,6 +9,15 @@ public class Course{
     private ArrayList<Assessment> results = new ArrayList<Assessment>(); 
     //index 0 is equivalent to exam marks, the rest are coursemarks
 
+    public Course(){}
+
+    public Course(String courseName, String courseCode, int AU, String courseCoordinator){
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+        this.AU = AU;
+        this.courseCoordinator = courseCoordinator;
+    }
+
     public String getCourseName(){
         return this.courseName;
     }
@@ -58,7 +67,7 @@ public class Course{
             else{
                 System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
                 confirm = sc.next();
-                if(confirm == Y){
+                if(confirm == "Y"){
                     totalWeightage += weightage;
                     results.add(new Assessment(name,weightage));
                     System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);

@@ -26,6 +26,5 @@ public class Assessment{
         this.weightage = weightage;
     }
 
-
-    
+   
 }
