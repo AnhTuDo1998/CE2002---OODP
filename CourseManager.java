@@ -25,6 +25,17 @@ public class CourseManager{
         }
         courseCatalog.add(new Course(courseName, courseCode, AU, courseCoordinator));
         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
+        //print out all courses after added in
+        printCourseCatalog();
+    }
+
+    public void printCourseCatalog(){
+        int i;
+        System.out.println("Course in current Catalog: ");
+        for (i = 0; i < courseCatalog.size(); i++){
+            System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator)
+        }
     }
     
+
 }
