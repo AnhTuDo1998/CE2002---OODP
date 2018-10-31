@@ -3,9 +3,9 @@ import java.util.*;
 public class Assessment{
 
     private String assessmentName;
-    private int weightage;
+    private Double weightage;
 
-    public Assessment(String name, int weightage)){
+    public Assessment(String name, double weightage){
         this.assessmentName = name;
         this.weightage = weightage;
     }
@@ -26,5 +26,4 @@ public class Assessment{
         this.weightage = weightage;
     }
 
-   
 }
