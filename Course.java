@@ -1,14 +1,20 @@
 import java.util.*;
 
 public class Course{
+    //Record of Session (Tut, Lab and Lecture) under a course
     private ArrayList<Session> indexList = new ArrayList<Session>();
+    //Record of Assessment (Exam and Coursework) under a course
+    //index 0 is equivalent to exam marks, the rest are coursemarks
+    private ArrayList<Assessment> results = new ArrayList<Assessment>(); 
+
+    //Other relevant information of a course
     private String courseName;
     private String courseCode;
     private int AU;
     private String courseCoordinator;
-    private ArrayList<Assessment> results = new ArrayList<Assessment>(); 
-    //index 0 is equivalent to exam marks, the rest are coursemarks
 
+    
+    //default constructor
     public Course(){}
 
     public Course(String courseName, String courseCode, int AU, String courseCoordinator){
@@ -18,6 +24,7 @@ public class Course{
         this.courseCoordinator = courseCoordinator;
     }
 
+    //accessers and modifiers
     public String getCourseName(){
         return this.courseName;
     }
@@ -34,6 +41,7 @@ public class Course{
         return this.courseCoordinator;
     }
 
+    //Add in new Session (Lab, Tut, LT)
     public int addSession(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter session type: (lec/tut/lab)");
@@ -48,9 +56,10 @@ public class Course{
         String tutorName = sc.next();
         System.out.println("Enter session's max capacity: ");
         int maxCapacity = sc.nextInt();
-        results.add(new Session(type, group, dayTime, location, tutorName, maxCapacity, 0));
+        indexList.add(new Session(type, group, dayTime, location, tutorName, maxCapacity, 0));
     }
 
+    //Set Course Assessment Information
     public int setAssessment(){
         String name;
         int weightage;

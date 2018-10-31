@@ -33,7 +33,7 @@ public class CourseManager{
         int i;
         System.out.println("Course in current Catalog: ");
         for (i = 0; i < courseCatalog.size(); i++){
-            System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator)
+            System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
         }
     }
     
