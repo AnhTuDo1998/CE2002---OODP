@@ -3,7 +3,12 @@ import java.util.*;
 public class Assessment{
 
     private String assessmentName;
-    private Double weightage;
+    private int weightage;
+
+    public Assessment(String name, int weightage)){
+        this.assessmentName = name;
+        this.weightage = weightage;
+    }
 
     public String getAssessmentName(){
         return this.assessmentName;
@@ -20,6 +25,7 @@ public class Assessment{
     public void setWeightage(Double weightage){
         this.weightage = weightage;
     }
+
 
     
 }
