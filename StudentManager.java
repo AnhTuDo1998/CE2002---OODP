@@ -36,7 +36,8 @@ public class StudentManager{
         int i;
         System.out.println("All students in record: ");
         for (i = 0; i < studentCatalog.size(); i++){
-            System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
+            System.out.println("Student: "+ studentCatalog.get(i).studentName +", Matric No.:" + studentCatalog.get(i).matricNumber + ", "+ studentCatalog.get(i).school + " Year " + studentCatalog.get(i).acadYear + " , "+ studentCatalog.get(i).gender);
         }
     }
+    
 }
