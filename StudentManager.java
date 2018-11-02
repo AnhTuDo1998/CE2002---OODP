@@ -37,7 +37,6 @@ public class StudentManager{
         System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender +"is added!");
         //print out all student (after added)
         printAllStudent();
-        sc.close();
     }
 
     public void printAllStudent(){

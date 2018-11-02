@@ -34,6 +34,7 @@ public class ScrameApp{
                     //studMg.regStudentToCourse();
                     break;
                 case 4: //Check available slots in a class
+                    courseManager.checkVacancy();
                     break;
                 case 5: //print student list
                     break;
