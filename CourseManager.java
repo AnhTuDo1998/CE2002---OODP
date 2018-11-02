@@ -3,7 +3,8 @@ import java.util.*;
 public class CourseManager{
     private ArrayList<Course> courseCatalog= new ArrayList<Course>();
     
-    public addCourse(){
+    //rmb to implement return int
+    public int addCourse(){
         String courseName;
         String courseCode;
         String courseCoordinator;
@@ -29,6 +30,20 @@ public class CourseManager{
         printCourseCatalog();
     }
 
+    public int removeCourse(){}
+
+    //return -1 if not exist 
+    public int verifyCourse(String courseCode){
+        int i;
+        int exist = -1;
+
+        for (i = 0; i < courseCatalog.size(); i++){
+            if (courseCatalog.get(i).getCourseCode() == courseCode)
+                exist = i;
+        }
+        return exist;
+    }
+
     public void printCourseCatalog(){
         int i;
         System.out.println("Course in current Catalog: ");
@@ -42,17 +57,24 @@ public class CourseManager{
         Scanner sc = new Scanner(System.in);
         String courseCode;
         boolean success = false;
+        int index = -1;
 
         printCourseCatalog(); //print out all the course
         System.out.println("Please enter the course code that you want to create/add new session.");
         courseCode = sc.next();
 
-        for(i = 0; i < courseCatalog.size(); i++){
+        /*for(i = 0; i < courseCatalog.size(); i++){
             if(courseCatalog.get(i).getCourseCode() == courseCode){
                 success = courseCatalog.get(i).addSession(); //will return true or false depends on whether the session is created
                 break;
             }
+        }*/
+        index = verifyCourse(courseCode);
+
+        if (index >= 0){
+            success = courseCatalog.get(index).addSession(); //will return true or false depends on whether the session is created
         }
+
         //session created successfully
         if(success){
             System.out.println("New session for " + courseCode + " is created successfully!");
