@@ -5,10 +5,10 @@ public class CourseManager{
     
     //rmb to implement return int
     public int addCourse(){
-        String courseName;
-        String courseCode;
-        String courseCoordinator;
-        int AU;
+        String courseName = "";
+        String courseCode = "";
+        String courseCoordinator = "";
+        int AU = 0;
         String confirm = "N";
         Scanner sc = new Scanner(System.in);
         
@@ -82,7 +82,7 @@ public class CourseManager{
     }
     
     public void addSession(){
-        int i;
+        //int i;
         Scanner sc = new Scanner(System.in);
         String courseCode;
         boolean success = false;

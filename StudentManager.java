@@ -3,7 +3,7 @@ import java.util.*;
 public class StudentManager{
     private ArrayList<Student> studentCatalog= new ArrayList<Student>();
 
-    public addStudent(){
+    public int addStudent(){
         String studentName;
         String matricNumber;
         String school;
@@ -36,7 +36,7 @@ public class StudentManager{
         int i;
         System.out.println("All students in record: ");
         for (i = 0; i < studentCatalog.size(); i++){
-            System.out.println("Student: "+ studentCatalog.get(i).studentName +", Matric No.:" + studentCatalog.get(i).matricNumber + ", "+ studentCatalog.get(i).school + " Year " + studentCatalog.get(i).acadYear + " , "+ studentCatalog.get(i).gender);
+            System.out.println("Student: "+ studentCatalog.get(i).getName() +", Matric No.:" + studentCatalog.get(i).getMatricNumber() + ", "+ studentCatalog.get(i).getSchool() + " Year " + studentCatalog.get(i).getAcadYear() + " , "+ studentCatalog.get(i).getGender());
         }
     }
     
