@@ -34,9 +34,10 @@ public class CourseManager{
     }
 
     public int removeCourse(){
-        int i;
+        int i = 0;
         Scanner sc = new Scanner(System.in);
-        index = -1;
+        int index = -1;
+        String courseCode;
 
         printCourseCatalog();
         System.out.println("Please enter the course code that you want to remove the course");
@@ -118,8 +119,9 @@ public class CourseManager{
     public void removeSession(){
         int i;
         Scanner sc = new Scanner(System.in);
-        boolean success;
-        index = -1;
+        boolean success = false;
+        int index = -1;
+        String courseCode;
 
         printCourseCatalog();
         System.out.println("Please enter the course code that you want to remove session.");

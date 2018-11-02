@@ -27,7 +27,7 @@ public class Student{
         for (Course course: coursesRegistered){
             System.out.println("PRINTING YO");
             course.getCourseCode();
-            course.getMarks(this.matricNumber);
+            //course.getMarks(this.matricNumber);
         }
     }
 

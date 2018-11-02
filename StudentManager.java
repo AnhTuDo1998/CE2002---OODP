@@ -4,16 +4,16 @@ public class StudentManager{
     private ArrayList<Student> studentCatalog= new ArrayList<Student>();
 
     public boolean addStudent(){
-        String studentName;
-        String matricNumber;
-        String school;
-        int acadYear;
-        char gender;
-        String confirm = "N";
+        String studentName = "";
+        String matricNumber = "";
+        String school = "";
+        int acadYear = 0;
+        char gender = 'N';
+        char confirm = 'N';
         Scanner sc = new Scanner(System.in);
 
         
-        while(confirm != "Y"){
+        while(confirm != 'Y'){
             System.out.println("Enter student's name: ");
             studentName = sc.nextLine();
             System.out.println("Enter student's matric No.: ");
@@ -25,8 +25,8 @@ public class StudentManager{
             sc.nextLine();
             System.out.println("Enter student's gender: ");
             gender = sc.next().charAt(0);
-            if(studentExits(matricNumber)){
-                System.our.println("Student with matric number " + matricNumber + " already exists!");
+            if(studentExists(matricNumber)){
+                System.out.println("Student with matric number " + matricNumber + " already exists!");
             }
             else{
                 System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
@@ -38,6 +38,7 @@ public class StudentManager{
         //print out all student (after added)
         printAllStudent();
         sc.close();
+        return true;
     }
 
     public void printAllStudent(){
