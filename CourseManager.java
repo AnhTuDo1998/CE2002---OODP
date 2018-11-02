@@ -22,6 +22,7 @@ public class CourseManager{
             courseCoordinator = sc.next();
             System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
             System.out.println("Are you sure you want to add in this course? (Y/N)");
+            confirm = sc.next();
         }
         courseCatalog.add(new Course(courseName, courseCode, AU, courseCoordinator));
         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
