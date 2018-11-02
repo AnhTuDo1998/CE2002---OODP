@@ -8,7 +8,7 @@ public class ScrameApp{
         int choice;
         boolean cont = true;
         while (cont){
-            System.out.println("Select a function: ");
+            System.out.println("Menu");
             System.out.println("1. Add a student ");
             System.out.println("2. Add a course");
             System.out.println("3. Register student for a course");
@@ -20,6 +20,7 @@ public class ScrameApp{
             System.out.println("9. Print course statistics");
             System.out.println("10. Print student transcript");
             System.out.println("11. Exit");
+            System.out.print("Enter your action: ");
             choice = sc.nextInt();
             switch(choice){
                 case 1: //add a student
