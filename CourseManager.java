@@ -28,6 +28,8 @@ public class CourseManager{
         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
         //print out all courses after added in
         printCourseCatalog();
+        sc.close();
+        return 1;
     }
 
     public int removeCourse(){
