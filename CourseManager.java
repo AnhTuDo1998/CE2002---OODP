@@ -30,7 +30,34 @@ public class CourseManager{
         printCourseCatalog();
     }
 
-    public int removeCourse(){}
+    public int removeCourse(){
+        int i;
+        Scanner sc = new Scanner(System.in);
+        index = -1;
+
+        printCourseCatalog();
+        System.out.println("Please enter the course code that you want to remove the course");
+        courseCode = sc.next();
+
+        index = verifyCourse(courseCode);
+
+        //return -1 if failed, return index of the removed array element if success
+        if (index >= 0){
+            courseCatalog.remove(i); //will return true or false depends on whether the session is created
+            return index;
+        }
+
+        else{
+            return index;
+        }
+
+        /*for(i = 0; i < courseCatalog.size(); i++){
+            if(courseCatalog.get(i).getCourseCode()== courseCode){
+                success = courseCatalog.get(i).removeSession();
+                break;
+            }
+        }*/
+    }
 
     //return -1 if not exist 
     public int verifyCourse(String courseCode){
@@ -79,24 +106,42 @@ public class CourseManager{
         if(success){
             System.out.println("New session for " + courseCode + " is created successfully!");
         }else{
-            System.out.println("Session is not added!");
+            System.out.println("Session is not added! Session does not exist");
         }
     }
 
+
+    //find a way to delete seperate session ?
     public void removeSession(){
         int i;
         Scanner sc = new Scanner(System.in);
         boolean success;
+        index = -1;
 
         printCourseCatalog();
         System.out.println("Please enter the course code that you want to remove session.");
         courseCode = sc.next();
 
-        for(i = 0; i < courseCatalog.size(); i++){
+        index = verifyCourse(courseCode);
+
+        if (index >= 0){
+            success = courseCatalog.get(index).removeSession(); //will return true or false depends on whether the session is created
+        }
+
+        //session created successfully
+        if(success){
+            System.out.println("Session for " + courseCode + " is deleted successfully!");
+        }
+        
+        else{
+            System.out.println("Session is not added! Session does not exist");
+        }
+
+        /*for(i = 0; i < courseCatalog.size(); i++){
             if(courseCatalog.get(i).getCourseCode()== courseCode){
                 success = courseCatalog.get(i).removeSession();
                 break;
             }
-        }
+        }*/
     }
 }
