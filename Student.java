@@ -20,7 +20,7 @@ public class Student{
     }
 
     public void registerCourse(String courseCode){
-
+        
     }
 
     public void printTranscript(){
