@@ -18,7 +18,7 @@ public class StudentManager{
             studentName = sc.nextLine();
             System.out.println("Enter student's matric No.: ");
             matricNumber = sc.nextLine();
-            System.out.println("Enter student's home school: ");
+            System.out.println("Enter student's school (SCSE): ");
             school = sc.nextLine();
             System.out.println("Enter student's year of study: ");
             acadYear = sc.nextInt();
@@ -31,13 +31,13 @@ public class StudentManager{
             else{
                 System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
                 System.out.println("Are you sure you want to add in this student? (Y/N)");
+                confirm = sc.next().charAt(0);
             }
         }
         studentCatalog.add(new Student(studentName, matricNumber, gender, school, acadYear));
         System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender +"is added!");
         //print out all student (after added)
         printAllStudent();
-        sc.close();
         return true;
     }
 
