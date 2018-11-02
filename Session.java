@@ -48,15 +48,14 @@ public class Session{
         return this.numberRegistered;
     }
 
-    public addStudent(Student s){ //add a student into an existing group
+    public boolean addStudent(Student s){ //add a student into an existing group
         if(this.maxCapacity == this.numberRegistered){
-            return -1; //group is already full
+            return false; //group is already full
         }else{
             this.numberRegistered++;
             System.out.println("Student added to " + getType() + " " + getGroup());
-            return 1; //student added
+            return true; //student added
         }
     }
     
-
 }

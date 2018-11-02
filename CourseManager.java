@@ -33,9 +33,48 @@ public class CourseManager{
         int i;
         System.out.println("Course in current Catalog: ");
         for (i = 0; i < courseCatalog.size(); i++){
-            System.out.println(courseCatalog.get(i).courseCode + " " + courseCatalog.get(i).courseName + " AU: " + courseCatalog.get(i).AU + " by " + courseCatalog.get(i).courseCoordinator);
+            System.out.println(courseCatalog.get(i).getCourseCode() + " " + courseCatalog.get(i).getCourseName() + " AU: " + courseCatalog.get(i).getAU() + " by " + courseCatalog.get(i).getCourseCoordinator());
         }
     }
     
+    public void addSession(){
+        int i;
+        Scanner sc = new Scanner(System.in);
+        String courseCode;
+        boolean success = false;
 
+        printCourseCatalog(); //print out all the course
+        System.out.println("Please enter the course code that you want to create/add new session.");
+        courseCode = sc.next();
+
+        for(i = 0; i < courseCatalog.size(); i++){
+            if(courseCatalog.get(i).getCourseCode() == courseCode){
+                success = courseCatalog.get(i).addSession(); //will return true or false depends on whether the session is created
+                break;
+            }
+        }
+        //session created successfully
+        if(success){
+            System.out.println("New session for " + courseCode + " is created successfully!");
+        }else{
+            System.out.println("Session is not added!");
+        }
+    }
+
+    public void removeSession(){
+        int i;
+        Scanner sc = new Scanner(System.in);
+        boolean success;
+
+        printCourseCatalog();
+        System.out.println("Please enter the course code that you want to remove session.");
+        courseCode = sc.next();
+
+        for(i = 0; i < courseCatalog.size(); i++){
+            if(courseCatalog.get(i).getCourseCode()== courseCode){
+                success = courseCatalog.get(i).removeSession();
+                break;
+            }
+        }
+    }
 }

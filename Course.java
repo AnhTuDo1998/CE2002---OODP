@@ -42,7 +42,10 @@ public class Course{
     }
 
     //Add in new Session (Lab, Tut, LT)
-    public int addSession(){
+    //need to check for whethere there's existing session already
+    public boolean addSession(){
+        boolean success = false;
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter session type: (lec/tut/lab)");
         String type = sc.next();
@@ -56,7 +59,56 @@ public class Course{
         String tutorName = sc.next();
         System.out.println("Enter session's max capacity: ");
         int maxCapacity = sc.nextInt();
-        indexList.add(new Session(type, group, dayTime, location, tutorName, maxCapacity, 0));
+        if(sessionExist(group) >= 0){
+            System.out.println("This session is already in!");
+        }else{
+            success = indexList.add(new Session(type, group, dayTime, location, tutorName, maxCapacity, 0));
+        }
+        return success;
+    }
+
+    //Remove session
+    public boolean removeSession(){
+        boolean success;
+        Scanner sc = new Scanner(System.in);
+        String group;
+        int index;
+
+        printIndexList();
+        System.out.println("Which session do you want to remove?");
+        group = sc.next();
+        index = sessionExist(group);
+        if(index >= 0){
+            success = indexList.remove(indexList.get(index)); //if removed then return true
+            return success;
+        }else{
+            return false; //else false
+        }
+    }
+
+    //print session catalogue
+    public void printIndexList(){
+        int i;
+
+        System.out.println("Sessions for " + this.courseName + " " + this.courseCode);
+        for(i = 0; i < indexList.size(); i++){
+            System.out.println(indexList.get(i).getGroup() + " " + indexList.get(i).getType() + " " +indexList.get(i).dayTime());
+        }
+    }
+
+    //check if session exist according to group name first
+    //may need to add more though
+    public int sessionExist(String sessionGroup){
+        int i;
+        int index = -1;
+
+        for(i = 0; i < indexList.size(); i++){  //return index if found, return -1 if not found
+            if(indexList.get(i).getGroup() == sessionGroup){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     //Set Course Assessment Information
