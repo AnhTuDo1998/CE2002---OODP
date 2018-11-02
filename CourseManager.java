@@ -9,27 +9,27 @@ public class CourseManager{
         String courseCode = "";
         String courseCoordinator = "";
         int AU = 0;
-        String confirm = "N";
+        char confirm = 'N';
         Scanner sc = new Scanner(System.in);
         
-        while(confirm != "Y"){
+        while(confirm != 'Y'){
             System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
-            courseName = sc.next();
+            courseName = sc.nextLine();
             System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
-            courseCode = sc.next();
+            courseCode = sc.nextLine();
             System.out.println("Enter course AU: (2/3)");
             AU = sc.nextInt();
+            sc.nextLine();
             System.out.println("Enter name of course coordinator: ");
-            courseCoordinator = sc.next();
+            courseCoordinator = sc.nextLine();
             System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
             System.out.println("Are you sure you want to add in this course? (Y/N)");
-            confirm = sc.next();
+            confirm = sc.next().charAt(0);
         }
         courseCatalog.add(new Course(courseName, courseCode, AU, courseCoordinator));
         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
         //print out all courses after added in
         printCourseCatalog();
-        sc.close();
         return 1;
     }
 
@@ -40,7 +40,7 @@ public class CourseManager{
 
         printCourseCatalog();
         System.out.println("Please enter the course code that you want to remove the course");
-        courseCode = sc.next();
+        courseCode = sc.nextLine();
 
         index = verifyCourse(courseCode);
 
@@ -91,7 +91,7 @@ public class CourseManager{
 
         printCourseCatalog(); //print out all the course
         System.out.println("Please enter the course code that you want to create/add new session.");
-        courseCode = sc.next();
+        courseCode = sc.nextLine();
 
         /*for(i = 0; i < courseCatalog.size(); i++){
             if(courseCatalog.get(i).getCourseCode() == courseCode){
@@ -123,7 +123,7 @@ public class CourseManager{
 
         printCourseCatalog();
         System.out.println("Please enter the course code that you want to remove session.");
-        courseCode = sc.next();
+        courseCode = sc.nextLine();
 
         index = verifyCourse(courseCode);
 

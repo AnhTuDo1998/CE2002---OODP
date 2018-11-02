@@ -15,15 +15,16 @@ public class StudentManager{
         
         while(confirm != "Y"){
             System.out.println("Enter student's name: ");
-            studentName = sc.next();
+            studentName = sc.nextLine();
             System.out.println("Enter student's matric No.: ");
-            matricNumber = sc.next();
+            matricNumber = sc.nextLine();
             System.out.println("Enter student's home school: ");
-            school = sc.next();
+            school = sc.nextLine();
             System.out.println("Enter student's year of study: ");
             acadYear = sc.nextInt();
+            sc.nextLine();
             System.out.println("Enter student's gender: ");
-            gender = sc.next.charAt(0);
+            gender = sc.next().charAt(0);
             if(studentExits(matricNumber)){
                 System.our.println("Student with matric number " + matricNumber + " already exists!");
             }

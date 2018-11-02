@@ -48,17 +48,18 @@ public class Course{
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter session type: (lec/tut/lab)");
-        String type = sc.next();
+        String type = sc.nextLine();
         System.out.println("Enter session group : (SEP1/CE3/SEA2)");
-        String group = sc.next();
+        String group = sc.nextLine();
         System.out.println("Enter session timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
-        String dayTime = sc.next();
+        String dayTime = sc.nextLine();
         System.out.println("Enter session location: (LT19a/TRx44/SWLAB3)");
-        String location = sc.next();
+        String location = sc.nextLine();
         System.out.println("Enter session tutor name: ");
-        String tutorName = sc.next();
+        String tutorName = sc.nextLine();
         System.out.println("Enter session's max capacity: ");
         int maxCapacity = sc.nextInt();
+        sc.nextLine(); //capture \n
         if(sessionExist(group) >= 0){
             System.out.println("This session is already in!");
         }else{
@@ -76,7 +77,7 @@ public class Course{
 
         printIndexList();
         System.out.println("Which session do you want to remove?");
-        group = sc.next();
+        group = sc.nextLine();
         index = sessionExist(group);
         if(index >= 0){
             success = indexList.remove(indexList.get(index)); //if removed then return true
@@ -121,18 +122,19 @@ public class Course{
         while(totalWeightage!=100){
             if(finalsSet){
                 System.out.println("Enter assessment type: (Quiz, Lab Report)");
-                name = sc.next();
+                name = sc.nextLine();
             }
             else name = "Finals"
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
             System.out.prinln("Remaining weightage left: " + weightage);
-            weightage = sc.nextInt();
+            weightage = sc.nextDouble();
+            sc.nextLine();
             if(weightage + totalWeightage > 100){
                 System.out.println("Invalid weightage! Should not exceed a total of 100!");
             }
             else{
                 System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                confirm = sc.next();
+                confirm = sc.nextLine();
                 if(confirm == "Y"){
                     totalWeightage += weightage;
                     results.add(new Assessment(name,weightage));

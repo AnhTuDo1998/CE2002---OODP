@@ -22,6 +22,7 @@ public class ScrameApp{
             System.out.println("11. Exit");
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
+            sc.nextLine();
             switch(choice){
                 case 1: //add a student
                     studMg.addStudent();
@@ -54,7 +55,6 @@ public class ScrameApp{
                     System.out.println("Invalid choice, please try again!");
             }
         }
-        sc.close();
 
     }
 }
