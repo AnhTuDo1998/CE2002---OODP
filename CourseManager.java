@@ -3,6 +3,10 @@ import java.util.*;
 public class CourseManager{
     private ArrayList<Course> courseCatalog= new ArrayList<Course>();
     
+    public Course getCourse(int index){
+        return courseCatalog.get(index);
+    }
+
     //rmb to implement return int
     public int addCourse(){
         String courseName = "";
@@ -148,5 +152,12 @@ public class CourseManager{
                 break;
             }
         }*/
+    }
+
+    public void checkVacancy(String courseCode){
+        //find index or course you want to check vacancy
+        int index = verifyCourse(courseCode);
+        //print out all session and let user choose
+
     }
 }
