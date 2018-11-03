@@ -28,13 +28,18 @@ public class CourseManager{
             courseCoordinator = sc.nextLine();
             System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
             System.out.println("Are you sure you want to add in this course? (Y/N)");
-            confirm = sc.next().charAt(0);
+            confirm = sc.nextLine().charAt(0);
         }
         courseCatalog.add(new Course(courseName, courseCode, AU, courseCoordinator));
         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
         //print out all courses after added in
         printCourseCatalog();
         return 1;
+    }
+
+    //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+    public int regStudentToCourse(String matricNumber, int i, String group){
+        return courseCatalog.get(i).registerStudent(matricNumber, group);
     }
 
     public int removeCourse(){
@@ -67,14 +72,15 @@ public class CourseManager{
         }*/
     }
 
-    //return -1 if not exist 
+    //return -1 if not exist , courseindex in arraylist otherwise
     public int verifyCourse(String courseCode){
         int i;
         int exist = -1;
 
         for (i = 0; i < courseCatalog.size(); i++){
-            if (courseCatalog.get(i).getCourseCode() == courseCode)
+            if (courseCatalog.get(i).getCourseCode().equals(courseCode)){
                 exist = i;
+            }
         }
         return exist;
     }
@@ -153,7 +159,11 @@ public class CourseManager{
             }
         }*/
     }
-
+  
+  public void getSessions(int i){
+        courseCatalog.get(i).printSessions();
+  }
+  
     public void checkVacancy(){
         Course tempCourse;
         Session session;
@@ -220,6 +230,4 @@ public class CourseManager{
             System.out.println("Course doesn't exist!");
         }
     }
-
-    
 }

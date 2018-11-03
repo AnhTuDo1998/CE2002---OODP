@@ -6,6 +6,12 @@ public class ScrameApp{
         StudentManager studMg = new StudentManager();
         CourseManager courseMg = new CourseManager();
         int choice;
+        int studentIndex;
+        int courseIndex;
+        int result;
+        String courseCode = "";
+        String matricNumber = "";
+        String group;
         boolean cont = true;
         while (cont){
             System.out.println("Menu");
@@ -31,7 +37,30 @@ public class ScrameApp{
                     courseMg.addCourse();
                     break;
                 case 3: //register student for a course
-                    //studMg.regStudentToCourse();
+                    System.out.println("Enter student's matriculation number: ");
+                    matricNumber = sc.nextLine();
+                    System.out.println("Enter course code to be registered: ");
+                    courseCode = sc.nextLine();
+                    studentIndex = studMg.studentExists(matricNumber);
+                    courseIndex = courseMg.verifyCourse(courseCode);
+                    //if any of them do not exist
+                    System.out.println(studentIndex + " " + courseIndex);
+                    if (studentIndex == -1 || courseIndex == -1){ 
+                        System.out.println("Student or course is not in our records!");
+                        break;
+                    }
+                    else{
+                        courseMg.getSessions(courseIndex);
+                        System.out.println("Please enter the group ID: (SEP1/CE3)");
+                        group = sc.nextLine();
+                        result = courseMg.regStudentToCourse(matricNumber, courseIndex, group);
+                        switch (result){
+                            case 0: studMg.updateCourseTaken(courseCode, studentIndex); break;
+                            case -1: System.out.println("Error! Group is already full!"); break;
+                            case -2: System.out.println("Error! Student is already registered in that group!"); break;
+                            case -3: System.out.println("Error! You have entered a wrong group!"); break;
+                        }
+                    }
                     break;
                 case 4: //Check available slots in a class
                     courseMg.checkVacancy();
