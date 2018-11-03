@@ -34,7 +34,18 @@ public class ScrameApp{
                     //studMg.regStudentToCourse();
                     break;
                 case 4: //Check available slots in a class
-                    courseManager.checkVacancy();
+                    System.out.println("Enter the course code you need check vacancy for: ")
+                    courseMg.printCourseCatalog();
+                    Course course;
+                    String courseCode = sc.nextLine();
+                    int index = courseMg.verifyCourse(courseCode);
+                    if (index!=-1){
+                        course = courseMg.getCourse(index);
+                        System.out.println("Select the session of course to check vacancy: ")
+                        course.printIndexList();
+                        String group = sc.nextLine();
+                        courseMg.checkVacancy(course, group);
+                    }
                     break;
                 case 5: //print student list
                     break;
