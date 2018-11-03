@@ -184,6 +184,41 @@ public class CourseManager{
         else{
             System.out.println("Course does not exist");
         } 
-
     }
+
+    public void printSessionStudent(){
+        int index; //index for course in array list.
+        Scanner sc = new Scanner(System.in);
+        String courseCode;
+        Course obtainedCourse;
+        String sessionGroup;
+        String sessionType;
+        Session group;
+        
+        printCourseCatalog();
+        System.out.println("Please enter the Course that you would like to print out the student list");
+        courseCode = sc.next();
+
+        index = verifyCourse(courseCode); //
+        if(index >= 0){
+            obtainedCourse = courseCatalog.get(index); //getting the course from arraylist
+            obtainedCourse.printIndexList();
+            System.out.println("Enter the session name: ");
+            sessionGroup = sc.next();
+            System.out.println("Enter the session type: ");
+            sessionType = sc.next();
+            group = obtainedCourse.getSession(sessionGroup, sessionType); //return null if not found
+            if(group){
+                System.out.println(courseCode + ": " + sessionGroup + " " + sessionType);
+                System.out.println("==========================================");
+                group.printSessionStudent(); //if exist go ahead and print list
+            }else{
+                System.out.println("Session doesn't exist!"); 
+            }
+        }else{
+            System.out.println("Course doesn't exist!");
+        }
+    }
+
+    
 }
