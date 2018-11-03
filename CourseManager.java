@@ -165,6 +165,7 @@ public class CourseManager{
   }
   
     public void checkVacancy(){
+        Scanner sc = new Scanner(System.in);
         Course tempCourse;
         Session session;
         String courseCode;
@@ -185,10 +186,10 @@ public class CourseManager{
             //get session information from the course
             System.out.println("Select the session group to check vacancy: ");
             tempCourse.printIndexList();
-            group = sc.nextLine();
+            groupSession = sc.nextLine();
             System.out.println("Vacancy for Lab or Tut? ");
             typeSession = sc.nextLine();
-            session = getSession(group, typeSession);
+            session = tempCourse.getSession(groupSession, typeSession);
             System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.numberRegistered()+"/"+session.maxCapacity());
             
         }
