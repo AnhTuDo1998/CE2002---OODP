@@ -25,17 +25,17 @@ public class StudentManager{
             sc.nextLine();
             System.out.println("Enter student's gender: ");
             gender = sc.next().charAt(0);
-            if(studentExists(matricNumber)){
+            if(studentExists(matricNumber) != -1){
                 System.out.println("Student with matric number " + matricNumber + " already exists!");
             }
             else{
-                System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
+                System.out.println("Student: "+ studentName +", Matric Number: " + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
                 System.out.println("Are you sure you want to add in this student? (Y/N)");
                 confirm = sc.next().charAt(0);
             }
         }
         studentCatalog.add(new Student(studentName, matricNumber, gender, school, acadYear));
-        System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender +"is added!");
+        System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender +" is added!");
         //print out all student (after added)
         printAllStudent();
         return true;
@@ -49,10 +49,17 @@ public class StudentManager{
         }
     }
     
-    public boolean studentExists(String matricNumber){
+//return -1 if student is not inside, studentindex otherwise
+    public int studentExists(String matricNumber){
         for (int i = 0; i< studentCatalog.size(); i++){
-            if(studentCatalog.get(i).getMatricNumber() == matricNumber) return true;
+            if(matricNumber.equals(studentCatalog.get(i).getMatricNumber())){
+                return i;
+            } 
         }
-        return false;
+        return -1;
+    }
+
+    public void updateCourseTaken(String courseCode, int i){
+        studentCatalog.get(i).registerCourse(courseCode);
     }
 }
