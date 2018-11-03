@@ -100,6 +100,20 @@ public class Course{
         }
     }
 
+    public Session getSession(String group, String type){
+        int i;
+        Session obtained = null;
+
+        for(i = 0; i < indexList.size(); i++){
+            if(indexList.get(i).getType() == type && indexList.get(i).getGroup() == group){
+                obtained = indexList.get(i);
+                break;
+            }
+        }
+        return obtained;
+    }
+       
+
     //check if session exist according to group name first
     //may need to add more though
     public int sessionExist(String sessionGroup, String type){
@@ -118,10 +132,9 @@ public class Course{
     //Set Course Assessment Information
     public int setAssessment(){
         String name;
-        double weightage = 0;
-        double totalWeightage = 0; //total weightage must be equal to 100
-        boolean finalsSet = false;
-        char confirm = 'N';
+        double weightage;
+        double totalWeightage; //total weightage must be equal to 100
+        boolean finalsSet;
         Scanner sc = new Scanner(System.in);
         while(totalWeightage!=100){
             if(finalsSet){
@@ -130,7 +143,7 @@ public class Course{
             }
             else name = "Finals";
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
-            System.out.println("Remaining weightage left: " + weightage);
+            System.out.prinln("Remaining weightage left: " + weightage);
             weightage = sc.nextDouble();
             sc.nextLine();
             if(weightage + totalWeightage > 100){
@@ -138,8 +151,8 @@ public class Course{
             }
             else{
                 System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                confirm = sc.next().charAt(0);
-                if(confirm == 'Y'){
+                confirm = sc.nextLine();
+                if(confirm == "Y"){
                     totalWeightage += weightage;
                     results.add(new Assessment(name,weightage));
                     if(name.equals("Finals")) finalsSet = true;
