@@ -34,9 +34,8 @@ public class Assessment{
 		String matriculationNumber = sc.nextLine();
 		System.out.println("Enter student's coursework mark: ");
 		double marks = sc.nextDouble();
-		System.out.println("Saving results.:");
 		assessmentResults.put(matriculationNumber, marks);
-		System.out.println("Done.");
+		System.out.println("Saved.");
 	}
 
 	public double retrieveAssessmentResult(String matriculationNumber){
@@ -48,7 +47,7 @@ public class Assessment{
 		}
 	}
 	public boolean removeAssessmentResult(String matriculationNumber){
-		boolean success = false;
+		boolean success = false; 
 		if(assessmentResults.get(matriculationNumber) != null){
 			assessmentResults.remove(matriculationNumber);
 			success = true;
