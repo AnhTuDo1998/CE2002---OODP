@@ -7,7 +7,7 @@ public class Session{
     private String tutorName;
     private int maxCapacity;
     private int numberRegistered;
-    private ArrayList<String> studentList = new ArrayList<String>();
+    private ArrayList<Student> studentList = new ArrayList<Student>();
     
     //create a session
     public Session(String type, String group, String dayTime, String location, String tutorName, int maxCapacity, int numberRegistered){
@@ -49,15 +49,15 @@ public class Session{
     }
 
     //return -1 if full, -2 if student is already inside, 0 if success
-    public int addStudent(String matricNumber){ //add a student into an existing group
+    public int addStudent(Student student){ //add a student into an existing group
         if(this.maxCapacity == this.numberRegistered){
             return -1; //group is already full
         } else {
             for(int i = 0; i < studentList.size(); i++){
-                if(studentList.get(i).equals(matricNumber)) return -2;
+                if(studentList.get(i) == student) return -2;
             }
             this.numberRegistered++;
-            studentList.add(matricNumber);
+            studentList.add(student);
             System.out.println("Student added to " + getType() + " " + getGroup());
             return 0; //student added
         }

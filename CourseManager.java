@@ -38,8 +38,8 @@ public class CourseManager{
     }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
-    public int regStudentToCourse(String matricNumber, int i, String group){
-        return courseCatalog.get(i).registerStudent(matricNumber, group);
+    public int regStudentToCourse(Student student, int i, String group){
+        return courseCatalog.get(i).registerStudent(student, group);
     }
 
     public int removeCourse(){
@@ -93,6 +93,12 @@ public class CourseManager{
         }
     }
     
+    public Course getCourse(String courseCode){
+        for(int i = 0; i < courseCatalog.size(); i++){
+            if(courseCatalog.get(i).getCourseCode().equals(courseCode)) return courseCatalog.get(i);
+        }
+        return null;
+    }
     public void addSession(){
         //int i;
         Scanner sc = new Scanner(System.in);
@@ -172,7 +178,6 @@ public class CourseManager{
         int index;
         String groupSession;
         String typeSession;
-        Scanner sc = new Scanner(System.in);
 
         //Interact with user to get course code
         System.out.println("Enter the course code you need check vacancy for: ");
@@ -190,7 +195,7 @@ public class CourseManager{
             System.out.println("Vacancy for Lab or Tut? ");
             typeSession = sc.nextLine();
             session = tempCourse.getSession(groupSession, typeSession);
-            System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.numberRegistered()+"/"+session.maxCapacity());
+            System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getNumberRegistered()+"/"+session.getMaxCapacity());
             
         }
         else{
@@ -220,7 +225,7 @@ public class CourseManager{
             System.out.println("Enter the session type: ");
             sessionType = sc.next();
             group = obtainedCourse.getSession(sessionGroup, sessionType); //return null if not found
-            if(group){
+            if(group != null){
                 System.out.println(courseCode + ": " + sessionGroup + " " + sessionType);
                 System.out.println("==========================================");
                 group.printSessionStudent(); //if exist go ahead and print list

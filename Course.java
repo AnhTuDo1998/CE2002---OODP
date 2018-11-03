@@ -132,10 +132,11 @@ public class Course{
     //Set Course Assessment Information
     public int setAssessment(){
         String name;
-        double weightage;
-        double totalWeightage; //total weightage must be equal to 100
-        boolean finalsSet;
+        double weightage = 0;
+        double totalWeightage = 0; //total weightage must be equal to 100
+        boolean finalsSet = false;
         Scanner sc = new Scanner(System.in);
+        char confirm = 'N';
         
         while(totalWeightage!=100){
             if(finalsSet){
@@ -144,7 +145,7 @@ public class Course{
             }
             else name = "Finals";
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
-            System.out.println("Remaining weightage left: " + weightage);
+            System.out.println("Remaining weightage left: " + (100-totalWeightage));
             weightage = sc.nextDouble();
             sc.nextLine();
             if(weightage + totalWeightage > 100){
@@ -152,8 +153,8 @@ public class Course{
             }
             else{
                 System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                confirm = sc.nextLine();
-                if(confirm == "Y"){
+                confirm = sc.nextLine().charAt(0);
+                if(confirm == 'Y'){
                     totalWeightage += weightage;
                     results.add(new Assessment(name,weightage));
                     if(name.equals("Finals")) finalsSet = true;
@@ -169,11 +170,11 @@ public class Course{
     }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
-    public int registerStudent(String matricNumber, String group){
+    public int registerStudent(Student student, String group){
         int result = -3;
         for(int i = 0; i < indexList.size();  i++){
             if(indexList.get(i).getGroup().equals(group)){
-                result = indexList.get(i).addStudent(matricNumber);
+                result = indexList.get(i).addStudent(student);
                 //result is -1 if full, -2 if student is already inside, 0 if success
             }
         }

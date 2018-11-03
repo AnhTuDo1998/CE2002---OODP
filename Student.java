@@ -5,7 +5,7 @@ public class Student{
     private String school;
     private int acadYear;
     private char gender;
-    private ArrayList<String> coursesRegistered = new ArrayList<String>(); //arraylist of course codes registered
+    private ArrayList<Course> coursesRegistered = new ArrayList<Course>(); //arraylist of course codes registered
     private int totalAU = 0;
 
 
@@ -19,11 +19,11 @@ public class Student{
         this.acadYear = acadYear;
     }
 
-    public void registerCourse(String courseCode){
-        coursesRegistered.add(courseCode);
+    public void registerCourse(Course course){
+        coursesRegistered.add(course);
     }
 
-    public ArrayList<String> printTranscript(){
+    public ArrayList<Course> printTranscript(){
         return coursesRegistered;
     }
 

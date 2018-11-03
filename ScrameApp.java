@@ -53,9 +53,9 @@ public class ScrameApp{
                         courseMg.getSessions(courseIndex);
                         System.out.println("Please enter the group ID: (SEP1/CE3)");
                         group = sc.nextLine();
-                        result = courseMg.regStudentToCourse(matricNumber, courseIndex, group);
+                        result = courseMg.regStudentToCourse(studMg.getStudent(matricNumber), courseIndex, group);
                         switch (result){
-                            case 0: studMg.updateCourseTaken(courseCode, studentIndex); break;
+                            case 0: studMg.updateCourseTaken(courseMg.getCourse(courseCode), studentIndex); break;
                             case -1: System.out.println("Error! Group is already full!"); break;
                             case -2: System.out.println("Error! Student is already registered in that group!"); break;
                             case -3: System.out.println("Error! You have entered a wrong group!"); break;

@@ -59,7 +59,14 @@ public class StudentManager{
         return -1;
     }
 
-    public void updateCourseTaken(String courseCode, int i){
-        studentCatalog.get(i).registerCourse(courseCode);
+    public void updateCourseTaken(Course course, int i){
+        studentCatalog.get(i).registerCourse(course);
+    }
+
+    public Student getStudent(String matricNumber){
+        for(int i = 0; i < studentCatalog.size(); i++){
+            if(studentCatalog.get(i).getMatricNumber().equals(matricNumber)) return studentCatalog.get(i);
+        }
+        return null;
     }
 }
