@@ -105,7 +105,7 @@ public class Course{
         Session obtained = null;
 
         for(i = 0; i < indexList.size(); i++){
-            if(indexList.get(i).getType() == type && indexList.get(i).getGroup() == group){
+            if(indexList.get(i).getType().equals(type) && indexList.get(i).getGroup().equals(group)){
                 obtained = indexList.get(i);
                 break;
             }

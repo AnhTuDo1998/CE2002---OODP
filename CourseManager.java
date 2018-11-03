@@ -8,13 +8,14 @@ public class CourseManager{
     }
 
     //rmb to implement return int
-    public int addCourse(){
+    public Course addCourse(){
         String courseName = "";
         String courseCode = "";
         String courseCoordinator = "";
         int AU = 0;
         char confirm = 'N';
         Scanner sc = new Scanner(System.in);
+        Course created = null;
         
         while(confirm != 'Y'){
             System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
@@ -30,11 +31,12 @@ public class CourseManager{
             System.out.println("Are you sure you want to add in this course? (Y/N)");
             confirm = sc.nextLine().charAt(0);
         }
-        courseCatalog.add(new Course(courseName, courseCode, AU, courseCoordinator));
+        created = new Course(courseName, courseCode, AU, courseCoordinator);
+        courseCatalog.add(created);
         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
         //print out all courses after added in
         printCourseCatalog();
-        return 1;
+        return created;
     }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
@@ -213,7 +215,7 @@ public class CourseManager{
         Session group;
         
         printCourseCatalog();
-        System.out.println("Please enter the Course that you would like to print out the student list");
+        System.out.println("Please enter the course code that you would like to print out the student list");
         courseCode = sc.next();
 
         index = verifyCourse(courseCode); //

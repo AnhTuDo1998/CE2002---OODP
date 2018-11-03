@@ -40,7 +40,17 @@ public class ScrameApp{
                     studMg.addStudent();
                     break;
                 case 2: //add a course
-                    courseMg.addCourse();
+                    boolean contin = true;
+                    Course created = courseMg.addCourse();
+                    do{
+                        created.addSession();
+                        System.out.println("Do you want to add more session? Y/N");
+                        choice = sc.next().charAt(0);
+                        switch(choice){
+                            case 'N': contin = false;
+                                        break;
+                        }
+                    }while(contin);
                     break;
                 case 3: //register student for a course
                     System.out.println("Enter student's matriculation number: ");
