@@ -51,7 +51,8 @@ public class ScrameApp{
                         System.out.println("Course does not exist");
                     } */
                     break;
-                case 5: //print student list
+                case 5: //print student list by lecture, tutorial or laboratory session for a course.
+                    courseMg.printSessionStudent();
                     break;
                 case 6: //enter course assessment weightage
                     break;

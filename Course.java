@@ -87,6 +87,19 @@ public class Course{
         }
     }
 
+    public Session getSession(String group, String type){
+        int i;
+        Session obtained = null;
+
+        for(i = 0; i < indexList.size(); i++){
+            if(indexList.get(i).getType() == type && indexList.get(i).getGroup() == group){
+                obtained = indexList.get(i);
+                break;
+            }
+        }
+        return obtained;
+    }
+
     //print session catalogue
     public void printIndexList(){
         int i;
