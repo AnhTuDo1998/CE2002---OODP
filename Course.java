@@ -124,7 +124,7 @@ public class Course{
                 System.out.println("Enter assessment type: (Quiz, Lab Report)");
                 name = sc.nextLine();
             }
-            else name = "Finals"
+            else name = "Finals";
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
             System.out.prinln("Remaining weightage left: " + weightage);
             weightage = sc.nextDouble();

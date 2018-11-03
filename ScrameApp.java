@@ -34,7 +34,8 @@ public class ScrameApp{
                     //studMg.regStudentToCourse();
                     break;
                 case 4: //Check available slots in a class
-                    System.out.println("Enter the course code you need check vacancy for: ")
+                    courseMg.checkVacancy();
+          /*           System.out.println("Enter the course code you need check vacancy for: ")
                     courseMg.printCourseCatalog();
                     Course course;
                     String courseCode = sc.nextLine();
@@ -46,6 +47,9 @@ public class ScrameApp{
                         String group = sc.nextLine();
                         courseMg.checkVacancy(course, group);
                     }
+                    else{
+                        System.out.println("Course does not exist");
+                    } */
                     break;
                 case 5: //print student list
                     break;

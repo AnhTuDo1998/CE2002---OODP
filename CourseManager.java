@@ -154,10 +154,36 @@ public class CourseManager{
         }*/
     }
 
-    public void checkVacancy(String courseCode){
-        //find index or course you want to check vacancy
-        int index = verifyCourse(courseCode);
-        //print out all session and let user choose
+    public void checkVacancy(){
+        Course tempCourse;
+        Session session;
+        String courseCode;
+        int index;
+        String groupSession;
+        String typeSession;
+
+        //Interact with user to get course code
+        System.out.println("Enter the course code you need check vacancy for: ");
+        printCourseCatalog();
+        courseCode = sc.nextLine();
+
+        //verify if the course exist and access the session if it does
+        index = verifyCourse(courseCode);
+        if (index!=-1){
+            tempCourse = courseMg.getCourse(index);
+            //get session information from the course
+            System.out.println("Select the session group to check vacancy: ");
+            tempCourse.printIndexList();
+            group = sc.nextLine();
+            System.out.println("Vacancy for Lab or Tut? ")
+            typeSession = sc.nextLine();
+            session = getSession(group, typeSession);
+            System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.numberRegistered()+"/"+session.maxCapacity());
+            
+        }
+        else{
+            System.out.println("Course does not exist");
+        } 
 
     }
 }
