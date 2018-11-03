@@ -133,6 +133,7 @@ public class Course{
         double totalWeightage; //total weightage must be equal to 100
         boolean finalsSet;
         Scanner sc = new Scanner(System.in);
+        
         while(totalWeightage!=100){
             if(finalsSet){
                 System.out.println("Enter assessment type: (Quiz, Lab Report)");
@@ -140,7 +141,7 @@ public class Course{
             }
             else name = "Finals";
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
-            System.out.prinln("Remaining weightage left: " + weightage);
+            System.out.println("Remaining weightage left: " + weightage);
             weightage = sc.nextDouble();
             sc.nextLine();
             if(weightage + totalWeightage > 100){

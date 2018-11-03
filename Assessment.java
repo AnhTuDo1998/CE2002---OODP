@@ -4,7 +4,7 @@ public class Assessment{
 
     private String assessmentName;
     private Double weightage;
-	private HashMap<String, Integer> assessmentResults = new HashMap<String, Integer>();
+	private HashMap<String, Double> assessmentResults = new HashMap<String, Double>();
 	
 	
     public Assessment(String name, double weightage){
@@ -28,16 +28,17 @@ public class Assessment{
         this.weightage = weightage;
     } 
 	
-	public void storeAssessmentResult(String matriculationNumber, double result){
+	public void storeAssessmentResult(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter student's matriculation number: ");
 		String matriculationNumber = sc.nextLine();
 		System.out.println("Enter student's coursework mark: ");
 		double marks = sc.nextDouble();
-		System.out.println("Saving results.:);
-		assessmentResults.put(matriculationNumber, result);
+		System.out.println("Saving results.:");
+		assessmentResults.put(matriculationNumber, marks);
 		System.out.println("Done.");
 	}
+
 	public double retrieveAssessmentResult(String matriculationNumber){
 		if(assessmentResults.get(matriculationNumber)!= null){
 			return assessmentResults.get(matriculationNumber);
@@ -46,14 +47,13 @@ public class Assessment{
 			return 0;  // for checking purpose
 		}
 	}
-	public int removeAssessmentResult(String matriculationNumber){
-		if(assessmentResult.get(matriculationNumber) != null){
-			return assessmentResult.get(matriculationNumber);
+	public boolean removeAssessmentResult(String matriculationNumber){
+		boolean success = false;
+		if(assessmentResults.get(matriculationNumber) != null){
+			assessmentResults.remove(matriculationNumber);
+			success = true;
 		}
-		else{
-			assessmentResult.remove(matriculationNumber);
-			return 0;  //for checking purpose
-		}
+		return success;
 	}
 	
 

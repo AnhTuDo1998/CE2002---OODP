@@ -161,6 +161,7 @@ public class CourseManager{
         int index;
         String groupSession;
         String typeSession;
+        Scanner sc = new Scanner(System.in);
 
         //Interact with user to get course code
         System.out.println("Enter the course code you need check vacancy for: ");
@@ -170,7 +171,7 @@ public class CourseManager{
         //verify if the course exist and access the session if it does
         index = verifyCourse(courseCode);
         if (index!=-1){
-            tempCourse = courseMg.getCourse(index);
+            tempCourse = getCourse(index);
             //get session information from the course
             System.out.println("Select the session group to check vacancy: ");
             tempCourse.printIndexList();
