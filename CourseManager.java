@@ -175,7 +175,7 @@ public class CourseManager{
             System.out.println("Select the session group to check vacancy: ");
             tempCourse.printIndexList();
             group = sc.nextLine();
-            System.out.println("Vacancy for Lab or Tut? ")
+            System.out.println("Vacancy for Lab or Tut? ");
             typeSession = sc.nextLine();
             session = getSession(group, typeSession);
             System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.numberRegistered()+"/"+session.maxCapacity());
