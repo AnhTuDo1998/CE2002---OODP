@@ -20,6 +20,9 @@ public class Student{
     }
 
     public void registerCourse(Course course){
+        for(int i = 0; i < coursesRegistered.size(); i++){
+            if(coursesRegistered.get(i) == course) return; //if course is already registered, ignore
+        }
         coursesRegistered.add(course);
     }
 

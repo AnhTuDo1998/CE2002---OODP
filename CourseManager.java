@@ -38,8 +38,8 @@ public class CourseManager{
     }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
-    public int regStudentToCourse(Student student, int i, String group){
-        return courseCatalog.get(i).registerStudent(student, group);
+    public int regStudentToCourse(Student student, int i, String group, String type){
+        return courseCatalog.get(i).registerStudent(student, group, type);
     }
 
     public int removeCourse(){
@@ -236,4 +236,13 @@ public class CourseManager{
             System.out.println("Course doesn't exist!");
         }
     }
+
+    public void setResults(Assessment component, Student student, double marks){
+        component.storeAssessmentResult(student, marks);
+    }
+
+    public ArrayList<Assessment> getAssessment(Course course){
+        return course.getAssessment();
+    }
+
 }

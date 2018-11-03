@@ -129,6 +129,8 @@ public class Course{
         return index;
     }
 
+    //Set results for assessment;
+
     //Set Course Assessment Information
     public int setAssessment(){
         String name;
@@ -170,10 +172,10 @@ public class Course{
     }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
-    public int registerStudent(Student student, String group){
+    public int registerStudent(Student student, String group, String type){
         int result = -3;
         for(int i = 0; i < indexList.size();  i++){
-            if(indexList.get(i).getGroup().equals(group)){
+            if(indexList.get(i).getGroup().equals(group) && indexList.get(i).getType().equals(type)){
                 result = indexList.get(i).addStudent(student);
                 //result is -1 if full, -2 if student is already inside, 0 if success
             }
@@ -187,5 +189,9 @@ public class Course{
             + " " + indexList.get(i).getDayTime() + " " + indexList.get(i).getLocation() + " Vacancy: " 
             + (indexList.get(i).getMaxCapacity()-indexList.get(i).getNumberRegistered()) + "/" + indexList.get(i).getMaxCapacity());
         }
+    }
+
+    public ArrayList<Assessment> getAssessment(){
+        return this.results;
     }
 }

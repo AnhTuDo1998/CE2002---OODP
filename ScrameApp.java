@@ -3,16 +3,22 @@ import java.util.*;
 public class ScrameApp{
     public static void main(String[] args) {
         Scanner sc = new Scanner (System.in);
+        Student student;
+        Course course;
         StudentManager studMg = new StudentManager();
         CourseManager courseMg = new CourseManager();
         int choice;
         int studentIndex;
         int courseIndex;
         int result;
+        String type;
         String courseCode = "";
         String matricNumber = "";
         String group;
         boolean cont = true;
+        ArrayList<Assessment> results;
+        int i = 0;
+        double marks = 0;
         while (cont){
             System.out.println("Menu");
             System.out.println("1. Add a student ");
@@ -53,15 +59,17 @@ public class ScrameApp{
                         courseMg.getSessions(courseIndex);
                         System.out.println("Please enter the group ID: (SEP1/CE3)");
                         group = sc.nextLine();
-                        result = courseMg.regStudentToCourse(studMg.getStudent(matricNumber), courseIndex, group);
+                        System.out.println("Please enter the session type: (LEC/TUT/LAB)");
+                        type = sc.nextLine();
+                        result = courseMg.regStudentToCourse(studMg.getStudent(matricNumber), courseIndex, group, type);
                         switch (result){
                             case 0: 
                                 studMg.updateCourseTaken(courseMg.getCourse(courseCode), studentIndex); 
-                                System.out.println("Student added to " + group);
+                                System.out.println("Student added to " + type + " " + group);
                                 break;
                             case -1: System.out.println("Error! Group is already full!"); break;
-                            case -2: System.out.println("Error! Student is already registered in that group!"); break;
-                            case -3: System.out.println("Error! You have entered a wrong group!"); break;
+                            case -2: System.out.println("Error! Student is already registered in that group session!"); break;
+                            case -3: System.out.println("Error! You have entered a wrong group session!"); break;
                         }
                     }
                     break;
@@ -89,6 +97,27 @@ public class ScrameApp{
                 case 6: //enter course assessment weightage
                     break;
                 case 7: //enter coursework mark
+                    System.out.println("Enter course: ");
+                    courseCode = sc.nextLine();
+                    System.out.println("Enter student's matriculation number: ");
+                    matricNumber = sc.nextLine();
+                    sc.nextLine();
+                    if(courseMg.verifyCourse(courseCode) == -1 || studMg.studentExists(matricNumber)== -1){
+                        System.out.println("Student or course entered is not in our records!");
+                    }
+                    else {
+                        course = courseMg.getCourse(courseCode);
+                        student = studMg.getStudent(matricNumber);
+                        results = courseMg.getAssessment(course);
+                        for (i = 0; i < results.size(); i++){
+                            while(marks > 100 || marks < 0){
+                                System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
+                                marks = sc.nextDouble();
+                                sc.nextLine();
+                                courseMg.setResults(results.get(i), student, marks);
+                            }
+                        }
+                    }
                     break;
                 case 8: //enter exam mark
                     break;
