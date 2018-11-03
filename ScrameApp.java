@@ -52,6 +52,7 @@ public class ScrameApp{
                     } */
                     break;
                 case 5: //print student list
+                    courseMg.printSessionStudent();
                     break;
                 case 6: //enter course assessment weightage
                     break;
