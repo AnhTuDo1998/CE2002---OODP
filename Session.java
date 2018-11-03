@@ -58,7 +58,6 @@ public class Session{
             }
             this.numberRegistered++;
             studentList.add(student);
-            System.out.println("Student added to " + getType() + " " + getGroup());
             return 0; //student added
         }
     }
