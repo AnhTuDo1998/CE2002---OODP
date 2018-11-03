@@ -58,4 +58,11 @@ public class Session{
         }
     }
     
+    public void printSessionStudent(){
+        int i;
+
+        for(i = 0; i < studentList.size(); i++){
+            System.out.println(studentList.get(i).getName() + " " + studentList.get(i).getMatricNumber() + " " + studentList.get(i).getSchool() + " " + studentList.get(i).getGender());
+        }
+    }
 }

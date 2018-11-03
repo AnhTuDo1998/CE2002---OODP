@@ -35,7 +35,8 @@ public class ScrameApp{
                     break;
                 case 4: //Check available slots in a class
                     break;
-                case 5: //print student list
+                case 5: //print student list by lecture, tutorial or laboratory session for a course.
+                    courseMg.printSessionStudent();
                     break;
                 case 6: //enter course assessment weightage
                     break;
