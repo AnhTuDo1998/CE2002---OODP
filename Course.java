@@ -47,7 +47,7 @@ public class Course{
         boolean success = false;
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter session type: (lec/tut/lab)");
+        System.out.println("Enter session type: (LEC/TUT/LAB)");
         String type = sc.nextLine();
         System.out.println("Enter session group : (SEP1/CE3/SEA2)");
         String group = sc.nextLine();
@@ -60,7 +60,7 @@ public class Course{
         System.out.println("Enter session's max capacity: ");
         int maxCapacity = sc.nextInt();
         sc.nextLine(); //capture \n
-        if(sessionExist(group) >= 0){
+        if(sessionExist(group, type) >= 0){
             System.out.println("This session is already in!");
         }else{
             success = indexList.add(new Session(type, group, dayTime, location, tutorName, maxCapacity, 0));
@@ -74,11 +74,14 @@ public class Course{
         Scanner sc = new Scanner(System.in);
         String group;
         int index;
+        String type;
 
         printIndexList();
         System.out.println("Which session do you want to remove?");
         group = sc.nextLine();
-        index = sessionExist(group);
+        System.out.println("Remove TUT or LAB?");
+        type = sc.nextLine();
+        index = sessionExist(group, type);
         if(index >= 0){
             success = indexList.remove(indexList.get(index)); //if removed then return true
             return success;
@@ -93,7 +96,7 @@ public class Course{
 
         System.out.println("Sessions for " + this.courseName + " " + this.courseCode);
         for(i = 0; i < indexList.size(); i++){
-            System.out.println(indexList.get(i).getGroup() + " " + indexList.get(i).getType() + " " +indexList.get(i).dayTime());
+            System.out.println(indexList.get(i).getGroup() + " " + indexList.get(i).getType() + " " +indexList.get(i).getDayTime());
         }
     }
 
@@ -113,12 +116,12 @@ public class Course{
 
     //check if session exist according to group name first
     //may need to add more though
-    public int sessionExist(String sessionGroup){
+    public int sessionExist(String sessionGroup, String type){
         int i;
         int index = -1;
 
         for(i = 0; i < indexList.size(); i++){  //return index if found, return -1 if not found
-            if(indexList.get(i).getGroup() == sessionGroup){
+            if(indexList.get(i).getGroup().equals(sessionGroup) && indexList.get(i).getType().equals(type)){
                 index = i;
                 break;
             }
@@ -152,7 +155,7 @@ public class Course{
                 if(confirm == "Y"){
                     totalWeightage += weightage;
                     results.add(new Assessment(name,weightage));
-                    if(name == "Finals") finalsSet = true;
+                    if(name.equals("Finals")) finalsSet = true;
                     System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);
                 }
                 else{
@@ -162,5 +165,25 @@ public class Course{
         }
         System.out.println("Results weightage completed....");
         return 0;
+    }
+
+    //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+    public int registerStudent(String matricNumber, String group){
+        int result = -3;
+        for(int i = 0; i < indexList.size();  i++){
+            if(indexList.get(i).getGroup().equals(group)){
+                result = indexList.get(i).addStudent(matricNumber);
+                //result is -1 if full, -2 if student is already inside, 0 if success
+            }
+        }
+        return result;
+    }
+
+    public void printSessions(){
+        for (int i = 0; i < indexList.size(); i++){
+            System.out.println(indexList.get(i).getType() + " Group: " + indexList.get(i).getGroup() 
+            + " " + indexList.get(i).getDayTime() + " " + indexList.get(i).getLocation() + " Vacancy: " 
+            + (indexList.get(i).getMaxCapacity()-indexList.get(i).getNumberRegistered()) + "/" + indexList.get(i).getMaxCapacity());
+        }
     }
 }

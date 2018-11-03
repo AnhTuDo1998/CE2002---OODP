@@ -7,7 +7,7 @@ public class Session{
     private String tutorName;
     private int maxCapacity;
     private int numberRegistered;
-    private ArrayList<Student> studentList = new ArrayList<Student>();
+    private ArrayList<String> studentList = new ArrayList<String>();
     
     //create a session
     public Session(String type, String group, String dayTime, String location, String tutorName, int maxCapacity, int numberRegistered){
@@ -28,33 +28,38 @@ public class Session{
         return this.group;
     }
 
-    public String dayTime(){  //return the date and time for the session
+    public String getDayTime(){  //return the date and time for the session
         return this.dayTime;
     }
 
-    public String tutorName(){ //return the name of tutor
+    public String getTutorName(){ //return the name of tutor
         return this.tutorName;
     }
 
-    public int maxCapacity(){
+    public int getMaxCapacity(){
         return this.maxCapacity;
     }
 
-    public String location(){
+    public String getLocation(){
         return this.location;
     }
     
-    public int numberRegistered(){
+    public int getNumberRegistered(){
         return this.numberRegistered;
     }
 
-    public boolean addStudent(Student s){ //add a student into an existing group
+    //return -1 if full, -2 if student is already inside, 0 if success
+    public int addStudent(String matricNumber){ //add a student into an existing group
         if(this.maxCapacity == this.numberRegistered){
-            return false; //group is already full
-        }else{
+            return -1; //group is already full
+        } else {
+            for(int i = 0; i < studentList.size(); i++){
+                if(studentList.get(i).equals(matricNumber)) return -2;
+            }
             this.numberRegistered++;
+            studentList.add(matricNumber);
             System.out.println("Student added to " + getType() + " " + getGroup());
-            return true; //student added
+            return 0; //student added
         }
     }
     public void printSessionStudent(){
