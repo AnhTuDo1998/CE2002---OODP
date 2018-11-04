@@ -96,7 +96,7 @@ public class Course{
 
         System.out.println("Sessions for " + this.courseName + " " + this.courseCode);
         for(i = 0; i < indexList.size(); i++){
-            System.out.println(indexList.get(i).getGroup() + " " + indexList.get(i).getType() + " " +indexList.get(i).getDayTime());
+            System.out.println(indexList.get(i));
         }
     }
 
@@ -159,5 +159,9 @@ public class Course{
 
     public ArrayList<Assessment> getAssessment(){
         return this.results;
+    }
+
+    public String toString(){
+        return (this.courseCode + ": " + this.courseName + " by " + this.courseCoordinator + " | Total AU : " + this.AU);
     }
 }

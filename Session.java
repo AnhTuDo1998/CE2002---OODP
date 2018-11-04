@@ -68,7 +68,11 @@ public class Session{
         int i;
 
         for(i = 0; i < studentList.size(); i++){
-            System.out.println(studentList.get(i).getName() + " " + studentList.get(i).getMatricNumber() + " " + studentList.get(i).getSchool() + " " + studentList.get(i).getGender());
+            System.out.println(studentList.get(i));
         }
+    }
+
+    public String toString(){
+        return (this.type + " | Group ID: " + this.group + " | Timings:  " + this.dayTime + "  | Venue: " + this.location);
     }
 }

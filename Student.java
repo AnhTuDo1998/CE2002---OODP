@@ -26,8 +26,8 @@ public class Student{
         coursesRegistered.add(course);
     }
 
-    public ArrayList<Course> printTranscript(){
-        return coursesRegistered;
+    public ArrayList<Course> getCourseRegistered(){
+        return this.coursesRegistered;
     }
 
     public String getName(){
@@ -48,5 +48,9 @@ public class Student{
 
     public char getGender(){
         return this.gender;
+    }
+
+    public String toString(){
+        return (this.studentName + " | Matriculation Number: " + this.matricNumber + " | School: " + this.school + "/" + this.acadYear + " | Gender: " + this.gender);
     }
 }
