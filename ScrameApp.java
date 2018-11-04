@@ -105,13 +105,21 @@ public class ScrameApp{
                     courseMg.printSessionStudent();
                     break;
                 case 6: //enter course assessment weightage
+                    System.out.println("================= ENTER COURSE WEIGHTAGE =================");
+                    System.out.println("Enter course code:");
+                    courseCode = sc.nextLine();
+                    course = courseMg.getCourse(courseCode);
+                    if(course == null){
+                        System.out.println("Error! Course isn't in our records!");
+                        break;
+                    }
+                    courseMg.setAssessment(course);
                     break;
                 case 7: //enter coursework mark
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    sc.nextLine();
                     if(courseMg.verifyCourse(courseCode) == -1 || studMg.studentExists(matricNumber)== -1){
                         System.out.println("Student or course entered is not in our records!");
                     }
@@ -119,7 +127,9 @@ public class ScrameApp{
                         course = courseMg.getCourse(courseCode);
                         student = studMg.getStudent(matricNumber);
                         results = courseMg.getAssessment(course);
+                        System.out.println("Size of reuslts : " + results.size());
                         for (i = 0; i < results.size(); i++){
+                            marks = 101;
                             while(marks > 100 || marks < 0){
                                 System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
                                 marks = sc.nextDouble();

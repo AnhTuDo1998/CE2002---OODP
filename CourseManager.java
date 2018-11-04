@@ -191,12 +191,17 @@ public class CourseManager{
         if (index!=-1){
             tempCourse = getCourse(index);
             //get session information from the course
-            System.out.println("Select the session group to check vacancy: ");
             tempCourse.printIndexList();
+            System.out.println("Select the session group to check vacancy: ");
             groupSession = sc.nextLine();
-            System.out.println("Vacancy for Lab or Tut? ");
+            System.out.println("Vacancy for LEC, LAB or TUT?");
             typeSession = sc.nextLine();
+
             session = tempCourse.getSession(groupSession, typeSession);
+            if(session == null){
+                System.out.println("Invalid input! Session is not in our records!");
+                return;
+            }
             System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getVacancy()+"/"+session.getMaxCapacity());
             
         }
@@ -247,4 +252,42 @@ public class CourseManager{
         return course.getAssessment();
     }
 
+    public int setAssessment(Course course){
+        String name;
+        double weightage = 0;
+        double totalWeightage = 0; //total weightage must be equal to 100
+        boolean finalsSet = false;
+        Scanner sc = new Scanner(System.in);
+        char confirm = 'N';
+        
+        while(totalWeightage!=100){
+            if(finalsSet){
+                System.out.println("Enter assessment type: (Quiz, Lab Report)");
+                name = sc.nextLine();
+            }
+            else name = "Finals";
+            System.out.println("Enter " + name + " weightage: (50, 70, 20)");
+            System.out.println("Remaining weightage left: " + (100-totalWeightage));
+            weightage = sc.nextDouble();
+            sc.nextLine();
+            if(weightage + totalWeightage > 100){
+                System.out.println("Invalid weightage! Should not exceed a total of 100!");
+            }
+            else{
+                System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
+                confirm = sc.nextLine().charAt(0);
+                if(confirm == 'Y'){
+                    totalWeightage += weightage;
+                    course.setAssessment(new Assessment(name,weightage));
+                    if(name.equals("Finals")) finalsSet = true;
+                    System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);
+                }
+                else{
+                    System.out.println(name + " component not added.");
+                }
+            }
+        }
+        System.out.println("Results weightage completed....");
+        return 0;
+    }
 }

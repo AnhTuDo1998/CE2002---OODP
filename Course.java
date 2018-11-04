@@ -132,42 +132,8 @@ public class Course{
     //Set results for assessment;
 
     //Set Course Assessment Information
-    public int setAssessment(){
-        String name;
-        double weightage = 0;
-        double totalWeightage = 0; //total weightage must be equal to 100
-        boolean finalsSet = false;
-        Scanner sc = new Scanner(System.in);
-        char confirm = 'N';
-        
-        while(totalWeightage!=100){
-            if(finalsSet){
-                System.out.println("Enter assessment type: (Quiz, Lab Report)");
-                name = sc.nextLine();
-            }
-            else name = "Finals";
-            System.out.println("Enter " + name + " weightage: (50, 70, 20)");
-            System.out.println("Remaining weightage left: " + (100-totalWeightage));
-            weightage = sc.nextDouble();
-            sc.nextLine();
-            if(weightage + totalWeightage > 100){
-                System.out.println("Invalid weightage! Should not exceed a total of 100!");
-            }
-            else{
-                System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                confirm = sc.nextLine().charAt(0);
-                if(confirm == 'Y'){
-                    totalWeightage += weightage;
-                    results.add(new Assessment(name,weightage));
-                    if(name.equals("Finals")) finalsSet = true;
-                    System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);
-                }
-                else{
-                    System.out.println(name + " component not added.");
-                }
-            }
-        }
-        System.out.println("Results weightage completed....");
+    public int setAssessment(Assessment assessment){
+        results.add(assessment);
         return 0;
     }
 

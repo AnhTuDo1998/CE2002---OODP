@@ -24,7 +24,7 @@ public class StudentManager{
             acadYear = sc.nextInt();
             sc.nextLine();
             System.out.println("Enter student's gender: ");
-            gender = sc.next().charAt(0);
+            gender = sc.nextLine().charAt(0);
             if(studentExists(matricNumber) != -1){
                 System.out.println("Student with matric number " + matricNumber + " already exists!");
             }
