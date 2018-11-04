@@ -187,7 +187,7 @@ public class Course{
         for (int i = 0; i < indexList.size(); i++){
             System.out.println(indexList.get(i).getType() + " Group: " + indexList.get(i).getGroup() 
             + " " + indexList.get(i).getDayTime() + " " + indexList.get(i).getLocation() + " Vacancy: " 
-            + (indexList.get(i).getMaxCapacity()-indexList.get(i).getNumberRegistered()) + "/" + indexList.get(i).getMaxCapacity());
+            + indexList.get(i).getVacancy() + "/" + indexList.get(i).getMaxCapacity());
         }
     }
 

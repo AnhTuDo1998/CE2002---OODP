@@ -197,7 +197,7 @@ public class CourseManager{
             System.out.println("Vacancy for Lab or Tut? ");
             typeSession = sc.nextLine();
             session = tempCourse.getSession(groupSession, typeSession);
-            System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getNumberRegistered()+"/"+session.getMaxCapacity());
+            System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getVacancy()+"/"+session.getMaxCapacity());
             
         }
         else{

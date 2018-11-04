@@ -44,6 +44,9 @@ public class Session{
         return this.location;
     }
     
+    public int getVacancy(){
+        return this.maxCapacity - this.numberRegistered;
+    }
     public int getNumberRegistered(){
         return this.numberRegistered;
     }
