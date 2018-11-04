@@ -42,6 +42,7 @@ public class ScrameApp{
                 case 2: //add a course
                     boolean contin = true;
                     Course created = courseMg.addCourse();
+                    if(created == null) break;
                     do{
                         created.addSession();
                         System.out.println("Do you want to add more session? Y/N");
