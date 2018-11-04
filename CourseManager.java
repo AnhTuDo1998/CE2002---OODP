@@ -31,6 +31,10 @@ public class CourseManager{
             System.out.println("Are you sure you want to add in this course? (Y/N)");
             confirm = sc.nextLine().charAt(0);
         }
+        if(getCourse(courseCode) != null){
+            System.out.println(courseCode + " is already registered and used! Please choose another course code!");
+            return null;
+        }
         created = new Course(courseName, courseCode, AU, courseCoordinator);
         courseCatalog.add(created);
         System.out.println(created + " is added.");
@@ -290,4 +294,5 @@ public class CourseManager{
         System.out.println("Results weightage completed....");
         return 0;
     }
+
 }
