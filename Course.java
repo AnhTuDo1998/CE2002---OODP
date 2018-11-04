@@ -164,4 +164,8 @@ public class Course implements Serializable{
     public String toString(){
         return (this.courseCode + ": " + this.courseName + " by " + this.courseCoordinator + " | Total AU : " + this.AU);
     }
+
+    public ArrayList<Session> getAllSession(){
+        return this.indexList;
+    }
 }

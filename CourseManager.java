@@ -331,5 +331,72 @@ public class CourseManager{
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
+    }
+    
+    public void printCourseStats(Course course){
+        ArrayList<Assessment> assessmentList = course.getAssessment();
+        ArrayList<Session> sessionList = course.getAllSession();
+        ArrayList<Student> registeredStudents = new ArrayList<Student>();
+        Set<Student> buffer = new HashSet<>();
+        int[] results = new int[10];
+        //index 0 = A+, 1 = A....9 = F
+        int totalMale = 0;
+        int totalFemale = 0;
+        int[] year = new int[4];
+        int totalResults = 0;
+        //index 0 = year1, 1 = year2, 2 = year3, 3 = year4 
+        for(int i = 0; i < sessionList.size(); i++){
+            buffer.addAll(sessionList.get(i).getStudentRegistered());
+            //get all registered students, using set to remove duplicates
+        }
+        registeredStudents.addAll(buffer);
+        for(int i = 0; i < registeredStudents.size(); i++){
+            year[registeredStudents.get(i).getAcadYear()-1]++;
+            if(registeredStudents.get(i).getGender() == ('M')) totalMale++;
+            else totalFemale++;
+            totalResults = 0;
+            for(int j = 0; j < assessmentList.size(); j++){
+                totalResults += assessmentList.get(j).retrieveAssessmentResult(registeredStudents.get(i)) * assessmentList.get(j).getWeightage() / 100;
+            }
+            if(totalResults > 90){
+                results[0]++;
+            }else if(totalResults >80){
+                results[1]++;
+            }else if(totalResults >75){
+                results[2]++;
+            }else if(totalResults >70){
+                results[3]++;
+            }else if(totalResults >60){
+                results[4]++;
+            }else if(totalResults >50){
+                results[5]++;
+            }else if(totalResults >45){
+                results[6]++;
+            }else if(totalResults >40){
+                results[7]++;
+            }else if(totalResults >30){
+                results[8]++;
+            }else results[9]++;
+        }
+        System.out.println("Printing course statistics for " + course);
+        System.out.println("====== Gender Distribution =====");
+        System.out.println("Male  : " + totalMale);
+        System.out.println("Female: " + totalFemale);
+        System.out.println("====== Year Distribution =====");
+        System.out.println("Year 1: " + year[0]);
+        System.out.println("Year 2: " + year[1]);
+        System.out.println("Year 3: " + year[2]);
+        System.out.println("Year 4: " + year[3]);
+        System.out.println("====== Grade Distribution =====");
+        System.out.println("A+ : " + results[0]);
+        System.out.println("A  : " + results[1]);
+        System.out.println("A- : " + results[2]);
+        System.out.println("B+ : " + results[3]);
+        System.out.println("B  : " + results[4]);
+        System.out.println("B- : " + results[5]);
+        System.out.println("C+ : " + results[6]);
+        System.out.println("C  : " + results[7]);
+        System.out.println("D  : " + results[8]);
+        System.out.println("F  : " + results[9]);
+    }
 }

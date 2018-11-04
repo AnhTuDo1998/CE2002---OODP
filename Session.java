@@ -66,6 +66,7 @@ public class Session implements Serializable{
             return 0; //student added
         }
     }
+    
     public void printSessionStudent(){
         int i;
 
@@ -76,5 +77,9 @@ public class Session implements Serializable{
 
     public String toString(){
         return (this.type + " | Group ID: " + this.group + " | Timings:  " + this.dayTime + "  | Venue: " + this.location);
+    }
+
+    public ArrayList<Student> getStudentRegistered(){
+        return this.studentList;
     }
 }

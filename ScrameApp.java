@@ -32,7 +32,7 @@ public class ScrameApp{
             System.out.println("5. Print student list");
             System.out.println("6. Enter course's assessment weightage");
             System.out.println("7. Enter coursework mark");
-            System.out.println("8. Enter exam mark");
+            System.out.println("8. Save data");
             System.out.println("9. Print course statistics");
             System.out.println("10. Print student transcript");
             System.out.println("11. Exit");
@@ -142,9 +142,19 @@ public class ScrameApp{
                         }
                     }
                     break;
-                case 8: //enter exam mark
+                case 8: //save data
+                    courseMg.saveData(courseFile);
+                    studMg.saveData(studentFile);
                     break;
                 case 9: //print course stats
+                    System.out.println("Enter course code:");
+                    courseCode = sc.nextLine();
+                    course = courseMg.getCourse(courseCode);
+                    if(course == null){
+                        System.out.println("Error! Course is not in our records!");
+                        break;
+                    }
+                    courseMg.printCourseStats(course);
                     break;
                 case 10: //print student transcript
                     System.out.println("Enter student's matriculation number: ");
