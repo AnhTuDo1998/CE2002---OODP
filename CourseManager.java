@@ -33,7 +33,7 @@ public class CourseManager{
         }
         created = new Course(courseName, courseCode, AU, courseCoordinator);
         courseCatalog.add(created);
-        System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator +" is added.");
+        System.out.println(created + " is added.");
         //print out all courses after added in
         printCourseCatalog();
         return created;
@@ -233,7 +233,7 @@ public class CourseManager{
             sessionType = sc.next();
             group = obtainedCourse.getSession(sessionGroup, sessionType); //return null if not found
             if(group != null){
-                System.out.println(courseCode + ": " + sessionGroup + " " + sessionType);
+                System.out.println(courseCode + ": " + group);
                 System.out.println("==========================================");
                 group.printSessionStudent(); //if exist go ahead and print list
             }else{

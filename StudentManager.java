@@ -34,8 +34,9 @@ public class StudentManager{
                 confirm = sc.next().charAt(0);
             }
         }
-        studentCatalog.add(new Student(studentName, matricNumber, gender, school, acadYear));
-        System.out.println("Student: "+ studentName +", Matric No.:" + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender +" is added!");
+        Student student = new Student(studentName, matricNumber, gender, school, acadYear);
+        studentCatalog.add(student);
+        System.out.println(student + " is added!");
         //print out all student (after added)
         printAllStudent();
         return true;
@@ -45,7 +46,7 @@ public class StudentManager{
         int i;
         System.out.println("All students in record: ");
         for (i = 0; i < studentCatalog.size(); i++){
-            System.out.println("Student: "+ studentCatalog.get(i).getName() +", Matric No.:" + studentCatalog.get(i).getMatricNumber() + ", "+ studentCatalog.get(i).getSchool() + " Year " + studentCatalog.get(i).getAcadYear() + " , "+ studentCatalog.get(i).getGender());
+            System.out.println((i+1) + ". " + studentCatalog.get(i));
         }
     }
     
@@ -68,5 +69,33 @@ public class StudentManager{
             if(studentCatalog.get(i).getMatricNumber().equals(matricNumber)) return studentCatalog.get(i);
         }
         return null;
+    }
+
+    public void printTranscript(Student student){
+        ArrayList<Course> courseRegistered = student.getCourseRegistered();
+        ArrayList<Assessment> results = null;
+        double totalResults = 0;
+        String grade = "F";
+        for(int i = 0; i < courseRegistered.size(); i++){
+            totalResults = 0;
+            results = courseRegistered.get(i).getAssessment();
+            for(int j = 0; j < results.size(); j++){
+                totalResults += results.get(j).retrieveAssessmentResult(student) * results.get(j).getWeightage() / 100;
+            }
+            System.out.println(courseRegistered.get(i).getCourseCode() + " " + courseRegistered.get(i).getCourseName() + " - Final Grade :" + marksToGrade(totalResults));
+        }
+    }
+
+    public String marksToGrade(double marks){
+        if(marks > 90) return "A+";
+        if(marks > 80) return "A";
+        if(marks > 75) return "A-";
+        if(marks > 70) return "B+";
+        if(marks > 60) return "B";
+        if(marks > 50) return "B-";
+        if(marks > 45) return "C+";
+        if(marks > 40) return "C";
+        if(marks > 30) return "D";
+        return "F";
     }
 }

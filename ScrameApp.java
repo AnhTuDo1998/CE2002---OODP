@@ -60,7 +60,6 @@ public class ScrameApp{
                     studentIndex = studMg.studentExists(matricNumber);
                     courseIndex = courseMg.verifyCourse(courseCode);
                     //if any of them do not exist
-                    System.out.println(studentIndex + " " + courseIndex);
                     if (studentIndex == -1 || courseIndex == -1){ 
                         System.out.println("Student or course is not in our records!");
                         break;
@@ -75,7 +74,7 @@ public class ScrameApp{
                         switch (result){
                             case 0: 
                                 studMg.updateCourseTaken(courseMg.getCourse(courseCode), studentIndex); 
-                                System.out.println("Student added to " + type + " " + group);
+                                System.out.println("Student added to " + type + " with Group ID: " + group);
                                 break;
                             case -1: System.out.println("Error! Group is already full!"); break;
                             case -2: System.out.println("Error! Student is already registered in that group session!"); break;
@@ -127,9 +126,8 @@ public class ScrameApp{
                         course = courseMg.getCourse(courseCode);
                         student = studMg.getStudent(matricNumber);
                         results = courseMg.getAssessment(course);
-                        System.out.println("Size of reuslts : " + results.size());
                         for (i = 0; i < results.size(); i++){
-                            marks = 101;
+                            marks = 101; //just for it to satisfy the while statement
                             while(marks > 100 || marks < 0){
                                 System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
                                 marks = sc.nextDouble();
@@ -144,6 +142,14 @@ public class ScrameApp{
                 case 9: //print course stats
                     break;
                 case 10: //print student transcript
+                    System.out.println("Enter student's matriculation number: ");
+                    matricNumber = sc.nextLine();
+                    student = studMg.getStudent(matricNumber);
+                    if(student == null){
+                        System.out.println("Error! Student is not in our records!");
+                        break;
+                    }
+                    studMg.printTranscript(student);
                     break;
                 case 11: //exit
                     cont = false;
