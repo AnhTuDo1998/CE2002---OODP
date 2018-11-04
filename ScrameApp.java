@@ -19,6 +19,10 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
+        String courseFile = "course_data.bat";
+        String studentFile = "student_data.bat";
+        courseMg.loadData(courseFile);
+        studMg.loadData(studentFile);
         while (cont){
             System.out.println("Menu");
             System.out.println("1. Add a student ");
@@ -154,6 +158,8 @@ public class ScrameApp{
                     break;
                 case 11: //exit
                     cont = false;
+                    courseMg.saveData(courseFile);
+                    studMg.saveData(studentFile);
                     System.out.println("Exit....");
                     break;
                 default:

@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.*;
 
-public class Course{
+public class Course implements Serializable{
     //Record of Session (Tut, Lab and Lecture) under a course
     private ArrayList<Session> indexList = new ArrayList<Session>();
     //Record of Assessment (Exam and Coursework) under a course

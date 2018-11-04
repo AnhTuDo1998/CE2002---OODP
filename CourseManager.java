@@ -1,7 +1,8 @@
 import java.util.*;
+import java.io.*;
 
 public class CourseManager{
-    private ArrayList<Course> courseCatalog= new ArrayList<Course>();
+    private ArrayList<Course> courseCatalog = new ArrayList<Course>();
     
     public Course getCourse(int index){
         return courseCatalog.get(index);
@@ -295,4 +296,40 @@ public class CourseManager{
         return 0;
     }
 
+    public void loadData(String filename) {
+		ArrayList<Course> courseList = null;
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			courseList = (ArrayList) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+            // ex.printStackTrace();
+            System.out.println("=================================================================================================");
+            System.out.println("================== ERROR! NO DATA LOADED (ignore if this is your first loadup) ==================");
+            System.out.println("=================================================================================================");
+		}
+		// print out the size
+		//System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+        if(courseList != null){
+            this.courseCatalog = courseList;
+        }
+	}
+
+	public void saveData(String filename) {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(courseCatalog);
+			out.close();
+		//	System.out.println("Object Persisted");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 }

@@ -1,5 +1,7 @@
 import java.util.*;
-public class Student{
+import java.io.*;
+
+public class Student implements Serializable{
     private String studentName;
     private String matricNumber;
     private String school;

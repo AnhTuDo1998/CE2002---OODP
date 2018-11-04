@@ -1,5 +1,7 @@
 import java.util.*;
-public class Session{
+import java.io.*;
+
+public class Session implements Serializable{
     private String type; //lec OR tut or lab
     private String group;
     private String dayTime;
