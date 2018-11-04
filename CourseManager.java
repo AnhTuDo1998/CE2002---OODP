@@ -196,19 +196,21 @@ public class CourseManager{
         if (index!=-1){
             tempCourse = getCourse(index);
             //get session information from the course
-            tempCourse.printIndexList();
+            tempCourse.printSessions();
+            /* 
+            to use printsession instead of printindexlist()
             System.out.println("Select the session group to check vacancy: ");
-            groupSession = sc.nextLine();
-            System.out.println("Vacancy for LEC, LAB or TUT?");
-            typeSession = sc.nextLine();
+            // groupSession = sc.nextLine();
+            // System.out.println("Vacancy for LEC, LAB or TUT?");
+            // typeSession = sc.nextLine();
 
-            session = tempCourse.getSession(groupSession, typeSession);
-            if(session == null){
-                System.out.println("Invalid input! Session is not in our records!");
-                return;
-            }
-            System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getVacancy()+"/"+session.getMaxCapacity());
-            
+            // session = tempCourse.getSession(groupSession, typeSession);
+            // if(session == null){
+            //     System.out.println("Invalid input! Session is not in our records!");
+            //     return;
+            // }
+            // System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getVacancy()+"/"+session.getMaxCapacity());
+            */
         }
         else{
             System.out.println("Course does not exist");
