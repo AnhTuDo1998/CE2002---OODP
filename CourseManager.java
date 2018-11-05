@@ -152,40 +152,9 @@ public class CourseManager{
         courseCatalog.get(i).printSessions();
   }
   
-    public void checkVacancy(){
-        Scanner sc = new Scanner(System.in);
-        Course tempCourse;
-        Session session;
-        String courseCode;
-        int index;
-        String groupSession;
-        String typeSession;
-
-        //Interact with user to get course code
-        System.out.println("Enter the course code you need check vacancy for: ");
-        printCourseCatalog();
-        courseCode = sc.nextLine();
-
-        //verify if the course exist and access the session if it does
-        index = verifyCourse(courseCode);
-        if (index!=-1){
-            tempCourse = getCourse(index);
-            //get session information from the course
-            tempCourse.printSessions();
-            /* 
-            to use printsession instead of printindexlist()
-            System.out.println("Select the session group to check vacancy: ");
-            // groupSession = sc.nextLine();
-            // System.out.println("Vacancy for LEC, LAB or TUT?");
-            // typeSession = sc.nextLine();
-
-            // session = tempCourse.getSession(groupSession, typeSession);
-            // if(session == null){
-            //     System.out.println("Invalid input! Session is not in our records!");
-            //     return;
-            // }
-            // System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getVacancy()+"/"+session.getMaxCapacity());
-            */
+    public void checkVacancy(Course course){
+        if (course != null){
+            course.printSessions();
         }
         else{
             System.out.println("Course does not exist");

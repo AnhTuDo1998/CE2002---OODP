@@ -141,7 +141,11 @@ public class ScrameApp{
                     }
                     break;
                 case 4: //Check available slots in a class
-                    courseMg.checkVacancy();
+                    courseMg.printCourseCatalog();
+                    System.out.println("Enter the course code you need check vacancy for: ");
+                    courseCode = sc.nextLine();
+                    course = courseMg.getCourse(courseCode);
+                    courseMg.checkVacancy(course);
           /*           System.out.println("Enter the course code you need check vacancy for: ")
                     courseMg.printCourseCatalog();
                     Course course;
