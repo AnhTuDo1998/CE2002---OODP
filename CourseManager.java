@@ -161,30 +161,17 @@ public class CourseManager{
         } 
     }
 
-    public void printSessionStudent(){
-        int index; //index for course in array list.
+    public void printSessionStudent(Course course){
         Scanner sc = new Scanner(System.in);
-        String courseCode;
-        Course obtainedCourse;
-        String sessionGroup;
-        String sessionType;
-        Session group;
-        
-        printCourseCatalog();
-        System.out.println("Please enter the course code that you would like to print out the student list");
-        courseCode = sc.next();
-
-        index = verifyCourse(courseCode); //
-        if(index >= 0){
-            obtainedCourse = courseCatalog.get(index); //getting the course from arraylist
-            obtainedCourse.printIndexList();
+        if(course != null){
+            course.printIndexList();
             System.out.println("Enter the session name: ");
-            sessionGroup = sc.next();
+            String sessionGroup = sc.next();
             System.out.println("Enter the session type: ");
-            sessionType = sc.next();
-            group = obtainedCourse.getSession(sessionGroup, sessionType); //return null if not found
+            String sessionType = sc.next();
+            Session group = course.getSession(sessionGroup, sessionType); //return null if not found
             if(group != null){
-                System.out.println(courseCode + ": " + group);
+                System.out.println(course + " ||| " + group);
                 System.out.println("==========================================");
                 group.printSessionStudent(); //if exist go ahead and print list
             }else{

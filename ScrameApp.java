@@ -163,7 +163,11 @@ public class ScrameApp{
                     } */
                     break;
                 case 5: //print student list
-                    courseMg.printSessionStudent();
+                    courseMg.printCourseCatalog();
+                    System.out.println("Please enter the course code that you would like to print out the student list");
+                    courseCode = sc.next();
+                    course = courseMg.getCourse(courseCode);
+                    courseMg.printSessionStudent(course);
                     break;
                 case 6: //enter course assessment weightage
                     System.out.println("================= ENTER COURSE WEIGHTAGE =================");
@@ -202,6 +206,7 @@ public class ScrameApp{
                 case 8: //save data
                     courseMg.saveData(courseFile);
                     studMg.saveData(studentFile);
+                    System.out.println("============== DATA SAVED ==============");
                     break;
                 case 9: //print course stats
                     System.out.println("Enter course code:");
