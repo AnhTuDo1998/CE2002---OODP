@@ -18,6 +18,9 @@ public class ScrameApp{
         char gender = 'N';
         char confirm = 'N';
         String courseCode = "";
+        String courseName = "";
+        String courseCoordinator = "";
+        int AU = 0;
         String matricNumber = "";
         String group;
         boolean cont = true;
@@ -46,6 +49,7 @@ public class ScrameApp{
             sc.nextLine();
             switch(choice){
                 case 1: //add a student
+                    confirm = 'N';
                     while(confirm != 'Y'){
                         System.out.println("Enter student's name: ");
                         studentName = sc.nextLine();
@@ -56,9 +60,9 @@ public class ScrameApp{
                         System.out.println("Enter student's year of study: ");
                         acadYear = sc.nextInt();
                         sc.nextLine();
-                        System.out.println("Enter student's gender: ");
+                        System.out.println("Enter student's gender: (M/F)");
                         gender = sc.nextLine().charAt(0);
-                        if(studMg.studentExists(matricNumber) != -1){
+                        if(studMg.getStudent(matricNumber) != null){
                             System.out.println("Student with matric number " + matricNumber + " already exists!");
                         }
                         else{
@@ -73,13 +77,34 @@ public class ScrameApp{
                     break;
                 case 2: //add a course
                     boolean contin = true;
-                    Course created = courseMg.addCourse();
-                    if(created == null) break;
+                    char addMore = 'Y';
+                    confirm = 'N';
+                    while(confirm != 'Y'){
+                        System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
+                        courseName = sc.nextLine();
+                        System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
+                        courseCode = sc.nextLine();
+                        System.out.println("Enter course AU: (2/3)");
+                        AU = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter name of course coordinator: ");
+                        courseCoordinator = sc.nextLine();
+                        System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
+                        System.out.println("Are you sure you want to add in this course? (Y/N)");
+                        confirm = sc.nextLine().charAt(0);
+                    }
+                    if(courseMg.getCourse(courseCode) != null){
+                        System.out.println(courseCode + " is already registered and used! Please choose another course code!");
+                        break;
+                    }
+                    course = courseMg.addCourse(courseName, courseCode, AU, courseCoordinator);
+                    System.out.println(course + " is added.");
+                    courseMg.printCourseCatalog();
                     do{
-                        created.addSession();
+                        course.addSession();
                         System.out.println("Do you want to add more session? Y/N");
-                        choice = sc.next().charAt(0);
-                        switch(choice){
+                        addMore = sc.next().charAt(0);
+                        switch(addMore){
                             case 'N': contin = false;
                                         break;
                         }

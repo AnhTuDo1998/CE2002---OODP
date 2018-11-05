@@ -9,38 +9,13 @@ public class CourseManager{
     }
 
     //rmb to implement return int
-    public Course addCourse(){
-        String courseName = "";
-        String courseCode = "";
-        String courseCoordinator = "";
-        int AU = 0;
-        char confirm = 'N';
-        Scanner sc = new Scanner(System.in);
+    public Course addCourse(String courseName, String courseCode, int AU, String courseCoordinator){
+
         Course created = null;
         
-        while(confirm != 'Y'){
-            System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
-            courseName = sc.nextLine();
-            System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
-            courseCode = sc.nextLine();
-            System.out.println("Enter course AU: (2/3)");
-            AU = sc.nextInt();
-            sc.nextLine();
-            System.out.println("Enter name of course coordinator: ");
-            courseCoordinator = sc.nextLine();
-            System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
-            System.out.println("Are you sure you want to add in this course? (Y/N)");
-            confirm = sc.nextLine().charAt(0);
-        }
-        if(getCourse(courseCode) != null){
-            System.out.println(courseCode + " is already registered and used! Please choose another course code!");
-            return null;
-        }
+        
         created = new Course(courseName, courseCode, AU, courseCoordinator);
         courseCatalog.add(created);
-        System.out.println(created + " is added.");
-        //print out all courses after added in
-        printCourseCatalog();
         return created;
     }
 
@@ -96,7 +71,7 @@ public class CourseManager{
         int i;
         System.out.println("Course in current Catalog: ");
         for (i = 0; i < courseCatalog.size(); i++){
-            System.out.println(courseCatalog.get(i).getCourseCode() + " " + courseCatalog.get(i).getCourseName() + " AU: " + courseCatalog.get(i).getAU() + " by " + courseCatalog.get(i).getCourseCoordinator());
+            System.out.println(courseCatalog.get(i));
         }
     }
     
