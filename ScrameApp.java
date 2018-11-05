@@ -12,6 +12,11 @@ public class ScrameApp{
         int courseIndex;
         int result;
         String type;
+        String studentName = "";
+        String school = "";
+        int acadYear = 0;
+        char gender = 'N';
+        char confirm = 'N';
         String courseCode = "";
         String matricNumber = "";
         String group;
@@ -41,7 +46,30 @@ public class ScrameApp{
             sc.nextLine();
             switch(choice){
                 case 1: //add a student
-                    studMg.addStudent();
+                    while(confirm != 'Y'){
+                        System.out.println("Enter student's name: ");
+                        studentName = sc.nextLine();
+                        System.out.println("Enter student's matric No.: ");
+                        matricNumber = sc.nextLine();
+                        System.out.println("Enter student's school (SCSE): ");
+                        school = sc.nextLine();
+                        System.out.println("Enter student's year of study: ");
+                        acadYear = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter student's gender: ");
+                        gender = sc.nextLine().charAt(0);
+                        if(studMg.studentExists(matricNumber) != -1){
+                            System.out.println("Student with matric number " + matricNumber + " already exists!");
+                        }
+                        else{
+                            System.out.println("Student: "+ studentName +", Matric Number: " + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
+                            System.out.println("Are you sure you want to add in this student? (Y/N)");
+                            confirm = sc.nextLine().charAt(0);
+                        }
+                    }
+                    student = studMg.addStudent(studentName, matricNumber, gender, school, acadYear);
+                    System.out.println(student + " is added into the records.");
+                    studMg.printAllStudent();
                     break;
                 case 2: //add a course
                     boolean contin = true;
