@@ -9,38 +9,13 @@ public class CourseManager{
     }
 
     //rmb to implement return int
-    public Course addCourse(){
-        String courseName = "";
-        String courseCode = "";
-        String courseCoordinator = "";
-        int AU = 0;
-        char confirm = 'N';
-        Scanner sc = new Scanner(System.in);
+    public Course addCourse(String courseName, String courseCode, int AU, String courseCoordinator){
+
         Course created = null;
         
-        while(confirm != 'Y'){
-            System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
-            courseName = sc.nextLine();
-            System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
-            courseCode = sc.nextLine();
-            System.out.println("Enter course AU: (2/3)");
-            AU = sc.nextInt();
-            sc.nextLine();
-            System.out.println("Enter name of course coordinator: ");
-            courseCoordinator = sc.nextLine();
-            System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
-            System.out.println("Are you sure you want to add in this course? (Y/N)");
-            confirm = sc.nextLine().charAt(0);
-        }
-        if(getCourse(courseCode) != null){
-            System.out.println(courseCode + " is already registered and used! Please choose another course code!");
-            return null;
-        }
+        
         created = new Course(courseName, courseCode, AU, courseCoordinator);
         courseCatalog.add(created);
-        System.out.println(created + " is added.");
-        //print out all courses after added in
-        printCourseCatalog();
         return created;
     }
 
@@ -96,7 +71,7 @@ public class CourseManager{
         int i;
         System.out.println("Course in current Catalog: ");
         for (i = 0; i < courseCatalog.size(); i++){
-            System.out.println(courseCatalog.get(i).getCourseCode() + " " + courseCatalog.get(i).getCourseName() + " AU: " + courseCatalog.get(i).getAU() + " by " + courseCatalog.get(i).getCourseCoordinator());
+            System.out.println(courseCatalog.get(i));
         }
     }
     
@@ -177,70 +152,26 @@ public class CourseManager{
         courseCatalog.get(i).printSessions();
   }
   
-    public void checkVacancy(){
-        Scanner sc = new Scanner(System.in);
-        Course tempCourse;
-        Session session;
-        String courseCode;
-        int index;
-        String groupSession;
-        String typeSession;
-
-        //Interact with user to get course code
-        System.out.println("Enter the course code you need check vacancy for: ");
-        printCourseCatalog();
-        courseCode = sc.nextLine();
-
-        //verify if the course exist and access the session if it does
-        index = verifyCourse(courseCode);
-        if (index!=-1){
-            tempCourse = getCourse(index);
-            //get session information from the course
-            tempCourse.printSessions();
-            /* 
-            to use printsession instead of printindexlist()
-            System.out.println("Select the session group to check vacancy: ");
-            // groupSession = sc.nextLine();
-            // System.out.println("Vacancy for LEC, LAB or TUT?");
-            // typeSession = sc.nextLine();
-
-            // session = tempCourse.getSession(groupSession, typeSession);
-            // if(session == null){
-            //     System.out.println("Invalid input! Session is not in our records!");
-            //     return;
-            // }
-            // System.out.println("Vacancy of "+ session.getType() + " " + session.getGroup() +": "+session.getVacancy()+"/"+session.getMaxCapacity());
-            */
+    public void checkVacancy(Course course){
+        if (course != null){
+            course.printSessions();
         }
         else{
             System.out.println("Course does not exist");
         } 
     }
 
-    public void printSessionStudent(){
-        int index; //index for course in array list.
+    public void printSessionStudent(Course course){
         Scanner sc = new Scanner(System.in);
-        String courseCode;
-        Course obtainedCourse;
-        String sessionGroup;
-        String sessionType;
-        Session group;
-        
-        printCourseCatalog();
-        System.out.println("Please enter the course code that you would like to print out the student list");
-        courseCode = sc.next();
-
-        index = verifyCourse(courseCode); //
-        if(index >= 0){
-            obtainedCourse = courseCatalog.get(index); //getting the course from arraylist
-            obtainedCourse.printIndexList();
+        if(course != null){
+            course.printIndexList();
             System.out.println("Enter the session name: ");
-            sessionGroup = sc.next();
+            String sessionGroup = sc.next();
             System.out.println("Enter the session type: ");
-            sessionType = sc.next();
-            group = obtainedCourse.getSession(sessionGroup, sessionType); //return null if not found
+            String sessionType = sc.next();
+            Session group = course.getSession(sessionGroup, sessionType); //return null if not found
             if(group != null){
-                System.out.println(courseCode + ": " + group);
+                System.out.println(course + " ||| " + group);
                 System.out.println("==========================================");
                 group.printSessionStudent(); //if exist go ahead and print list
             }else{

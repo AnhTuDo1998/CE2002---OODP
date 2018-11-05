@@ -12,7 +12,15 @@ public class ScrameApp{
         int courseIndex;
         int result;
         String type;
+        String studentName = "";
+        String school = "";
+        int acadYear = 0;
+        char gender = 'N';
+        char confirm = 'N';
         String courseCode = "";
+        String courseName = "";
+        String courseCoordinator = "";
+        int AU = 0;
         String matricNumber = "";
         String group;
         boolean cont = true;
@@ -41,17 +49,62 @@ public class ScrameApp{
             sc.nextLine();
             switch(choice){
                 case 1: //add a student
-                    studMg.addStudent();
+                    confirm = 'N';
+                    while(confirm != 'Y'){
+                        System.out.println("Enter student's name: ");
+                        studentName = sc.nextLine();
+                        System.out.println("Enter student's matric No.: ");
+                        matricNumber = sc.nextLine();
+                        System.out.println("Enter student's school (SCSE): ");
+                        school = sc.nextLine();
+                        System.out.println("Enter student's year of study: ");
+                        acadYear = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter student's gender: (M/F)");
+                        gender = sc.nextLine().charAt(0);
+                        if(studMg.getStudent(matricNumber) != null){
+                            System.out.println("Student with matric number " + matricNumber + " already exists!");
+                        }
+                        else{
+                            System.out.println("Student: "+ studentName +", Matric Number: " + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
+                            System.out.println("Are you sure you want to add in this student? (Y/N)");
+                            confirm = sc.nextLine().charAt(0);
+                        }
+                    }
+                    student = studMg.addStudent(studentName, matricNumber, gender, school, acadYear);
+                    System.out.println(student + " is added into the records.");
+                    studMg.printAllStudent();
                     break;
                 case 2: //add a course
                     boolean contin = true;
-                    Course created = courseMg.addCourse();
-                    if(created == null) break;
+                    char addMore = 'Y';
+                    confirm = 'N';
+                    while(confirm != 'Y'){
+                        System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
+                        courseName = sc.nextLine();
+                        System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
+                        courseCode = sc.nextLine();
+                        System.out.println("Enter course AU: (2/3)");
+                        AU = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Enter name of course coordinator: ");
+                        courseCoordinator = sc.nextLine();
+                        System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
+                        System.out.println("Are you sure you want to add in this course? (Y/N)");
+                        confirm = sc.nextLine().charAt(0);
+                    }
+                    if(courseMg.getCourse(courseCode) != null){
+                        System.out.println(courseCode + " is already registered and used! Please choose another course code!");
+                        break;
+                    }
+                    course = courseMg.addCourse(courseName, courseCode, AU, courseCoordinator);
+                    System.out.println(course + " is added.");
+                    courseMg.printCourseCatalog();
                     do{
-                        created.addSession();
+                        course.addSession();
                         System.out.println("Do you want to add more session? Y/N");
-                        choice = sc.next().charAt(0);
-                        switch(choice){
+                        addMore = sc.next().charAt(0);
+                        switch(addMore){
                             case 'N': contin = false;
                                         break;
                         }
@@ -88,7 +141,11 @@ public class ScrameApp{
                     }
                     break;
                 case 4: //Check available slots in a class
-                    courseMg.checkVacancy();
+                    courseMg.printCourseCatalog();
+                    System.out.println("Enter the course code you need check vacancy for: ");
+                    courseCode = sc.nextLine();
+                    course = courseMg.getCourse(courseCode);
+                    courseMg.checkVacancy(course);
           /*           System.out.println("Enter the course code you need check vacancy for: ")
                     courseMg.printCourseCatalog();
                     Course course;
@@ -106,7 +163,11 @@ public class ScrameApp{
                     } */
                     break;
                 case 5: //print student list
-                    courseMg.printSessionStudent();
+                    courseMg.printCourseCatalog();
+                    System.out.println("Please enter the course code that you would like to print out the student list");
+                    courseCode = sc.next();
+                    course = courseMg.getCourse(courseCode);
+                    courseMg.printSessionStudent(course);
                     break;
                 case 6: //enter course assessment weightage
                     System.out.println("================= ENTER COURSE WEIGHTAGE =================");
@@ -145,6 +206,7 @@ public class ScrameApp{
                 case 8: //save data
                     courseMg.saveData(courseFile);
                     studMg.saveData(studentFile);
+                    System.out.println("============== DATA SAVED ==============");
                     break;
                 case 9: //print course stats
                     System.out.println("Enter course code:");
