@@ -10,8 +10,6 @@ public class ScrameApp{
         Database db = loadData(fileName);
         StudentManager studMg = new StudentManager();
         CourseManager courseMg = new CourseManager();
-        studMg.setStudentCatalog(db.getStudentCatalog());
-        courseMg.setCourseCatalog(db.getCourseCatalog());
         int choice;
         int result;
         String type;
@@ -61,7 +59,7 @@ public class ScrameApp{
                         sc.nextLine();
                         System.out.println("Enter student's gender: (M/F)");
                         gender = sc.nextLine().charAt(0);
-                        if(studMg.getStudent(matricNumber) != null){
+                        if(db.getStudent(matricNumber) != null){
                             System.out.println("Student with matric number " + matricNumber + " already exists!");
                         }
                         else{
@@ -70,9 +68,9 @@ public class ScrameApp{
                             confirm = sc.nextLine().charAt(0);
                         }
                     }
-                    student = studMg.addStudent(studentName, matricNumber, gender, school, acadYear);
+                    student = db.addStudent(studentName, matricNumber, gender, school, acadYear);
                     System.out.println(student + " is added into the records.");
-                    studMg.printAllStudent();
+                    db.printStudentCatalog();
                     break;
                 case 2: //add a course
                     boolean contin = true;
@@ -92,13 +90,13 @@ public class ScrameApp{
                         System.out.println("Are you sure you want to add in this course? (Y/N)");
                         confirm = sc.nextLine().charAt(0);
                     }
-                    if(courseMg.getCourse(courseCode) != null){
+                    if(db.getCourse(courseCode) != null){
                         System.out.println(courseCode + " is already registered and used! Please choose another course code!");
                         break;
                     }
-                    course = courseMg.addCourse(courseName, courseCode, AU, courseCoordinator);
+                    course = db.addCourse(courseName, courseCode, AU, courseCoordinator);
                     System.out.println(course + " is added.");
-                    courseMg.printCourseCatalog();
+                    db.printCourseCatalog();
                     do{
                         course.addSession();
                         System.out.println("Do you want to add more session? Y/N");
@@ -110,12 +108,14 @@ public class ScrameApp{
                     }while(contin);
                     break;
                 case 3: //register student for a course
+                    db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
+                    db.printCourseCatalog();
                     System.out.println("Enter course code to be registered: ");
                     courseCode = sc.nextLine();
-                    student = studMg.getStudent(matricNumber);
-                    course = courseMg.getCourse(courseCode);
+                    student = db.getStudent(matricNumber);
+                    course = db.getCourse(courseCode);
                     //if any of them do not exist
                     if (student == null || course == null){ 
                         System.out.println("Student or course is not in our records!");
@@ -140,24 +140,25 @@ public class ScrameApp{
                     }
                     break;
                 case 4: //Check available slots in a class
-                    courseMg.printCourseCatalog();
+                    db.printCourseCatalog();
                     System.out.println("Enter the course code you need check vacancy for: ");
                     courseCode = sc.nextLine();
-                    course = courseMg.getCourse(courseCode);
+                    course = db.getCourse(courseCode);
                     courseMg.checkVacancy(course);
                     break;
                 case 5: //print student list
-                    courseMg.printCourseCatalog();
+                    db.printCourseCatalog();
                     System.out.println("Please enter the course code that you would like to print out the student list");
                     courseCode = sc.nextLine();
-                    course = courseMg.getCourse(courseCode);
+                    course = db.getCourse(courseCode);
                     courseMg.printSessionStudent(course);
                     break;
                 case 6: //enter course assessment weightage
                     System.out.println("================= ENTER COURSE WEIGHTAGE =================");
+                    db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
-                    course = courseMg.getCourse(courseCode);
+                    course = db.getCourse(courseCode);
                     if(course == null){
                         System.out.println("Error! Course isn't in our records!");
                         break;
@@ -165,12 +166,13 @@ public class ScrameApp{
                     courseMg.setAssessment(course);
                     break;
                 case 7: //enter coursework mark
+                    db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    course = courseMg.getCourse(courseCode);
-                    student = studMg.getStudent(matricNumber);
+                    course = db.getCourse(courseCode);
+                    student = db.getStudent(matricNumber);
                     if(course == null || student == null){
                         System.out.println("Student or course entered is not in our records!");
                     }
@@ -197,9 +199,10 @@ public class ScrameApp{
                     System.out.println("============== DATA SAVED ==============");
                     break;
                 case 9: //print course stats
+                    db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
-                    course = courseMg.getCourse(courseCode);
+                    course = db.getCourse(courseCode);
                     if(course == null){
                         System.out.println("Error! Course is not in our records!");
                         break;
@@ -207,9 +210,10 @@ public class ScrameApp{
                     courseMg.printCourseStats(course);
                     break;
                 case 10: //print student transcript
+                    db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    student = studMg.getStudent(matricNumber);
+                    student = db.getStudent(matricNumber);
                     if(student == null){
                         System.out.println("Error! Student is not in our records!");
                         break;

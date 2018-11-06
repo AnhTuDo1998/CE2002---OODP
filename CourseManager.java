@@ -5,89 +5,32 @@ public class CourseManager{
     private ArrayList<Course> courseCatalog = new ArrayList<Course>();
     
     //rmb to implement return int
-    public Course addCourse(String courseName, String courseCode, int AU, String courseCoordinator){
 
-        Course created = null;
-        
-        
-        created = new Course(courseName, courseCode, AU, courseCoordinator);
-        courseCatalog.add(created);
-        return created;
-    }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
     }
 
-    public Course removeCourse(){
-        int i = 0;
-        Scanner sc = new Scanner(System.in);
-        String courseCode;
-        Course course;
-
-        printCourseCatalog();
-        System.out.println("Please enter the course code that you want to remove the course");
-        courseCode = sc.nextLine();
-        course = getCourse(courseCode);
-
-        //return deleted course, null of none
-        if (course != null){
-            courseCatalog.remove(course); //will return true or false depends on whether the session is created
-            return course;
-        } else{
-            return null;
-        }
-
-    }
-
-
-    public void printCourseCatalog(){
-        int i;
-        System.out.println("Course in current Catalog: ");
-        for (i = 0; i < courseCatalog.size(); i++){
-            System.out.println(courseCatalog.get(i));
-        }
-    }
-    
-    public Course getCourse(String courseCode){
-        for(int i = 0; i < courseCatalog.size(); i++){
-            if(courseCatalog.get(i).getCourseCode().equals(courseCode)) return courseCatalog.get(i);
-        }
-        return null;
-    }
-
     //find a way to delete seperate session ?
-    public void removeSession(){
+    //move IO to main interface, print all courses before calling this method, pass course as parameter
+    public void removeSession(Course course){
         int i;
-        Scanner sc = new Scanner(System.in);
         boolean success = false;
         String courseCode;
-        Course course;
 
-        printCourseCatalog();
-        System.out.println("Please enter the course code that you want to remove session.");
-        courseCode = sc.nextLine();
-        course = getCourse(courseCode);
-
+        //printCourseCatalog();
         if (course != null){
             success = course.removeSession(); //will return true or false depends on whether the session is created
         }
         //session created successfully
         if(success){
-            System.out.println("Session for " + courseCode + " is deleted successfully!");
+            System.out.println("Session for " + course.getCourseCode() + " is deleted successfully!");
         }
         
         else{
             System.out.println("Session is not added! Session does not exist");
         }
-
-        /*for(i = 0; i < courseCatalog.size(); i++){
-            if(courseCatalog.get(i).getCourseCode()== courseCode){
-                success = courseCatalog.get(i).removeSession();
-                break;
-            }
-        }*/
     }
     
     public void checkVacancy(Course course){
@@ -233,9 +176,5 @@ public class CourseManager{
         System.out.println("C  : " + results[7]);
         System.out.println("D  : " + results[8]);
         System.out.println("F  : " + results[9]);
-    }
-
-    public void setCourseCatalog(ArrayList<Course> courseCatalog){
-        this.courseCatalog = courseCatalog;
     }
 }
