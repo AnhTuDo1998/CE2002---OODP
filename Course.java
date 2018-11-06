@@ -63,6 +63,8 @@ public class Course implements Serializable{
         sc.nextLine(); //capture \n
         if(sessionExist(group, type) >= 0){
             System.out.println("This session is already in!");
+        }else if(maxCapacity < 1){
+            System.out.println("Please enter a valid capacity!");
         }else{
             success = indexList.add(new Session(type, group, dayTime, location, tutorName, maxCapacity, 0));
         }
