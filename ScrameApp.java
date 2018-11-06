@@ -74,6 +74,7 @@ public class ScrameApp{
                     break;
                 case 2: //add a course
                     boolean contin = true;
+                    boolean added = false;
                     char addMore = 'Y';
                     confirm = 'N';
                     while(confirm != 'Y'){
@@ -98,7 +99,8 @@ public class ScrameApp{
                     System.out.println(course + " is added.");
                     db.printCourseCatalog();
                     do{
-                        course.addSession();
+                        added = course.addSession();
+                        if(!added) continue; //ensures at least one is added!
                         System.out.println("Do you want to add more session? Y/N");
                         addMore = sc.nextLine().charAt(0);
                         switch(addMore){
