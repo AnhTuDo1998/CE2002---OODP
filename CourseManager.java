@@ -197,6 +197,7 @@ public class CourseManager{
         boolean finalsSet = false;
         Scanner sc = new Scanner(System.in);
         char confirm = 'N';
+        course.clearAssessments(); //reset assessments if already set;
         
         while(totalWeightage!=100){
             if(finalsSet){
@@ -238,12 +239,16 @@ public class CourseManager{
 			in = new ObjectInputStream(fis);
 			courseList = (ArrayList) in.readObject();
 			in.close();
-		} catch (Exception ex) {
+		} catch (IOException ex) {
             // ex.printStackTrace();
             System.out.println("=================================================================================================");
             System.out.println("================== ERROR! NO DATA LOADED (ignore if this is your first loadup) ==================");
             System.out.println("=================================================================================================");
-		}
+		} catch (ClassNotFoundException ex) {
+            System.out.println("=================================================================================================");
+            System.out.println("============= ERROR! CLASS NOT FOUND! Make sure you have all the required classes! ==============");
+            System.out.println("=================================================================================================");
+        }
 		// print out the size
 		//System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();

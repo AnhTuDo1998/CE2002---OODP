@@ -168,4 +168,15 @@ public class Course implements Serializable{
     public ArrayList<Session> getAllSession(){
         return this.indexList;
     }
+
+    public boolean studentRegistered(Student student){
+        for(int i = 0; i < indexList.size(); i++){
+            if(indexList.get(i).getStudentRegistered().contains(student)) return true;
+        }
+        return false;
+    }
+
+    public void clearAssessments(){
+        results.clear();
+    }
 }
