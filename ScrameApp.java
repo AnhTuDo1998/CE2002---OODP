@@ -108,8 +108,10 @@ public class ScrameApp{
                     }while(contin);
                     break;
                 case 3: //register student for a course
+                    db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
+                    db.printCourseCatalog();
                     System.out.println("Enter course code to be registered: ");
                     courseCode = sc.nextLine();
                     student = db.getStudent(matricNumber);
@@ -153,6 +155,7 @@ public class ScrameApp{
                     break;
                 case 6: //enter course assessment weightage
                     System.out.println("================= ENTER COURSE WEIGHTAGE =================");
+                    db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
                     course = db.getCourse(courseCode);
@@ -163,6 +166,7 @@ public class ScrameApp{
                     courseMg.setAssessment(course);
                     break;
                 case 7: //enter coursework mark
+                    db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
                     System.out.println("Enter student's matriculation number: ");
@@ -195,6 +199,7 @@ public class ScrameApp{
                     System.out.println("============== DATA SAVED ==============");
                     break;
                 case 9: //print course stats
+                    db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
                     course = db.getCourse(courseCode);
@@ -205,6 +210,7 @@ public class ScrameApp{
                     courseMg.printCourseStats(course);
                     break;
                 case 10: //print student transcript
+                    db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
                     student = db.getStudent(matricNumber);
