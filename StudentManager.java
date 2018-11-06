@@ -47,10 +47,12 @@ public class StudentManager{
         for(int i = 0; i < courseRegistered.size(); i++){
             totalResults = 0;
             results = courseRegistered.get(i).getAssessment();
+            System.out.println(courseRegistered.get(i));
             for(int j = 0; j < results.size(); j++){
+                System.out.println(results.get(j).getAssessmentName() + " - Marks: " + results.get(j).retrieveAssessmentResult(student));
                 totalResults += results.get(j).retrieveAssessmentResult(student) * results.get(j).getWeightage() / 100;
             }
-            System.out.println(courseRegistered.get(i).getCourseCode() + " " + courseRegistered.get(i).getCourseName() + " - Final Grade :" + marksToGrade(totalResults));
+            System.out.println("~~~~~~~~~~~~~~ Final Grade :" + marksToGrade(totalResults) + " ~~~~~~~~~~~~~~");
         }
     }
 

@@ -165,10 +165,10 @@ public class CourseManager{
         Scanner sc = new Scanner(System.in);
         if(course != null){
             course.printIndexList();
-            System.out.println("Enter the session name: ");
-            String sessionGroup = sc.next();
-            System.out.println("Enter the session type: ");
-            String sessionType = sc.next();
+            System.out.println("Please enter the group ID: (SEP1/CE3)");
+            String sessionGroup = sc.nextLine();
+            System.out.println("Please enter the session type: (LEC/TUT/LAB)");
+            String sessionType = sc.nextLine();
             Session group = course.getSession(sessionGroup, sessionType); //return null if not found
             if(group != null){
                 System.out.println(course + " ||| " + group);

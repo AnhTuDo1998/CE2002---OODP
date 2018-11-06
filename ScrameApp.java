@@ -103,7 +103,7 @@ public class ScrameApp{
                     do{
                         course.addSession();
                         System.out.println("Do you want to add more session? Y/N");
-                        addMore = sc.next().charAt(0);
+                        addMore = sc.nextLine().charAt(0);
                         switch(addMore){
                             case 'N': contin = false;
                                         break;
@@ -165,7 +165,7 @@ public class ScrameApp{
                 case 5: //print student list
                     courseMg.printCourseCatalog();
                     System.out.println("Please enter the course code that you would like to print out the student list");
-                    courseCode = sc.next();
+                    courseCode = sc.nextLine();
                     course = courseMg.getCourse(courseCode);
                     courseMg.printSessionStudent(course);
                     break;
@@ -237,10 +237,12 @@ public class ScrameApp{
                     courseMg.saveData(courseFile);
                     studMg.saveData(studentFile);
                     System.out.println("Exit....");
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice, please try again!");
             }
+        System.out.println("Press enter to continue...");
+        sc.nextLine();
         }
 
     }
