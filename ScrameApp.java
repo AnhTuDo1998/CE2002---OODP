@@ -13,8 +13,6 @@ public class ScrameApp{
         studMg.setStudentCatalog(db.getStudentCatalog());
         courseMg.setCourseCatalog(db.getCourseCatalog());
         int choice;
-        int studentIndex;
-        int courseIndex;
         int result;
         String type;
         String studentName = "";
@@ -116,23 +114,23 @@ public class ScrameApp{
                     matricNumber = sc.nextLine();
                     System.out.println("Enter course code to be registered: ");
                     courseCode = sc.nextLine();
-                    studentIndex = studMg.studentExists(matricNumber);
-                    courseIndex = courseMg.verifyCourse(courseCode);
+                    student = studMg.getStudent(matricNumber);
+                    course = courseMg.getCourse(courseCode);
                     //if any of them do not exist
-                    if (studentIndex == -1 || courseIndex == -1){ 
+                    if (student == null || course == null){ 
                         System.out.println("Student or course is not in our records!");
                         break;
                     }
                     else{
-                        courseMg.getSessions(courseIndex);
+                        course.printSessions();
                         System.out.println("Please enter the group ID: (SEP1/CE3)");
                         group = sc.nextLine();
                         System.out.println("Please enter the session type: (LEC/TUT/LAB)");
                         type = sc.nextLine();
-                        result = courseMg.regStudentToCourse(studMg.getStudent(matricNumber), courseIndex, group, type);
+                        result = courseMg.regStudentToCourse(student, course, group, type);
                         switch (result){
                             case 0: 
-                                studMg.updateCourseTaken(courseMg.getCourse(courseCode), studentIndex); 
+                                studMg.updateCourseTaken(course, student); 
                                 System.out.println("Student added to " + type + " with Group ID: " + group);
                                 break;
                             case -1: System.out.println("Error! Group is already full!"); break;
@@ -147,21 +145,6 @@ public class ScrameApp{
                     courseCode = sc.nextLine();
                     course = courseMg.getCourse(courseCode);
                     courseMg.checkVacancy(course);
-          /*           System.out.println("Enter the course code you need check vacancy for: ")
-                    courseMg.printCourseCatalog();
-                    Course course;
-                    String courseCode = sc.nextLine();
-                    int index = courseMg.verifyCourse(courseCode);
-                    if (index!=-1){
-                        course = courseMg.getCourse(index);
-                        System.out.println("Select the session of course to check vacancy: ")
-                        course.printIndexList();
-                        String group = sc.nextLine();
-                        courseMg.checkVacancy(course, group);
-                    }
-                    else{
-                        System.out.println("Course does not exist");
-                    } */
                     break;
                 case 5: //print student list
                     courseMg.printCourseCatalog();
@@ -186,12 +169,12 @@ public class ScrameApp{
                     courseCode = sc.nextLine();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    if(courseMg.verifyCourse(courseCode) == -1 || studMg.studentExists(matricNumber)== -1){
+                    course = courseMg.getCourse(courseCode);
+                    student = studMg.getStudent(matricNumber);
+                    if(course == null || student == null){
                         System.out.println("Student or course entered is not in our records!");
                     }
                     else {
-                        course = courseMg.getCourse(courseCode);
-                        student = studMg.getStudent(matricNumber);
                         results = courseMg.getAssessment(course);
                         if(course.studentRegistered(student)){
                             for (i = 0; i < results.size(); i++){

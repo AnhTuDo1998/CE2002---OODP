@@ -18,18 +18,8 @@ public class StudentManager{
         }
     }
     
-//return -1 if student is not inside, studentindex otherwise
-    public int studentExists(String matricNumber){
-        for (int i = 0; i< studentCatalog.size(); i++){
-            if(matricNumber.equals(studentCatalog.get(i).getMatricNumber())){
-                return i;
-            } 
-        }
-        return -1;
-    }
-
-    public void updateCourseTaken(Course course, int i){
-        studentCatalog.get(i).registerCourse(course);
+    public void updateCourseTaken(Course course, Student student){
+        student.registerCourse(course);
     }
 
     public Student getStudent(String matricNumber){
