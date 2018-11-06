@@ -1,12 +1,17 @@
 import java.util.*;
+import java.io.*;
 
 public class ScrameApp{
     public static void main(String[] args) {
         Scanner sc = new Scanner (System.in);
         Student student;
         Course course;
+        String fileName = "test.bat";
+        Database db = loadData(fileName);
         StudentManager studMg = new StudentManager();
         CourseManager courseMg = new CourseManager();
+        studMg.setStudentCatalog(db.getStudentCatalog());
+        courseMg.setCourseCatalog(db.getCourseCatalog());
         int choice;
         int studentIndex;
         int courseIndex;
@@ -27,10 +32,6 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
-        String courseFile = "course_data.bat";
-        String studentFile = "student_data.bat";
-        courseMg.loadData(courseFile);
-        studMg.loadData(studentFile);
         while (cont){
             System.out.println("Menu");
             System.out.println("1. Add a student ");
@@ -202,14 +203,14 @@ public class ScrameApp{
                                     courseMg.setResults(results.get(i), student, marks);
                                 }
                             }
+                            if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
                         } else {
                             System.out.println("Student is not registered in this course!");
                         }
                     }
                     break;
                 case 8: //save data
-                    courseMg.saveData(courseFile);
-                    studMg.saveData(studentFile);
+                    saveData(fileName, db);
                     System.out.println("============== DATA SAVED ==============");
                     break;
                 case 9: //print course stats
@@ -234,8 +235,7 @@ public class ScrameApp{
                     break;
                 case 11: //exit
                     cont = false;
-                    courseMg.saveData(courseFile);
-                    studMg.saveData(studentFile);
+                    saveData(fileName, db);
                     System.out.println("Exit....");
                     return;
                 default:
@@ -245,5 +245,47 @@ public class ScrameApp{
         sc.nextLine();
         }
 
+    }
+
+    public static Database loadData(String filename) {
+		Database db = null;
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			db = (Database) in.readObject();
+			in.close();
+		} catch (IOException ex) {
+            // ex.printStackTrace();
+            System.out.println("=================================================================================================");
+            System.out.println("================== ERROR! NO DATA LOADED (ignore if this is your first loadup) ==================");
+            System.out.println("=================================================================================================");
+		} catch (ClassNotFoundException ex) {
+            System.out.println("=================================================================================================");
+            System.out.println("============= ERROR! CLASS NOT FOUND! Make sure you have all the required classes! ==============");
+            System.out.println("=================================================================================================");
+        }
+		// print out the size
+		//System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+        if(db != null){
+            return db;
+        }
+        return (new Database());
+	}
+
+	public static void saveData(String filename, Database db) {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(db);
+			out.close();
+		//	System.out.println("Object Persisted");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
     }
 }

@@ -68,45 +68,8 @@ public class StudentManager{
         if(marks > 30) return "D";
         return "F";
     }
-
-    public void loadData(String filename) {
-		ArrayList<Student> studentList = null;
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-		try {
-			fis = new FileInputStream(filename);
-			in = new ObjectInputStream(fis);
-			studentList = (ArrayList) in.readObject();
-			in.close();
-		} catch (IOException ex) {
-            // ex.printStackTrace();
-            System.out.println("=================================================================================================");
-            System.out.println("================== ERROR! NO DATA LOADED (ignore if this is your first loadup) ==================");
-            System.out.println("=================================================================================================");
-		} catch (ClassNotFoundException ex) {
-            System.out.println("=================================================================================================");
-            System.out.println("============= ERROR! CLASS NOT FOUND! Make sure you have all the required classes! ==============");
-            System.out.println("=================================================================================================");
-        }
-		// print out the size
-		//System.out.println(" Details Size: " + pDetails.size());
-        //System.out.println();
-        if(studentList != null){
-            this.studentCatalog = studentList;
-        }
-	}
-
-	public void saveData(String filename) {
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-		try {
-			fos = new FileOutputStream(filename);
-			out = new ObjectOutputStream(fos);
-			out.writeObject(studentCatalog);
-			out.close();
-		//	System.out.println("Object Persisted");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
+    
+    public void setStudentCatalog(ArrayList<Student> studentCatalog){
+        this.studentCatalog = studentCatalog;
+    }
 }

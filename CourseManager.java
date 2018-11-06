@@ -81,37 +81,6 @@ public class CourseManager{
         }
         return null;
     }
-    public void addSession(){
-        //int i;
-        Scanner sc = new Scanner(System.in);
-        String courseCode;
-        boolean success = false;
-        int index = -1;
-
-        printCourseCatalog(); //print out all the course
-        System.out.println("Please enter the course code that you want to create/add new session.");
-        courseCode = sc.nextLine();
-
-        /*for(i = 0; i < courseCatalog.size(); i++){
-            if(courseCatalog.get(i).getCourseCode() == courseCode){
-                success = courseCatalog.get(i).addSession(); //will return true or false depends on whether the session is created
-                break;
-            }
-        }*/
-        index = verifyCourse(courseCode);
-
-        if (index >= 0){
-            success = courseCatalog.get(index).addSession(); //will return true or false depends on whether the session is created
-        }
-
-        //session created successfully
-        if(success){
-            System.out.println("New session for " + courseCode + " is created successfully!");
-        }else{
-            System.out.println("Session is not added! Session does not exist");
-        }
-    }
-
 
     //find a way to delete seperate session ?
     public void removeSession(){
@@ -229,47 +198,6 @@ public class CourseManager{
         System.out.println("Results weightage completed....");
         return 0;
     }
-
-    public void loadData(String filename) {
-		ArrayList<Course> courseList = null;
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-		try {
-			fis = new FileInputStream(filename);
-			in = new ObjectInputStream(fis);
-			courseList = (ArrayList) in.readObject();
-			in.close();
-		} catch (IOException ex) {
-            // ex.printStackTrace();
-            System.out.println("=================================================================================================");
-            System.out.println("================== ERROR! NO DATA LOADED (ignore if this is your first loadup) ==================");
-            System.out.println("=================================================================================================");
-		} catch (ClassNotFoundException ex) {
-            System.out.println("=================================================================================================");
-            System.out.println("============= ERROR! CLASS NOT FOUND! Make sure you have all the required classes! ==============");
-            System.out.println("=================================================================================================");
-        }
-		// print out the size
-		//System.out.println(" Details Size: " + pDetails.size());
-        //System.out.println();
-        if(courseList != null){
-            this.courseCatalog = courseList;
-        }
-	}
-
-	public void saveData(String filename) {
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-		try {
-			fos = new FileOutputStream(filename);
-			out = new ObjectOutputStream(fos);
-			out.writeObject(courseCatalog);
-			out.close();
-		//	System.out.println("Object Persisted");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-    }
     
     public void printCourseStats(Course course){
         ArrayList<Assessment> assessmentList = course.getAssessment();
@@ -336,5 +264,9 @@ public class CourseManager{
         System.out.println("C  : " + results[7]);
         System.out.println("D  : " + results[8]);
         System.out.println("F  : " + results[9]);
+    }
+
+    public void setCourseCatalog(ArrayList<Course> courseCatalog){
+        this.courseCatalog = courseCatalog;
     }
 }
