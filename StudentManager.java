@@ -4,29 +4,8 @@ import java.io.*;
 public class StudentManager{
     private ArrayList<Student> studentCatalog= new ArrayList<Student>();
 
-    public Student addStudent(String studentName,String  matricNumber,char gender,String school,int acadYear){
-        Student student = new Student(studentName, matricNumber, gender, school, acadYear);
-        studentCatalog.add(student);
-        return student;
-    }
-
-    public void printAllStudent(){
-        int i;
-        System.out.println("All students in record: ");
-        for (i = 0; i < studentCatalog.size(); i++){
-            System.out.println((i+1) + ". " + studentCatalog.get(i));
-        }
-    }
-    
     public void updateCourseTaken(Course course, Student student){
         student.registerCourse(course);
-    }
-
-    public Student getStudent(String matricNumber){
-        for(int i = 0; i < studentCatalog.size(); i++){
-            if(studentCatalog.get(i).getMatricNumber().equals(matricNumber)) return studentCatalog.get(i);
-        }
-        return null;
     }
 
     public void printTranscript(Student student){
@@ -57,9 +36,5 @@ public class StudentManager{
         if(marks > 40) return "C";
         if(marks > 30) return "D";
         return "F";
-    }
-    
-    public void setStudentCatalog(ArrayList<Student> studentCatalog){
-        this.studentCatalog = studentCatalog;
     }
 }
