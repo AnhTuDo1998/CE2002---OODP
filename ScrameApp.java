@@ -1,15 +1,18 @@
 import java.util.*;
+import java.io.*;
 
 public class ScrameApp{
     public static void main(String[] args) {
         Scanner sc = new Scanner (System.in);
         Student student;
         Course course;
+        String fileName = "test.bat";
+        Database db = loadData(fileName);
         StudentManager studMg = new StudentManager();
         CourseManager courseMg = new CourseManager();
+        studMg.setStudentCatalog(db.getStudentCatalog());
+        courseMg.setCourseCatalog(db.getCourseCatalog());
         int choice;
-        int studentIndex;
-        int courseIndex;
         int result;
         String type;
         String studentName = "";
@@ -27,10 +30,6 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
-        String courseFile = "course_data.bat";
-        String studentFile = "student_data.bat";
-        courseMg.loadData(courseFile);
-        studMg.loadData(studentFile);
         while (cont){
             System.out.println("Menu");
             System.out.println("1. Add a student ");
@@ -115,23 +114,23 @@ public class ScrameApp{
                     matricNumber = sc.nextLine();
                     System.out.println("Enter course code to be registered: ");
                     courseCode = sc.nextLine();
-                    studentIndex = studMg.studentExists(matricNumber);
-                    courseIndex = courseMg.verifyCourse(courseCode);
+                    student = studMg.getStudent(matricNumber);
+                    course = courseMg.getCourse(courseCode);
                     //if any of them do not exist
-                    if (studentIndex == -1 || courseIndex == -1){ 
+                    if (student == null || course == null){ 
                         System.out.println("Student or course is not in our records!");
                         break;
                     }
                     else{
-                        courseMg.getSessions(courseIndex);
+                        course.printSessions();
                         System.out.println("Please enter the group ID: (SEP1/CE3)");
                         group = sc.nextLine();
                         System.out.println("Please enter the session type: (LEC/TUT/LAB)");
                         type = sc.nextLine();
-                        result = courseMg.regStudentToCourse(studMg.getStudent(matricNumber), courseIndex, group, type);
+                        result = courseMg.regStudentToCourse(student, course, group, type);
                         switch (result){
                             case 0: 
-                                studMg.updateCourseTaken(courseMg.getCourse(courseCode), studentIndex); 
+                                studMg.updateCourseTaken(course, student); 
                                 System.out.println("Student added to " + type + " with Group ID: " + group);
                                 break;
                             case -1: System.out.println("Error! Group is already full!"); break;
@@ -146,21 +145,6 @@ public class ScrameApp{
                     courseCode = sc.nextLine();
                     course = courseMg.getCourse(courseCode);
                     courseMg.checkVacancy(course);
-          /*           System.out.println("Enter the course code you need check vacancy for: ")
-                    courseMg.printCourseCatalog();
-                    Course course;
-                    String courseCode = sc.nextLine();
-                    int index = courseMg.verifyCourse(courseCode);
-                    if (index!=-1){
-                        course = courseMg.getCourse(index);
-                        System.out.println("Select the session of course to check vacancy: ")
-                        course.printIndexList();
-                        String group = sc.nextLine();
-                        courseMg.checkVacancy(course, group);
-                    }
-                    else{
-                        System.out.println("Course does not exist");
-                    } */
                     break;
                 case 5: //print student list
                     courseMg.printCourseCatalog();
@@ -185,12 +169,12 @@ public class ScrameApp{
                     courseCode = sc.nextLine();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    if(courseMg.verifyCourse(courseCode) == -1 || studMg.studentExists(matricNumber)== -1){
+                    course = courseMg.getCourse(courseCode);
+                    student = studMg.getStudent(matricNumber);
+                    if(course == null || student == null){
                         System.out.println("Student or course entered is not in our records!");
                     }
                     else {
-                        course = courseMg.getCourse(courseCode);
-                        student = studMg.getStudent(matricNumber);
                         results = courseMg.getAssessment(course);
                         if(course.studentRegistered(student)){
                             for (i = 0; i < results.size(); i++){
@@ -202,14 +186,14 @@ public class ScrameApp{
                                     courseMg.setResults(results.get(i), student, marks);
                                 }
                             }
+                            if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
                         } else {
                             System.out.println("Student is not registered in this course!");
                         }
                     }
                     break;
                 case 8: //save data
-                    courseMg.saveData(courseFile);
-                    studMg.saveData(studentFile);
+                    saveData(fileName, db);
                     System.out.println("============== DATA SAVED ==============");
                     break;
                 case 9: //print course stats
@@ -234,8 +218,7 @@ public class ScrameApp{
                     break;
                 case 11: //exit
                     cont = false;
-                    courseMg.saveData(courseFile);
-                    studMg.saveData(studentFile);
+                    saveData(fileName, db);
                     System.out.println("Exit....");
                     return;
                 default:
@@ -245,5 +228,47 @@ public class ScrameApp{
         sc.nextLine();
         }
 
+    }
+
+    public static Database loadData(String filename) {
+		Database db = null;
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			db = (Database) in.readObject();
+			in.close();
+		} catch (IOException ex) {
+            // ex.printStackTrace();
+            System.out.println("=================================================================================================");
+            System.out.println("================== ERROR! NO DATA LOADED (ignore if this is your first loadup) ==================");
+            System.out.println("=================================================================================================");
+		} catch (ClassNotFoundException ex) {
+            System.out.println("=================================================================================================");
+            System.out.println("============= ERROR! CLASS NOT FOUND! Make sure you have all the required classes! ==============");
+            System.out.println("=================================================================================================");
+        }
+		// print out the size
+		//System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+        if(db != null){
+            return db;
+        }
+        return (new Database());
+	}
+
+	public static void saveData(String filename, Database db) {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream(filename);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(db);
+			out.close();
+		//	System.out.println("Object Persisted");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
     }
 }
