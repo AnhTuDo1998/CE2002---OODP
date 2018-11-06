@@ -192,14 +192,18 @@ public class ScrameApp{
                         course = courseMg.getCourse(courseCode);
                         student = studMg.getStudent(matricNumber);
                         results = courseMg.getAssessment(course);
-                        for (i = 0; i < results.size(); i++){
-                            marks = 101; //just for it to satisfy the while statement
-                            while(marks > 100 || marks < 0){
-                                System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
-                                marks = sc.nextDouble();
-                                sc.nextLine();
-                                courseMg.setResults(results.get(i), student, marks);
+                        if(course.studentRegistered(student)){
+                            for (i = 0; i < results.size(); i++){
+                                marks = 101; //just for it to satisfy the while statement
+                                while(marks > 100 || marks < 0){
+                                    System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
+                                    marks = sc.nextDouble();
+                                    sc.nextLine();
+                                    courseMg.setResults(results.get(i), student, marks);
+                                }
                             }
+                        } else {
+                            System.out.println("Student is not registered in this course!");
                         }
                     }
                     break;
