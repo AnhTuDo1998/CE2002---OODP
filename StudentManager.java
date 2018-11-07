@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class StudentManager{
-    private ArrayList<Student> studentCatalog= new ArrayList<Student>();
 
     public void updateCourseTaken(Course course, Student student){
         student.registerCourse(course);

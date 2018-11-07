@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class CourseManager{
-    private ArrayList<Course> courseCatalog = new ArrayList<Course>();
     
     //rmb to implement return int
 
