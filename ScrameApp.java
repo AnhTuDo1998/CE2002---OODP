@@ -40,7 +40,9 @@ public class ScrameApp{
             System.out.println("8. Save data");
             System.out.println("9. Print course statistics");
             System.out.println("10. Print student transcript");
-            System.out.println("11. Exit");
+            System.out.println("11. Print all courses");
+            System.out.println("12. Print all students");
+            System.out.println("13. Exit");
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -222,7 +224,13 @@ public class ScrameApp{
                     }
                     studMg.printTranscript(student);
                     break;
-                case 11: //exit
+                case 11:
+                    db.printCourseCatalog();
+                    break;
+                case 12:
+                    db.printStudentCatalog();
+                    break;
+                case 13: //exit
                     cont = false;
                     saveData(fileName, db);
                     System.out.println("Exit....");
