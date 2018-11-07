@@ -30,25 +30,18 @@ public class Database implements Serializable{
         return student;
     }
 
-    public Course removeCourse(){
-        int i = 0;
-        Scanner sc = new Scanner(System.in);
-        String courseCode;
-        Course course;
-
-        printCourseCatalog();
-        System.out.println("Please enter the course code that you want to remove the course");
-        courseCode = sc.nextLine();
-        course = getCourse(courseCode);
-
+    public boolean removeCourse(Course course){
+    
         //return deleted course, null of none
         if (course != null){
-            courseCatalog.remove(course); //will return true or false depends on whether the session is created
-            return course;
-        } else{
-            return null;
+            if(courseCatalog.remove(course)){
+                for(int i = 0 ; i < studentCatalog.size(); i++){
+                    studentCatalog.get(i).deregisterCourse(course);
+                }
+                return true;
+            } //will return true or false depends on whether the session is created
         }
-
+        return false;
     }
 
     public void printCourseCatalog(){

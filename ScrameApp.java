@@ -32,17 +32,18 @@ public class ScrameApp{
             System.out.println("Menu");
             System.out.println("1. Add a student ");
             System.out.println("2. Add a course");
-            System.out.println("3. Register student for a course");
-            System.out.println("4. Check available slot in a class");
-            System.out.println("5. Print student list");
-            System.out.println("6. Enter course's assessment weightage");
-            System.out.println("7. Enter coursework mark");
-            System.out.println("8. Save data");
-            System.out.println("9. Print course statistics");
-            System.out.println("10. Print student transcript");
-            System.out.println("11. Print all courses");
-            System.out.println("12. Print all students");
-            System.out.println("13. Exit");
+            System.out.println("3. Remove course");
+            System.out.println("4. Register student for a course");
+            System.out.println("5. Check available slot in a class");
+            System.out.println("6. Print student list");
+            System.out.println("7. Enter course's assessment weightage");
+            System.out.println("8. Enter coursework mark");
+            System.out.println("9. Save data");
+            System.out.println("10. Print course statistics");
+            System.out.println("11. Print student transcript");
+            System.out.println("12. Print all courses");
+            System.out.println("13. Print all students");
+            System.out.println("14. Exit");
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -111,7 +112,18 @@ public class ScrameApp{
                         }
                     }while(contin);
                     break;
-                case 3: //register student for a course
+                case 3:
+                    db.printCourseCatalog();
+                    System.out.println("Enter the course code you want to remove: ");
+                    courseCode = sc.nextLine();
+                    course = db.getCourse(courseCode);
+                    if(course != null){
+                        db.removeCourse(course);
+                    }else{
+                        System.out.println("course doesn't exist!");
+                    }
+                    break;
+                case 4: //register student for a course
                     db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
@@ -143,21 +155,22 @@ public class ScrameApp{
                         }
                     }
                     break;
-                case 4: //Check available slots in a class
+                
+                case 5: //Check available slots in a class
                     db.printCourseCatalog();
                     System.out.println("Enter the course code you need check vacancy for: ");
                     courseCode = sc.nextLine();
                     course = db.getCourse(courseCode);
                     courseMg.checkVacancy(course);
                     break;
-                case 5: //print student list
+                case 6: //print student list
                     db.printCourseCatalog();
                     System.out.println("Please enter the course code that you would like to print out the student list");
                     courseCode = sc.nextLine();
                     course = db.getCourse(courseCode);
                     courseMg.printSessionStudent(course);
                     break;
-                case 6: //enter course assessment weightage
+                case 7: //enter course assessment weightage
                     System.out.println("================= ENTER COURSE WEIGHTAGE =================");
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
@@ -169,7 +182,7 @@ public class ScrameApp{
                     }
                     courseMg.setAssessment(course);
                     break;
-                case 7: //enter coursework mark
+                case 8: //enter coursework mark
                     db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
@@ -198,11 +211,11 @@ public class ScrameApp{
                         }
                     }
                     break;
-                case 8: //save data
+                case 9: //save data
                     saveData(fileName, db);
                     System.out.println("============== DATA SAVED ==============");
                     break;
-                case 9: //print course stats
+                case 10: //print course stats
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
@@ -213,7 +226,7 @@ public class ScrameApp{
                     }
                     courseMg.printCourseStats(course);
                     break;
-                case 10: //print student transcript
+                case 11: //print student transcript
                     db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
@@ -224,13 +237,13 @@ public class ScrameApp{
                     }
                     studMg.printTranscript(student);
                     break;
-                case 11:
+                case 12:
                     db.printCourseCatalog();
                     break;
-                case 12:
+                case 13:
                     db.printStudentCatalog();
                     break;
-                case 13: //exit
+                case 14: //exit
                     cont = false;
                     saveData(fileName, db);
                     System.out.println("Exit....");
