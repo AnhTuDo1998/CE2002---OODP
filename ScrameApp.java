@@ -50,17 +50,24 @@ public class ScrameApp{
                 case 1: //add a student
                     confirm = 'N';
                     while(confirm != 'Y'){
-                        System.out.println("Enter student's name: ");
-                        studentName = sc.nextLine();
-                        System.out.println("Enter student's matric No.: ");
-                        matricNumber = sc.nextLine();
-                        System.out.println("Enter student's school (SCSE): ");
-                        school = sc.nextLine();
-                        System.out.println("Enter student's year of study: ");
-                        acadYear = sc.nextInt();
-                        sc.nextLine();
-                        System.out.println("Enter student's gender: (M/F)");
-                        gender = sc.nextLine().charAt(0);
+                        try{
+                            System.out.println("Enter student's name: ");
+                            studentName = sc.nextLine();
+                            System.out.println("Enter student's matric No.: ");
+                            matricNumber = sc.nextLine();
+                            System.out.println("Enter student's school (SCSE): ");
+                            school = sc.nextLine();
+                            System.out.println("Enter student's year of study: ");
+                            acadYear = sc.nextInt();
+                            sc.nextLine();
+                            System.out.println("Enter student's gender: (M/F)");
+                            gender = sc.nextLine().toUpperCase().charAt(0);
+                        }
+                        catch(InputMismatchException e){
+                            System.out.println("Data entered is invalid, please try again!");
+                            sc.nextLine();
+                            continue;
+                        }
                         if(db.getStudent(matricNumber) != null){
                             System.out.println("Student with matric number " + matricNumber + " already exists!");
                         }
@@ -80,15 +87,22 @@ public class ScrameApp{
                     char addMore = 'Y';
                     confirm = 'N';
                     while(confirm != 'Y'){
-                        System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
-                        courseName = sc.nextLine();
-                        System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
-                        courseCode = sc.nextLine();
-                        System.out.println("Enter course AU: (2/3)");
-                        AU = sc.nextInt();
-                        sc.nextLine();
-                        System.out.println("Enter name of course coordinator: ");
-                        courseCoordinator = sc.nextLine();
+                        try{
+                            System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
+                            courseName = sc.nextLine();
+                            System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
+                            courseCode = sc.nextLine();
+                            System.out.println("Enter course AU: (2/3)");
+                            AU = sc.nextInt();
+                            sc.nextLine();
+                            System.out.println("Enter name of course coordinator: ");
+                            courseCoordinator = sc.nextLine();
+                        }
+                        catch(InputMismatchException e){
+                            System.out.println("Data entered is invalid, please try again!");
+                            sc.nextLine();
+                            continue;
+                        }
                         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
                         System.out.println("Are you sure you want to add in this course? (Y/N)");
                         confirm = sc.nextLine().charAt(0);
