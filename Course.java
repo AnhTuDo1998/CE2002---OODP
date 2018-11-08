@@ -6,7 +6,7 @@ public class Course implements Serializable{
     private ArrayList<Session> indexList = new ArrayList<Session>();
     //Record of Assessment (Exam and Coursework) under a course
     //index 0 is equivalent to exam marks, the rest are coursemarks
-    private ArrayList<Assessment> results = new ArrayList<Assessment>(); 
+    private ArrayList<Assessment> results = new ArrayList<Assessment>();  //arrayList of hashmaps
 
     //Other relevant information of a course
     private String courseName;
@@ -150,6 +150,25 @@ public class Course implements Serializable{
             }
         }
         return result;
+    }
+
+    public int deregisterStudent(Student student){
+        int sessionCount = 0;
+        for(int i = 0; i < indexList.size(); i++){
+            ArrayList<Student> students = indexList.get(i).getStudentRegistered();
+            for(int j = 0; j < students.size(); j++){
+                if(students.get(j).equals(student)){
+                    sessionCount++;
+                    students.remove(student);
+                    indexList.get(i).setNumberRegistered(indexList.get(i).getNumberRegistered()-1);
+                }
+            }
+
+            for(int z = 0; z < results.size(); z++){
+                results.get(z).removeAssessmentResult(student);
+            }
+        }
+        return sessionCount;
     }
 
     public void printSessions(){

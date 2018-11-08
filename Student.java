@@ -28,6 +28,10 @@ public class Student implements Serializable{
         coursesRegistered.add(course);
     }
 
+    public boolean deregisterCourse(Course course){
+        return coursesRegistered.remove(course);
+    }
+
     public ArrayList<Course> getCourseRegistered(){
         return this.coursesRegistered;
     }

@@ -53,6 +53,16 @@ public class Session implements Serializable{
         return this.numberRegistered;
     }
 
+    public void setNumberRegistered(int numberRegistered){
+        this.numberRegistered = numberRegistered;
+    }
+    public boolean deregisterStudent(Student student){
+        if(student != null){
+            return studentList.remove(student);
+        }
+        return false;
+    }
+
     //return -1 if full, -2 if student is already inside, 0 if success
     public int addStudent(Student student){ //add a student into an existing group
         if(this.maxCapacity == this.numberRegistered){

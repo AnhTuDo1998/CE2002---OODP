@@ -30,25 +30,43 @@ public class Database implements Serializable{
         return student;
     }
 
-    public Course removeCourse(){
-        int i = 0;
-        Scanner sc = new Scanner(System.in);
-        String courseCode;
-        Course course;
+    public void removeStudent(Student student){
+        if(studentCatalog.remove(student)){
+            for(int i = 0; i < courseCatalog.size(); i++){
+                //remove the assessment results for that student
+                ArrayList<Assessment> assessments = courseCatalog.get(i).getAssessment();
+                for(int z = 0; z < assessments.size(); z++){
+                    assessments.get(z).removeAssessmentResult(student);
+                }
+                //deregister student and increase number of vacancy by 1
+                ArrayList<Session> indexList = courseCatalog.get(i).getAllSession();
+                for(int j = 0; j < indexList.size(); j++){
+                    ArrayList<Student> studentList = indexList.get(j).getStudentRegistered();
+                    for(int k = 0; k < studentList.size(); k++){
+                        if(studentList.get(i).equals(student)){
+                            studentList.remove(student);
+                            indexList.get(j).setNumberRegistered(indexList.get(j).getNumberRegistered()-1);
+                        }
+                    }
+                }
+            }
+        }else{
+            System.out.println("Student not removed!");
+        }
+    }
 
-        printCourseCatalog();
-        System.out.println("Please enter the course code that you want to remove the course");
-        courseCode = sc.nextLine();
-        course = getCourse(courseCode);
-
+    public boolean removeCourse(Course course){
+    
         //return deleted course, null of none
         if (course != null){
-            courseCatalog.remove(course); //will return true or false depends on whether the session is created
-            return course;
-        } else{
-            return null;
+            if(courseCatalog.remove(course)){
+                for(int i = 0 ; i < studentCatalog.size(); i++){
+                    studentCatalog.get(i).deregisterCourse(course);
+                }
+                return true;
+            } //will return true or false depends on whether the session is created
         }
-
+        return false;
     }
 
     public void printCourseCatalog(){
