@@ -78,8 +78,8 @@ public class ScrameApp{
                     db.printStudentCatalog();
                     break;
                 case 2: //remove a student
-                    System.out.println("Enter the matriculation number of the student: ");
                     db.printStudentCatalog();
+                    System.out.println("Enter the matriculation number of the student: ");
                     matricNumber = sc.nextLine();
                     student = db.getStudent(matricNumber);
                     System.out.println(student);
@@ -87,6 +87,7 @@ public class ScrameApp{
                     confirm = sc.nextLine().charAt(0);
                     if(student != null && confirm == 'Y'){
                         db.removeStudent(student);
+                        System.out.println(student + " is removed!");
                     }else{
                         System.out.println("Student not removed!");
                     }
@@ -134,9 +135,14 @@ public class ScrameApp{
                     courseCode = sc.nextLine();
                     course = db.getCourse(courseCode);
                     if(course != null){
-                        db.removeCourse(course);
+                        System.out.println("Are you sure you want to remove " + course + " ? (Y/N)");
+                        confirm = sc.nextLine.charAt(0);
+                        if(confirm == 'Y'){
+                            db.removeCourse(course);
+                            System.out.println(course  + " is removed!");
+                        }
                     }else{
-                        System.out.println("course doesn't exist!");
+                        System.out.println("Error! Course doesn't exist!");
                     }
                     break;
                 case 5: //register student for a course
@@ -172,6 +178,7 @@ public class ScrameApp{
                     }
                     break;
                 case 6: //deregister a student from a course
+                    db.printStudentCatalog();
                     System.out.println("Enter the student matriculation number: ");
                     matricNumber = sc.nextLine();
                     System.out.println("Enter the course code you want to remove the student from");
@@ -180,9 +187,10 @@ public class ScrameApp{
                     student = db.getStudent(matricNumber);
                     if(course != null && student != null){
                         if(course.deregisterStudent(student) > 0){
+                            student.deregisterCourse(course);
                             System.out.println("Student deregistered successfully!");
                         }else{
-                            System.out.println("Student deregistered unsuccessfully!");
+                            System.out.println("Error! Student is not registered for this course!");
                         }
                     }else{
                         System.out.println("Course or student does not exist!");

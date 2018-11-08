@@ -50,7 +50,6 @@ public class Database implements Serializable{
                     }
                 }
             }
-            System.out.println("Student removed!");
         }else{
             System.out.println("Student not removed!");
         }
