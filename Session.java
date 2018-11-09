@@ -22,6 +22,34 @@ public class Session implements Serializable{
         this.location = location;
     }
 
+    public void setType(String type){
+        this.type = type;
+    }
+
+    public void setGroup(String group){
+        this.group = group;
+    }
+
+    public void setDayTime(String dayTime){
+        this.dayTime = dayTime;
+    }
+
+    public void setTutorName(String tutorName){
+        this.tutorName = tutorName;
+    }
+
+    public void setMaxCapacity(int maxCapacity){
+        this.maxCapacity = maxCapacity;
+    }
+
+    public void setNumberRegistered(int numberRegistered){
+        this.numberRegistered = numberRegistered;
+    }
+
+    public void setLocation (String location){
+        this.location = location;
+    }
+
     public String getType(){ //return type of session e.g. LEC, LAB, TUT
         return this.type;
     }
@@ -53,9 +81,6 @@ public class Session implements Serializable{
         return this.numberRegistered;
     }
 
-    public void setNumberRegistered(int numberRegistered){
-        this.numberRegistered = numberRegistered;
-    }
     public boolean deregisterStudent(Student student){
         if(student != null){
             return studentList.remove(student);
