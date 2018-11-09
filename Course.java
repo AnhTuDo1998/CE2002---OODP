@@ -93,6 +93,62 @@ public class Course implements Serializable{
         }
     }
 
+    //Modifying Session
+    public boolean modifySession(Session session){
+        boolean success = false;
+        char conti = 'Y';
+        int choice;
+        Scanner sc = new Scanner(System.in);
+        do{
+            System.out.println("Select the field of Session to edit: 1.Type 2.Group ID 3.Timing 4.Location 5.Tutor Name 6.Max Capcity");
+            choice = sc.nextInt();
+            switch(choice){
+                case 1:
+                    System.out.println("Enter new session type: (LEC/TUT/LAB)");
+                    String type = sc.nextLine();
+                    session.setType(type);
+                    success = true;
+                    break;
+                case 2:
+                    System.out.println("Enter new session group : (SEP1/CE3/SEA2)");
+                    String group = sc.nextLine();
+                    session.setGroup(group);
+                    success = true;
+                    break;
+                case 3:
+                    System.out.println("Enter new session timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
+                    String dayTime = sc.nextLine();
+                    session.setDayTime(dayTime);
+                    success = true;
+                    break;
+                case 4:
+                    System.out.println("Enter new session location: (LT19a/TRx44/SWLAB3)");
+                    String location = sc.nextLine();
+                    session.setLocation(location);
+                    success = true;
+                    break;
+                case 5:
+                    System.out.println("Enter new session tutor name: ");
+                    String tutorName = sc.nextLine();
+                    session.setTutorName(tutorName);
+                    success = true;
+                    break;
+                case 6:
+                    System.out.println("Enter session's new max capacity: ");
+                    int maxCapacity = sc.nextInt();
+                    success = true;
+                    break;
+                default: 
+                    System.out.println("Please select a valid field!");
+            }
+            System.out.println("Modified session: "+ session.toString());
+            System.out.println("Do you wish to continue modifying the session (Y/N)");
+            conti = sc.nextLine().charAt(0);
+        }while(conti == 'Y');
+    return success;     
+        
+    }
+
     //print session catalogue
     public void printIndexList(){
         int i;

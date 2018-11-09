@@ -46,6 +46,7 @@ public class ScrameApp{
             System.out.println("14. Print all courses");
             System.out.println("15. Print all students");
             System.out.println("16. Exit");
+            System.out.println("17. Modify Session");
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -143,7 +144,7 @@ public class ScrameApp{
                         }
                     }while(contin);
                     break;
-                case 4:
+                case 4: //Remove Course
                     db.printCourseCatalog();
                     System.out.println("Enter the course code you want to remove: ");
                     courseCode = sc.nextLine();
@@ -302,6 +303,33 @@ public class ScrameApp{
                     saveData(fileName, db);
                     System.out.println("Exit....");
                     return;
+
+                case 17: //modify Session
+                    db.printCourseCatalog();
+                    System.out.println("Enter the course code you want to modify sessions: ");
+                    courseCode = sc.nextLine();
+                    course = db.getCourse(courseCode);
+                    // course exists
+                    if(course != null){
+                        //print out the course's session
+                        course.printIndexList();
+                        //tell user to select the session to modify and get tbe session
+                        System.out.println("Enter the Session Type and Group ID to be removed (LAB/TUT/LEC CE1)");
+                        type = sc.next();
+                        group = sc.next();
+                        //get the session from database
+                        session = course.getSession(group, type);
+                        if (session != null){
+                            course.modifySession(session);
+                        }else{
+                            System.out.println("Session does not exist!");
+                        }
+                    }
+                    //course doesn't exist
+                    else{
+                        System.out.println("Error! Course doesn't exist!");
+                    }
+                    break;
                 default:
                     System.out.println("Invalid choice, please try again!");
             }
