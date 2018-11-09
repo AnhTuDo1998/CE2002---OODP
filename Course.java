@@ -102,6 +102,7 @@ public class Course implements Serializable{
         do{
             System.out.println("Select the field of Session to edit: 1.Type 2.Group ID 3.Timing 4.Location 5.Tutor Name 6.Max Capcity");
             choice = sc.nextInt();
+            sc.nextLine();
             switch(choice){
                 case 1:
                     System.out.println("Enter new session type: (LEC/TUT/LAB)");

@@ -6,6 +6,7 @@ public class ScrameApp{
         Scanner sc = new Scanner (System.in);
         Student student;
         Course course;
+        Session session;
         String fileName = "test.bat";
         Database db = loadData(fileName);
         StudentManager studMg = new StudentManager();
@@ -151,7 +152,7 @@ public class ScrameApp{
                     course = db.getCourse(courseCode);
                     if(course != null){
                         System.out.println("Are you sure you want to remove " + course + " ? (Y/N)");
-                        confirm = sc.nextLine.charAt(0);
+                        confirm = sc.nextLine().charAt(0);
                         if(confirm == 'Y'){
                             db.removeCourse(course);
                             System.out.println(course  + " is removed!");
