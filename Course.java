@@ -111,38 +111,49 @@ public class Course implements Serializable{
             sc.nextLine();
             switch(choice){
                 case 1:
-                    System.out.println("Enter new session type: (LEC/TUT/LAB)");
+                    System.out.println("Old session's type: " + session.getType());
+                    System.out.println("Enter new session's type: (LEC/TUT/LAB)");
                     String type = sc.nextLine();
                     session.setType(type);
                     success = true;
                     break;
                 case 2:
-                    System.out.println("Enter new session group : (SEP1/CE3/SEA2)");
+                    System.out.println("Old session's group: " + session.getGroup());
+                    System.out.println("Enter new session's group : (SEP1/CE3/SEA2)");
                     String group = sc.nextLine();
                     session.setGroup(group);
                     success = true;
                     break;
                 case 3:
-                    System.out.println("Enter new session timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
+                    System.out.println("Old session's timing: " + session.getDayTime());
+                    System.out.println("Enter new session's timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
                     String dayTime = sc.nextLine();
                     session.setDayTime(dayTime);
                     success = true;
                     break;
                 case 4:
-                    System.out.println("Enter new session location: (LT19a/TRx44/SWLAB3)");
+                    System.out.println("Old session's location: " + session.getLocation());
+                    System.out.println("Enter new session's location: (LT19a/TRx44/SWLAB3)");
                     String location = sc.nextLine();
                     session.setLocation(location);
                     success = true;
                     break;
                 case 5:
-                    System.out.println("Enter new session tutor name: ");
+                    System.out.println("Old session's tutor name: " + session.getTutorName());
+                    System.out.println("Enter new session's tutor name: ");
                     String tutorName = sc.nextLine();
                     session.setTutorName(tutorName);
                     success = true;
                     break;
                 case 6:
+                    System.out.println("Old session's max capacity: " + session.getMaxCapacity());
                     System.out.println("Enter session's new max capacity: ");
                     int maxCapacity = sc.nextInt();
+                    if(maxCapacity < session.getNumberRegistered()){
+                        System.out.println("Error!! Number of student registered exceed the new max capacity!");
+                        sc.nextLine();
+                        break;
+                    }
                     session.setMaxCapacity(maxCapacity);
                     sc.nextLine();
                     success = true;
@@ -150,7 +161,7 @@ public class Course implements Serializable{
                 default: 
                     System.out.println("Please select a valid field!");
             }
-            System.out.println("Modified session: "+ session.toString());
+            System.out.println("Modified session: "+ session.toString() + " | Max Capacity: " +session.getMaxCapacity());
             System.out.println("Do you wish to continue modifying the session (Y/N)");
             conti = sc.nextLine().toUpperCase().charAt(0);
         }while(conti == 'Y');
