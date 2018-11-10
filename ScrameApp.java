@@ -385,7 +385,6 @@ public class ScrameApp{
         sc.nextLine();
         printSpaces();
         }
-
     }
 
     public static Database loadData(String filename) {
@@ -462,7 +461,9 @@ public class ScrameApp{
             System.in.read();
         }  
         catch(Exception e)
-        {}  
+        {
+            System.out.println("Error !");
+        }  
     }
             
     public static void printSpaces(){

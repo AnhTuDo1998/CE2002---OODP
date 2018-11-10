@@ -165,8 +165,7 @@ public class Course implements Serializable{
             System.out.println("Do you wish to continue modifying the session (Y/N)");
             conti = sc.nextLine().toUpperCase().charAt(0);
         }while(conti == 'Y');
-    return success;     
-        
+        return success;         
     }
 
     //print session catalogue
