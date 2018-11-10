@@ -1,5 +1,10 @@
 import java.util.*;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.awt.Graphics;
 
 public class ScrameApp{
     public static void main(String[] args) {
@@ -29,6 +34,7 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
+        printTitle();
         while (cont){
             System.out.println("Menu");
             System.out.println("1. Add/Remove a student ");
@@ -117,6 +123,7 @@ public class ScrameApp{
                         System.out.println("3. Menu ");
                         System.out.print("Enter your action: ");
                         choice = sc.nextInt();
+                        sc.nextLine();
                         switch(choice){
                             case 1: //add a course
                                 boolean contin = true;
@@ -190,6 +197,7 @@ public class ScrameApp{
                     System.out.println("3. Menu");
                     System.out.print("Enter your action: ");
                     choice = sc.nextInt();
+                    sc.nextLine();
                     switch(choice){
                         case 1: //register student for a course
                             db.printStudentCatalog();
@@ -397,5 +405,30 @@ public class ScrameApp{
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+    }
+
+    //print the title SCRAME
+    public static void printTitle(){
+        int width = 110; //set the width and height of the view
+        int height = 20;
+        int x;
+        int y;
+
+        BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        g.setFont(new Font("TimesNewRoman", Font.ITALIC,15)); //set font style and size
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.drawString("S C R A M E", 10, 15);
+
+        for(y = 0 ; y < height; y++){
+            StringBuilder builder = new StringBuilder();
+            for(x = 0; x < width; x++){
+                builder.append(image.getRGB(x, y) == -16777216? "#": " ");
+            }
+            System.out.println(builder);
+            
+        }
     }
 }
