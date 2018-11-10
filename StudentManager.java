@@ -36,4 +36,8 @@ public class StudentManager{
         if(marks > 30) return "D";
         return "F";
     }
+
+    public void deregisterCourse(Student student, Course course){
+        student.deregisterCourse(course);
+    }
 }

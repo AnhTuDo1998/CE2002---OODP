@@ -135,7 +135,7 @@ public class ScrameApp{
                     System.out.println(course + " is added.");
                     db.printCourseCatalog();
                     do{
-                        added = course.addSession();
+                        added = courseMg.addSession(course);
                         if(!added) continue; //ensures at least one is added!
                         System.out.println("Do you want to add more session? Y/N");
                         addMore = sc.nextLine().charAt(0);
@@ -176,7 +176,7 @@ public class ScrameApp{
                         break;
                     }
                     else{
-                        course.printSessions();
+                        courseMg.printSessions(course);
                         System.out.println("Please enter the group ID: (SEP1/CE3)");
                         group = sc.nextLine();
                         System.out.println("Please enter the session type: (LEC/TUT/LAB)");
@@ -202,8 +202,8 @@ public class ScrameApp{
                     course = db.getCourse(courseCode);
                     student = db.getStudent(matricNumber);
                     if(course != null && student != null){
-                        if(course.deregisterStudent(student) > 0){
-                            student.deregisterCourse(course);
+                        if(courseMg.deregisterStudent(course, student) > 0){
+                            studMg.deregisterCourse(student, course);
                             System.out.println("Student deregistered successfully!");
                         }else{
                             System.out.println("Error! Student is not registered for this course!");
@@ -250,21 +250,7 @@ public class ScrameApp{
                         System.out.println("Student or course entered is not in our records!");
                     }
                     else {
-                        results = courseMg.getAssessment(course);
-                        if(course.studentRegistered(student)){
-                            for (i = 0; i < results.size(); i++){
-                                marks = 101; //just for it to satisfy the while statement
-                                while(marks > 100 || marks < 0){
-                                    System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
-                                    marks = sc.nextDouble();
-                                    sc.nextLine();
-                                    courseMg.setResults(results.get(i), student, marks);
-                                }
-                            }
-                            if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
-                        } else {
-                            System.out.println("Student is not registered in this course!");
-                        }
+                        courseMg.setResults(course, student);
                     }
                     break;
                 case 11: //save data
@@ -313,15 +299,11 @@ public class ScrameApp{
                     // course exists
                     if(course != null){
                         //print out the course's session
-                        course.printIndexList();
-                        //tell user to select the session to modify and get tbe session
-                        System.out.println("Enter the Session Type and Group ID to be removed (LAB/TUT/LEC CE1)");
-                        type = sc.next();
-                        group = sc.next();
+                        courseMg.printIndexList(course);
                         //get the session from database
-                        session = course.getSession(group, type);
+                        session = courseMg.getCourseSession(course);
                         if (session != null){
-                            course.modifySession(session);
+                            courseMg.modifySession(course, session);
                         }else{
                             System.out.println("Session does not exist!");
                         }

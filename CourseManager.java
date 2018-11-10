@@ -62,10 +62,6 @@ public class CourseManager{
         }
     }
 
-    public void setResults(Assessment component, Student student, double marks){
-        component.storeAssessmentResult(student, marks);
-    }
-
     public ArrayList<Assessment> getAssessment(Course course){
         return course.getAssessment();
     }
@@ -175,5 +171,57 @@ public class CourseManager{
         System.out.println("C  : " + results[7]);
         System.out.println("D  : " + results[8]);
         System.out.println("F  : " + results[9]);
+    }
+
+    public boolean addSession(Course course){
+        return course.addSession();
+    }
+
+    public void printSessions(Course course){
+        course.printSessions();
+    }
+
+    public int deregisterStudent(Course course, Student student){
+        return course.deregisterStudent(student);
+    }
+
+    public void printIndexList(Course course){
+        course.printIndexList();
+    }
+
+    public Session getCourseSession(Course course){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Session Group ID (CE1/SEP3)");
+        String group = sc.nextLine();
+        System.out.println("Enter the Session Type (LAB/TUT/LEC CE1)");
+        String type = sc.nextLine();
+        //get the session from database
+        return course.getSession(group, type);
+    }
+
+    public void modifySession(Course course, Session session){
+        course.modifySession(session);
+    }
+
+    public void setResults(Course course, Student student){
+        int i =0;
+        Scanner sc = new Scanner(System.in);
+        Double marks;
+
+        ArrayList<Assessment> results = getAssessment(course);
+        if(course.studentRegistered(student)){
+            for (i = 0; i < results.size(); i++){
+                marks = 101.0; //just for it to satisfy the while statement
+                while(marks > 100 || marks < 0){
+                    System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
+                    marks = sc.nextDouble();
+                    sc.nextLine();
+                    course.enterResults(results.get(i), student, marks);
+                }
+            }
+            if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
+        } else {
+            System.out.println("Student is not registered in this course!");
+        }
     }
 }

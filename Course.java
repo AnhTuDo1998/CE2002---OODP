@@ -100,7 +100,13 @@ public class Course implements Serializable{
         int choice;
         Scanner sc = new Scanner(System.in);
         do{
-            System.out.println("Select the field of Session to edit: 1.Type 2.Group ID 3.Timing 4.Location 5.Tutor Name 6.Max Capcity");
+            System.out.println("Select the field of Session to edit: ");
+            System.out.println("1.Type");
+            System.out.println("2.Group ID");
+            System.out.println("3.Timing");
+            System.out.println("4.Location");
+            System.out.println("5.Tutor Name");
+            System.out.println("6.Max Capcity");
             choice = sc.nextInt();
             sc.nextLine();
             switch(choice){
@@ -137,6 +143,7 @@ public class Course implements Serializable{
                 case 6:
                     System.out.println("Enter session's new max capacity: ");
                     int maxCapacity = sc.nextInt();
+                    sc.nextLine();
                     success = true;
                     break;
                 default: 
@@ -256,5 +263,9 @@ public class Course implements Serializable{
 
     public void clearAssessments(){
         results.clear();
+    }
+
+    public void enterResults(Assessment assessment, Student student, double marks){
+        assessment.storeAssessmentResult(student, marks);
     }
 }
