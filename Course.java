@@ -106,7 +106,7 @@ public class Course implements Serializable{
             System.out.println("3.Timing");
             System.out.println("4.Location");
             System.out.println("5.Tutor Name");
-            System.out.println("6.Max Capcity");            
+            System.out.println("6.Max Capacity");
             choice = sc.nextInt();
             sc.nextLine();
             switch(choice){
