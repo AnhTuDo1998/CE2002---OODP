@@ -117,13 +117,14 @@ public class CourseManager{
         int totalFemale = 0;
         int[] year = new int[4];
         int totalResults = 0;
+        int i = 0;
         //index 0 = year1, 1 = year2, 2 = year3, 3 = year4 
-        for(int i = 0; i < sessionList.size(); i++){
+        for(i = 0; i < sessionList.size(); i++){
             buffer.addAll(sessionList.get(i).getStudentRegistered());
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
-        for(int i = 0; i < registeredStudents.size(); i++){
+        for(i = 0; i < registeredStudents.size(); i++){
             year[registeredStudents.get(i).getAcadYear()-1]++;
             if(registeredStudents.get(i).getGender() == ('M')) totalMale++;
             else totalFemale++;
@@ -153,24 +154,25 @@ public class CourseManager{
         }
         System.out.println("Printing course statistics for " + course);
         System.out.println("====== Gender Distribution =====");
-        System.out.println("Male  : " + totalMale);
-        System.out.println("Female: " + totalFemale);
+        // i is currently the total number of students in this course
+        System.out.println("Male  : " + totalMale + " (" + ((double)(totalMale)/i)*100 + "%)");
+        System.out.println("Female: " + totalFemale  + " (" + ((double)(totalFemale)/i)*100 + "%)");
         System.out.println("====== Year Distribution =====");
-        System.out.println("Year 1: " + year[0]);
-        System.out.println("Year 2: " + year[1]);
-        System.out.println("Year 3: " + year[2]);
-        System.out.println("Year 4: " + year[3]);
+        System.out.println("Year 1: " + year[0]+ " (" + ((double)(year[0])/i)*100 + "%)");
+        System.out.println("Year 2: " + year[1]+ " (" + ((double)(year[1])/i)*100 + "%)");
+        System.out.println("Year 3: " + year[2]+ " (" + ((double)(year[2])/i)*100 + "%)");
+        System.out.println("Year 4: " + year[3]+ " (" + ((double)(year[3])/i)*100 + "%)");
         System.out.println("====== Grade Distribution =====");
-        System.out.println("A+ : " + results[0]);
-        System.out.println("A  : " + results[1]);
-        System.out.println("A- : " + results[2]);
-        System.out.println("B+ : " + results[3]);
-        System.out.println("B  : " + results[4]);
-        System.out.println("B- : " + results[5]);
-        System.out.println("C+ : " + results[6]);
-        System.out.println("C  : " + results[7]);
-        System.out.println("D  : " + results[8]);
-        System.out.println("F  : " + results[9]);
+        System.out.println("A+ : " + results[0]+ " (" + ((double)(results[0])/i)*100 + "%)");
+        System.out.println("A  : " + results[1]+ " (" + ((double)(results[1])/i)*100 + "%)");
+        System.out.println("A- : " + results[2]+ " (" + ((double)(results[2])/i)*100 + "%)");
+        System.out.println("B+ : " + results[3]+ " (" + ((double)(results[3])/i)*100 + "%)");
+        System.out.println("B  : " + results[4]+ " (" + ((double)(results[4])/i)*100 + "%)");
+        System.out.println("B- : " + results[5]+ " (" + ((double)(results[5])/i)*100 + "%)");
+        System.out.println("C+ : " + results[6]+ " (" + ((double)(results[6])/i)*100 + "%)");
+        System.out.println("C  : " + results[7]+ " (" + ((double)(results[7])/i)*100 + "%)");
+        System.out.println("D  : " + results[8]+ " (" + ((double)(results[8])/i)*100 + "%)");
+        System.out.println("F  : " + results[9]+ " (" + ((double)(results[9])/i)*100 + "%)");
     }
 
     public boolean addSession(Course course){

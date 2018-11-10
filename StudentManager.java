@@ -8,6 +8,9 @@ public class StudentManager{
     }
 
     public void printTranscript(Student student){
+        ScrameApp.printSpaces();
+        System.out.println(student);
+        System.out.println("============================== TRANSCRIPT ==============================");
         ArrayList<Course> courseRegistered = student.getCourseRegistered();
         ArrayList<Assessment> results = null;
         double totalResults = 0;
