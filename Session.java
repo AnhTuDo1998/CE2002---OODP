@@ -111,7 +111,7 @@ public class Session implements Serializable{
     }
 
     public String toString(){
-        return (this.type + " | Group ID: " + this.group + " | Timings:  " + this.dayTime + "  | Venue: " + this.location);
+        return (this.type + " | Group ID: " + this.group + " | Timings:  " + this.dayTime + "  | Venue: " + this.location + " | TA Name: " + getTutorName());
     }
 
     public ArrayList<Student> getStudentRegistered(){
