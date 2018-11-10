@@ -90,7 +90,7 @@ public class Database implements Serializable{
         for (i = 0; i < studentCatalog.size(); i++){
             System.out.println((i+1)+ ". " + studentCatalog.get(i) );
         }
-        System.out.println("================================================================================");
+        System.out.println("===============================================================================");
         System.out.println();
     }
 
