@@ -72,6 +72,7 @@ public class Database implements Serializable{
     public void printCourseCatalog(){
         int i;
         System.out.println("Course in current Catalog: ");
+        System.out.println("======================================================================================");
         for (i = 0; i < courseCatalog.size(); i++){
             System.out.println(courseCatalog.get(i));
         }
@@ -81,6 +82,7 @@ public class Database implements Serializable{
     public void printStudentCatalog(){
         int i;
         System.out.println("All students in record: ");
+        System.out.println("==============================================================================");
         for (i = 0; i < studentCatalog.size(); i++){
             System.out.println((i+1) + ". " + studentCatalog.get(i));
         }

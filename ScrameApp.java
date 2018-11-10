@@ -125,6 +125,7 @@ public class ScrameApp{
                         System.out.println("3. Menu ");
                         System.out.print("Enter your action: ");
                         choice = sc.nextInt();
+                        sc.nextLine();
                         printSpaces();
                         switch(choice){
                             case 1: //add a course
