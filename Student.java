@@ -58,7 +58,7 @@ public class Student implements Serializable{
 
     public String toString(){
         String nameFormat = "|| %1$-20s ";
-        String matricFormat = "| %2$-28s ";
+        String matricFormat = "| %2$-25s ";
         String schoolFormat = "| %3$4s/";
         String yearFormat = "%4$-1s |";
         String genderFormat = " %5$-1s ||";
