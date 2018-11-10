@@ -90,7 +90,7 @@ public class CourseManager{
             }
             else{
                 System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                confirm = sc.nextLine().charAt(0);
+                confirm = sc.nextLine().toUpperCase().charAt(0);
                 if(confirm == 'Y'){
                     totalWeightage += weightage;
                     course.setAssessment(new Assessment(name,weightage));
