@@ -79,7 +79,7 @@ public class ScrameApp{
                         else{
                             System.out.println("Student: "+ studentName +", Matric Number: " + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
                             System.out.println("Are you sure you want to add in this student? (Y/N)");
-                            confirm = sc.nextLine().charAt(0);
+                            confirm = sc.nextLine().toUpperCase().charAt(0);
                         }
                     }
                     student = db.addStudent(studentName, matricNumber, gender, school, acadYear);
@@ -93,7 +93,7 @@ public class ScrameApp{
                     student = db.getStudent(matricNumber);
                     System.out.println(student);
                     System.out.println("Confirm to remove? (Y/N)");
-                    confirm = sc.nextLine().charAt(0);
+                    confirm = sc.nextLine().toUpperCase().charAt(0);
                     if(student != null && confirm == 'Y'){
                         db.removeStudent(student);
                         System.out.println(student + " is removed!");
@@ -125,7 +125,7 @@ public class ScrameApp{
                         }
                         System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
                         System.out.println("Are you sure you want to add in this course? (Y/N)");
-                        confirm = sc.nextLine().charAt(0);
+                        confirm = sc.nextLine().toUpperCase().charAt(0);
                     }
                     if(db.getCourse(courseCode) != null){
                         System.out.println(courseCode + " is already registered and used! Please choose another course code!");
@@ -138,7 +138,7 @@ public class ScrameApp{
                         added = courseMg.addSession(course);
                         if(!added) continue; //ensures at least one is added!
                         System.out.println("Do you want to add more session? Y/N");
-                        addMore = sc.nextLine().charAt(0);
+                        addMore = sc.nextLine().toUpperCase().charAt(0);
                         switch(addMore){
                             case 'N': contin = false;
                                         break;
@@ -152,7 +152,7 @@ public class ScrameApp{
                     course = db.getCourse(courseCode);
                     if(course != null){
                         System.out.println("Are you sure you want to remove " + course + " ? (Y/N)");
-                        confirm = sc.nextLine().charAt(0);
+                        confirm = sc.nextLine().toUpperCase().charAt(0);
                         if(confirm == 'Y'){
                             db.removeCourse(course);
                             System.out.println(course  + " is removed!");

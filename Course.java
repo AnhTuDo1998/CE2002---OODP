@@ -151,7 +151,7 @@ public class Course implements Serializable{
             }
             System.out.println("Modified session: "+ session.toString());
             System.out.println("Do you wish to continue modifying the session (Y/N)");
-            conti = sc.nextLine().charAt(0);
+            conti = sc.nextLine().toUpperCase().charAt(0);
         }while(conti == 'Y');
     return success;     
         
@@ -237,7 +237,7 @@ public class Course implements Serializable{
 
     public void printSessions(){
         for (int i = 0; i < indexList.size(); i++){
-            System.out.println(indexList.get(i) + " Vacancy: " 
+            System.out.println(indexList.get(i) + " | Vacancy: " 
             + indexList.get(i).getVacancy() + "/" + indexList.get(i).getMaxCapacity());
         }
     }
