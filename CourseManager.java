@@ -78,14 +78,17 @@ public class CourseManager{
         
         while(totalWeightage!=100){
             if(finalsSet){
+                System.out.println();
                 System.out.println("Enter assessment type: (Quiz, Lab Report)");
                 name = sc.nextLine();
+                System.out.println();
             }
             else name = "Finals";
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
             System.out.println("Remaining weightage left: " + (100-totalWeightage));
             weightage = sc.nextDouble();
             sc.nextLine();
+            System.out.println();
             if(weightage + totalWeightage > 100){
                 System.out.println("Invalid weightage! Should not exceed a total of 100!");
             }
@@ -125,6 +128,7 @@ public class CourseManager{
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
+        ScrameApp.printSpaces();
         for(i = 0; i < registeredStudents.size(); i++){
             year[registeredStudents.get(i).getAcadYear()-1]++;
             if(registeredStudents.get(i).getGender() == ('M')) totalMale++;

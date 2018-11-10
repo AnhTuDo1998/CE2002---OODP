@@ -10,7 +10,7 @@ public class StudentManager{
     public void printTranscript(Student student){
         ScrameApp.printSpaces();
         System.out.println(student);
-        System.out.println("============================== TRANSCRIPT ==============================");
+        System.out.println("============================== TRANSCRIPT ===============================");
         ArrayList<Course> courseRegistered = student.getCourseRegistered();
         ArrayList<Assessment> results = null;
         double totalResults = 0;
@@ -20,10 +20,12 @@ public class StudentManager{
             results = courseRegistered.get(i).getAssessment();
             System.out.println(courseRegistered.get(i));
             for(int j = 0; j < results.size(); j++){
-                System.out.println(results.get(j).getAssessmentName() + " - Marks: " + results.get(j).retrieveAssessmentResult(student));
+                System.out.printf("%1$35s Marks : %2$1s (%3$2s%%)\n", results.get(j).getAssessmentName(), results.get(j).retrieveAssessmentResult(student), results.get(j).getWeightage());
                 totalResults += results.get(j).retrieveAssessmentResult(student) * results.get(j).getWeightage() / 100;
             }
-            System.out.println("~~~~~~~~~~~~~~ Final Grade :" + marksToGrade(totalResults) + " ~~~~~~~~~~~~~~");
+            System.out.println("============================= Final Grade :" + marksToGrade(totalResults) + " ============================");
+            System.out.println("=========================================================================");
+            System.out.println();
         }
     }
 
