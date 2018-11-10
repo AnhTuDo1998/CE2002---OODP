@@ -34,9 +34,10 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
+        printSpaces();
         printTitle();
         while (cont){
-            System.out.println("Menu");
+            System.out.println("==================================================== MENU ====================================================");             
             System.out.println("1. Add/Remove a student ");
             System.out.println("2. Add/Remove a course");
             System.out.println("3. Register/Unregister student for a course");
@@ -56,16 +57,20 @@ public class ScrameApp{
             sc.nextLine();
             switch(choice){
                 case 1: //add a student
+                    printSpaces();
+                    System.out.println("============================== STUDENT ==============================");                    
                     System.out.println("1. Add a student ");
                     System.out.println("2. Remove a student ");
                     System.out.println("3. Menu");
                     System.out.print("Enter your action: ");
                     choice = sc.nextInt();
                     sc.nextLine();
+                    printSpaces();
                     switch(choice){
                         case 1: confirm = 'N';
                             while(confirm != 'Y'){
                                 try{
+                                    System.out.println("============================== ADD NEW STUDENT ==============================");                    
                                     System.out.println("Enter student's name: ");
                                     studentName = sc.nextLine();
                                     System.out.println("Enter student's matric No.: ");
@@ -97,6 +102,7 @@ public class ScrameApp{
                             db.printStudentCatalog();
                             break;
                         case 2:
+                            System.out.println("============================== REMOVE EXISTING STUDENT ==============================");                    
                             db.printStudentCatalog();
                             System.out.println("Enter the matriculation number of the student: ");
                             matricNumber = sc.nextLine();
@@ -118,12 +124,15 @@ public class ScrameApp{
                     }
                         break;
                 case 2: //add&remove a course
+                        printSpaces();
+                        System.out.println("============================== COURSE ==============================");                    
                         System.out.println("1. Add a course ");
                         System.out.println("2. Remove a course ");
                         System.out.println("3. Menu ");
                         System.out.print("Enter your action: ");
                         choice = sc.nextInt();
                         sc.nextLine();
+                        printSpaces();
                         switch(choice){
                             case 1: //add a course
                                 boolean contin = true;
@@ -132,6 +141,7 @@ public class ScrameApp{
                                 confirm = 'N';
                                 while(confirm != 'Y'){
                                     try{
+                                        System.out.println("============================== ADD NEW COURSE ==============================");                    
                                         System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
                                         courseName = sc.nextLine();
                                         System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
@@ -170,6 +180,7 @@ public class ScrameApp{
                                 }while(contin);
                                 break;
                             case 2: //remove a course
+                                System.out.println("============================== REMOVE EXISTING COURSE ==============================");                    
                                 db.printCourseCatalog();
                                 System.out.println("Enter the course code you want to remove: ");
                                 courseCode = sc.nextLine();
@@ -198,8 +209,10 @@ public class ScrameApp{
                     System.out.print("Enter your action: ");
                     choice = sc.nextInt();
                     sc.nextLine();
+                    printSpaces();
                     switch(choice){
                         case 1: //register student for a course
+                            System.out.println("============================== REGISTER STUDENT ==============================");                    
                             db.printStudentCatalog();
                             System.out.println("Enter student's matriculation number: ");
                             matricNumber = sc.nextLine();
@@ -232,9 +245,11 @@ public class ScrameApp{
                             }
                             break;
                         case 2: //unregister a student
+                            System.out.println("============================== UNREGISTER STUDENT ==============================");                    
                             db.printStudentCatalog();
                             System.out.println("Enter the student matriculation number: ");
                             matricNumber = sc.nextLine();
+                            db.printCourseCatalog();
                             System.out.println("Enter the course code you want to remove the student from");
                             courseCode = sc.nextLine();
                             course = db.getCourse(courseCode);
@@ -255,6 +270,7 @@ public class ScrameApp{
                     }
                     break;
                 case 4: //modify Session
+                    System.out.println("============================== MODIFY SESSION INFO ==============================");                    
                     db.printCourseCatalog();
                     System.out.println("Enter the course code you want to modify sessions: ");
                     courseCode = sc.nextLine();
@@ -277,6 +293,7 @@ public class ScrameApp{
                     }
                     break;
                 case 5: //Check available slots in a class
+                    System.out.println("============================== SHOW VACANCIES ==============================");                    
                     db.printCourseCatalog();
                     System.out.println("Enter the course code you need check vacancy for: ");
                     courseCode = sc.nextLine();
@@ -284,6 +301,7 @@ public class ScrameApp{
                     courseMg.checkVacancy(course);
                     break;
                 case 6: //print student list
+                    System.out.println("============================== SHOW STUDENT REGISTERED ==============================");                    
                     db.printCourseCatalog();
                     System.out.println("Please enter the course code that you would like to print out the student list");
                     courseCode = sc.nextLine();
@@ -291,7 +309,7 @@ public class ScrameApp{
                     courseMg.printSessionStudent(course);
                     break;
                 case 7: //enter course assessment weightage
-                    System.out.println("================= ENTER COURSE WEIGHTAGE =================");
+                    System.out.println("============================== ENTER COURSE WEIGHTAGE ==============================");
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
@@ -303,6 +321,7 @@ public class ScrameApp{
                     courseMg.setAssessment(course);
                     break;
                 case 8: //enter coursework mark
+                    System.out.println("============================== ENTER MARKS ==============================");
                     db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
@@ -319,9 +338,10 @@ public class ScrameApp{
                     break;
                 case 9: //save data
                     saveData(fileName, db);
-                    System.out.println("============== DATA SAVED ==============");
+                    System.out.println("============================== DATA SAVED ==============================");
                     break;
                 case 10: //print course stats
+                    System.out.println("============================== SHOW COURSE CATALOG ==============================");
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
@@ -333,6 +353,7 @@ public class ScrameApp{
                     courseMg.printCourseStats(course);
                     break;
                 case 11: //print student transcript
+                    System.out.println("============================== SHOW STUDENT TRANSCRIPT ==============================");
                     db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
@@ -361,6 +382,7 @@ public class ScrameApp{
             }
         System.out.println("Press any key to continue...");
         sc.nextLine();
+        printSpaces();
         }
 
     }
@@ -413,6 +435,7 @@ public class ScrameApp{
         int height = 20;
         int x;
         int y;
+        Scanner sc = new Scanner(System.in);
 
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
@@ -428,7 +451,21 @@ public class ScrameApp{
                 builder.append(image.getRGB(x, y) == -16777216? "#": " ");
             }
             System.out.println(builder);
+        }
+        System.out.println();
+        System.out.println("                                     ~ Welcome to the SCRAME APP ~                                  ");
+        System.out.println("                                      Press Enter Key to Continue                                   ");
+        try
+        {
+            System.in.read();
+        }  
+        catch(Exception e)
+        {}  
+    }
             
+    public static void printSpaces(){
+        for(int i =0; i< 100; i++){
+            System.out.println();
         }
     }
 }
