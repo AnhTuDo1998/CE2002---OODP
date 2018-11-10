@@ -43,4 +43,15 @@ public class StudentManager{
     public void deregisterCourse(Student student, Course course){
         student.deregisterCourse(course);
     }
+
+    public void printCourseRegistered(Student student){
+        int i =0;
+        ArrayList<Course> courseRegistered = student.getCourseRegistered();
+        System.out.println("======================================================================================");
+        System.out.println("================================= Course Registered ==================================");
+        for(i = 0; i < courseRegistered.size(); i++){
+            System.out.println(courseRegistered.get(i));
+        }
+        System.out.println("======================================================================================");
+    }
 }

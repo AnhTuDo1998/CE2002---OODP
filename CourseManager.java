@@ -51,8 +51,9 @@ public class CourseManager{
             String sessionType = sc.nextLine();
             Session group = course.getSession(sessionGroup, sessionType); //return null if not found
             if(group != null){
-                System.out.println(course + " ||| " + group);
-                System.out.println("==========================================");
+                System.out.println(course);
+                System.out.println(group);
+                System.out.println("========================================================================================");
                 group.printSessionStudent(); //if exist go ahead and print list
             }else{
                 System.out.println("Session doesn't exist!"); 
@@ -225,5 +226,23 @@ public class CourseManager{
         } else {
             System.out.println("Student is not registered in this course!");
         }
+    }
+
+    public void printStudentRegistered(Course course){
+        ArrayList<Session> sessionList = course.getAllSession();
+        ArrayList<Student> registeredStudents = new ArrayList<Student>();
+        Set<Student> buffer = new HashSet<>();
+        int i=0;
+        for(i = 0; i < sessionList.size(); i++){
+            buffer.addAll(sessionList.get(i).getStudentRegistered());
+            //get all registered students, using set to remove duplicates
+        }
+        registeredStudents.addAll(buffer);
+        System.out.println("============================================================================");
+        System.out.println("========================== Student Registered ==============================");
+        for(i = 0; i < registeredStudents.size(); i++){
+            System.out.println(registeredStudents.get(i));
+        }
+        System.out.println("============================================================================");
     }
 }

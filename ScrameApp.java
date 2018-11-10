@@ -249,11 +249,11 @@ public class ScrameApp{
                             db.printStudentCatalog();
                             System.out.println("Enter the student matriculation number: ");
                             matricNumber = sc.nextLine();
-                            db.printCourseCatalog();
+                            student = db.getStudent(matricNumber);
+                            if(student!=null) studMg.printCourseRegistered(student);
                             System.out.println("Enter the course code you want to remove the student from");
                             courseCode = sc.nextLine();
                             course = db.getCourse(courseCode);
-                            student = db.getStudent(matricNumber);
                             if(course != null && student != null){
                                 if(courseMg.deregisterStudent(course, student) > 0){
                                     studMg.deregisterCourse(student, course);
@@ -325,9 +325,10 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
+                    course = db.getCourse(courseCode);
+                    if(course != null) courseMg.printStudentRegistered(course);
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    course = db.getCourse(courseCode);
                     student = db.getStudent(matricNumber);
                     if(course == null || student == null){
                         System.out.println("Student or course entered is not in our records!");
