@@ -2,22 +2,25 @@ import java.util.*;
 import java.io.*;
 
 public class Course implements Serializable{
-    //Record of Session (Tut, Lab and Lecture) under a course
+    //Record of Session (Tut, Lab and Lecture) under a course.
     private ArrayList<Session> indexList = new ArrayList<Session>();
-    //Record of Assessment (Exam and Coursework) under a course
-    //index 0 is equivalent to exam marks, the rest are coursemarks
-    private ArrayList<Assessment> results = new ArrayList<Assessment>();  //arrayList of hashmaps
+    //Record of Assessment (Exam and Coursework) under a course.
+    //index 0 is equivalent to exam marks, the rest are coursemarks.
+    private ArrayList<Assessment> results = new ArrayList<Assessment>();  //arrayList of hashmaps.
 
-    //Other relevant information of a course
+    //Other relevant information of a course.
     private String courseName;
     private String courseCode;
     private int AU;
     private String courseCoordinator;
 
-    
-    //default constructor
-    public Course(){}
-
+    /**
+     * Constructor for Course object, instantiating the following attributes
+     * @param courseName String name of the course object being construct, for instance "Object Oriented Design & Programming".
+     * @param courseCode String course code of the course object being construct, for instance CE2002
+     * @param AU int AU of the course object being construct.
+     * @param courseCoordinator String name of the overall coordinator of the course object being created. 
+     */
     public Course(String courseName, String courseCode, int AU, String courseCoordinator){
         this.courseName = courseName;
         this.courseCode = courseCode;
@@ -25,25 +28,42 @@ public class Course implements Serializable{
         this.courseCoordinator = courseCoordinator;
     }
 
-    //accessers and modifiers
+    /**
+     * A method to get the course name of the calling Course object. For example, Object Oriented Design & Programming.
+     * @return String the name of the calling Course object.
+     */
     public String getCourseName(){
         return this.courseName;
     }
-
+    /**
+     * A method to get the course code of the calling Course objcect, for example CE2002.
+     * @return String the course code of the calling Course object.
+     */
     public String getCourseCode(){
         return this.courseCode;
     }
-
+    /**
+     * A method to get the AU assigned to the calling Course object
+     * @return int the AU of the calling Course object.
+     */
     public int getAU(){
         return this.AU;
     }
 
+    /**
+     * A method to return the name of the overall coordinator of the calling Course object.
+     * @return String the name of the coordinator of the calling Course object
+     */
     public String getCourseCoordinator(){
         return this.courseCoordinator;
     }
-
-    //Add in new Session (Lab, Tut, LT)
-    //need to check for whethere there's existing session already
+    /**
+     * A method to add in new Session under the calling Course object. 
+     * @return boolean false if the new Session object is not added.
+     * @return boolean true if the new Session object is added
+     * @see Session for Session object usage.
+     * @see ArrayList<Session> 
+     */
     public boolean addSession(){
         boolean success = false;
 
@@ -72,6 +92,12 @@ public class Course implements Serializable{
     }
 
     //Remove session
+    /**
+     * A method to remove a Session under this calling Course object.
+     * @return boolean false if the removal of the Session is unsuccessful.
+     * @return boolean true if the removal of the Session is successful.
+     * @see ArrayList<Session>
+     */
     public boolean removeSession(){
         boolean success;
         Scanner sc = new Scanner(System.in);
@@ -198,7 +224,11 @@ public class Course implements Serializable{
     }
 
 
-    //Set Course Assessment Information
+    /**
+     * A method to set the Assessment information of the calling Course object.
+     * @param assessment Assessment the assessment components of this Course object. 
+     * @return
+     */
     public int setAssessment(Assessment assessment){
         results.add(assessment);
         return 0;
