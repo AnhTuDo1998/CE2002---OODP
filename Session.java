@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This is an entity class to contain information about sessions/classes (Lecture, Tutorial, Laboratory)
+ * This is an entity class to contain information about sessions/classes (Lecture, Tutorial, Laboratory).
  */
 public class Session implements Serializable{
     private String type; //lec OR tut or lab

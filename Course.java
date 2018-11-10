@@ -277,7 +277,12 @@ public class Course implements Serializable{
     }
 
     public String toString(){
-        return (this.courseCode + ": " + this.courseName + " by " + this.courseCoordinator + " | Total AU : " + this.AU);
+        String codeFormat = "|| %1$6s :";
+        String nameFormat = " %2$-30s ";
+        String tutorFormat = "| %3$-30s | ";
+        String AUFormat = "%4$-1s ||";
+        String format = codeFormat.concat(nameFormat).concat(tutorFormat).concat(AUFormat);
+        return String.format(format, this.courseCode, this.courseName, "Coordinator: " + this.courseCoordinator, "AU: " + this.AU);
     }
 
     public ArrayList<Session> getAllSession(){

@@ -1,5 +1,10 @@
 import java.util.*;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.awt.Graphics;
 
 public class ScrameApp{
     public static void main(String[] args) {
@@ -29,9 +34,10 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
+        printSpaces();
+        printTitle();
         while (cont){
-            printSpaces();
-            System.out.println("============================== MENU ==============================");                    
+            System.out.println("==================================================== MENU ====================================================");             
             System.out.println("1. Add/Remove a student ");
             System.out.println("2. Add/Remove a course");
             System.out.println("3. Register/Unregister student for a course");
@@ -125,6 +131,7 @@ public class ScrameApp{
                         System.out.println("3. Menu ");
                         System.out.print("Enter your action: ");
                         choice = sc.nextInt();
+                        sc.nextLine();
                         printSpaces();
                         switch(choice){
                             case 1: //add a course
@@ -201,6 +208,7 @@ public class ScrameApp{
                     System.out.println("3. Menu");
                     System.out.print("Enter your action: ");
                     choice = sc.nextInt();
+                    sc.nextLine();
                     printSpaces();
                     switch(choice){
                         case 1: //register student for a course
@@ -241,10 +249,11 @@ public class ScrameApp{
                             db.printStudentCatalog();
                             System.out.println("Enter the student matriculation number: ");
                             matricNumber = sc.nextLine();
+                            student = db.getStudent(matricNumber);
+                            if(student!=null) studMg.printCourseRegistered(student);
                             System.out.println("Enter the course code you want to remove the student from");
                             courseCode = sc.nextLine();
                             course = db.getCourse(courseCode);
-                            student = db.getStudent(matricNumber);
                             if(course != null && student != null){
                                 if(courseMg.deregisterStudent(course, student) > 0){
                                     studMg.deregisterCourse(student, course);
@@ -316,9 +325,10 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
+                    course = db.getCourse(courseCode);
+                    if(course != null) courseMg.printStudentRegistered(course);
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    course = db.getCourse(courseCode);
                     student = db.getStudent(matricNumber);
                     if(course == null || student == null){
                         System.out.println("Student or course entered is not in our records!");
@@ -373,6 +383,7 @@ public class ScrameApp{
             }
         System.out.println("Press any key to continue...");
         sc.nextLine();
+        printSpaces();
         }
 
     }
@@ -419,6 +430,41 @@ public class ScrameApp{
 		}
     }
 
+    //print the title SCRAME
+    public static void printTitle(){
+        int width = 110; //set the width and height of the view
+        int height = 20;
+        int x;
+        int y;
+        Scanner sc = new Scanner(System.in);
+
+        BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        g.setFont(new Font("TimesNewRoman", Font.ITALIC,15)); //set font style and size
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.drawString("S C R A M E", 10, 15);
+
+        for(y = 0 ; y < height; y++){
+            StringBuilder builder = new StringBuilder();
+            for(x = 0; x < width; x++){
+                builder.append(image.getRGB(x, y) == -16777216? "#": " ");
+            }
+            System.out.println(builder);
+        }
+        System.out.println();
+        System.out.println("                                     ~ Welcome to the SCRAME APP ~                                  ");
+        System.out.println("                                        ~ Presented by Group 3 ~                                    ");
+        System.out.println("                                      Press Enter Key to Continue                                   ");
+        try
+        {
+            System.in.read();
+        }  
+        catch(Exception e)
+        {}  
+    }
+            
     public static void printSpaces(){
         for(int i =0; i< 100; i++){
             System.out.println();

@@ -57,6 +57,12 @@ public class Student implements Serializable{
     }
 
     public String toString(){
-        return (this.studentName + " | Matriculation Number: " + this.matricNumber + " | School: " + this.school + "/" + this.acadYear + " | Gender: " + this.gender);
+        String nameFormat = "|| %1$-20s ";
+        String matricFormat = "| %2$-10s ";
+        String schoolFormat = "| %3$4s/";
+        String yearFormat = "%4$-1s |";
+        String genderFormat = " %5$-1s ||";
+        String format = nameFormat.concat(matricFormat).concat(schoolFormat).concat(yearFormat).concat(genderFormat);
+        return String.format(format, this.studentName, "Matric Number: " +  this.matricNumber, this.school, this.acadYear,"Gender : " +  this.gender);
     }
 }
