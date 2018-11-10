@@ -380,7 +380,7 @@ public class ScrameApp{
                 default:
                     System.out.println("Invalid choice, please try again!");
             }
-        System.out.println("Press any key to continue...");
+        System.out.println("Press Enter key to continue...");
         sc.nextLine();
         printSpaces();
         }
