@@ -175,6 +175,10 @@ public class Course implements Serializable{
                 case 6:
                     System.out.println("Enter session's new max capacity: ");
                     int maxCapacity = sc.nextInt();
+                    if(session.getNumberRegistered()> maxCapacity){
+                        System.out.println("Please enter a valid capacity!");
+                        return false;
+                    }
                     session.setMaxCapacity(maxCapacity);
                     sc.nextLine();
                     success = true;
