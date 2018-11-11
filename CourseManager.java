@@ -1,12 +1,18 @@
 import java.util.*;
 import java.io.*;
-
+/**
+ * A controller class, in charge of most services related to Course objects
+ */
 public class CourseManager{
-    
-    //rmb to implement return int
-
-
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+    /**
+     * A method to register Student object into Course object both being parsed in.
+     * @param student Student object to be registered 
+     * @param course Course object to add the Student object in
+     * @param group 
+     * @param type
+     * @return 
+     */
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
     }
