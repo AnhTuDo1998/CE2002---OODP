@@ -66,20 +66,26 @@ public class Course implements Serializable{
      */
     public boolean addSession(){
         boolean success = false;
-
+        ScrameApp.printSpaces();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter session type: (LEC/TUT/LAB)");
         String type = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session group : (SEP1/CE3/SEA2)");
         String group = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
         String dayTime = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session location: (LT19a/TRx44/SWLAB3)");
         String location = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session tutor name: ");
         String tutorName = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session's max capacity: ");
         int maxCapacity = sc.nextInt();
+        System.out.println();
         sc.nextLine(); //capture \n
         if(sessionExist(group, type) >= 0){
             System.out.println("This session is already in!");
@@ -169,6 +175,10 @@ public class Course implements Serializable{
                 case 6:
                     System.out.println("Enter session's new max capacity: ");
                     int maxCapacity = sc.nextInt();
+                    if(session.getNumberRegistered()> maxCapacity){
+                        System.out.println("Please enter a valid capacity!");
+                        return false;
+                    }
                     session.setMaxCapacity(maxCapacity);
                     sc.nextLine();
                     success = true;
