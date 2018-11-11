@@ -56,7 +56,7 @@ public class Assessment implements Serializable{
 	 * A method to store the calling Assessment object result for a Student object being parsed in
 	 * @param student Student student object to store mark/grade in.
 	 * @param marks double the mark/grad to be stored in for the Student object.
-	 * @see HashMap<Student, Double>
+	 * @see #assessmentResults
 	 */
 	public void storeAssessmentResult(Student student, double marks){
 		assessmentResults.put(student, marks);
@@ -65,9 +65,8 @@ public class Assessment implements Serializable{
 	/**
 	 * A method to return the grade/mark of the calling Assessment object for the Student object being parsed in.
 	 * @param student Student student who grade/mark to be searched and returned.
-	 * @return double the grade/mark of the Assessment of the student being parse in if succeed.
-	 * @return double 0 if the Student object parsed in is not valid.
-	 * @see HashMap<Student, Double>
+	 * @return double the grade/mark of the Assessment of the student being parse in if succeed, else return 0.
+	 * @see #assessmentResults
 	 */
 	public double retrieveAssessmentResult(Student student){
 		if(assessmentResults.get(student)!= null){
@@ -81,9 +80,8 @@ public class Assessment implements Serializable{
 	/**
 	 * A method to remove the grade/mark of Student object under the calling Assessment object.
 	 * @param student Student object whose Assessment result is removed.
-	 * @return boolean false if the removal of Assessement result for the Student is failed.
-	 * @return boolean true if the removal of Assessment result for the Student is successful.
-	 * @see HashMap<Student, Double> 
+	 * @return boolean false if the removal of Assessement result for the Student is failed, return true if the removal is successful.
+	 * @see #assessmentResults
 	 */
 	public boolean removeAssessmentResult(Student student){
 		boolean success = false; 

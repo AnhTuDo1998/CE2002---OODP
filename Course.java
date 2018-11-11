@@ -16,7 +16,7 @@ public class Course implements Serializable{
 
     /**
      * Constructor for Course object, instantiating the following attributes
-     * @param courseName String name of the course object being construct, for instance "Object Oriented Design & Programming".
+     * @param courseName String name of the course object being construct, for instance "Object Oriented Design and Programming".
      * @param courseCode String course code of the course object being construct, for instance CE2002
      * @param AU int AU of the course object being construct.
      * @param courseCoordinator String name of the overall coordinator of the course object being created. 
@@ -29,7 +29,7 @@ public class Course implements Serializable{
     }
 
     /**
-     * A method to get the course name of the calling Course object. For example, Object Oriented Design & Programming.
+     * A method to get the course name of the calling Course object. For example, Object Oriented Design and Programming.
      * @return String the name of the calling Course object.
      */
     public String getCourseName(){
@@ -59,10 +59,10 @@ public class Course implements Serializable{
     }
     /**
      * A method to add in new Session under the calling Course object. 
-     * @return boolean false if the new Session object is not added.
-     * @return boolean true if the new Session object is added
+     * @return boolean false if the new Session object is not added,
+     * return true if the new Session object is added
      * @see Session for Session object usage.
-     * @see ArrayList<Session> 
+     * @see #indexList
      */
     public boolean addSession(){
         boolean success = false;
@@ -100,9 +100,9 @@ public class Course implements Serializable{
     //Remove session
     /**
      * A method to remove a Session under this calling Course object.
-     * @return boolean false if the removal of the Session is unsuccessful.
-     * @return boolean true if the removal of the Session is successful.
-     * @see ArrayList<Session>
+     * @return boolean false if the removal of the Session is unsuccessful, 
+     * return true if the removal is successful.
+     * @see #indexList
      */
     public boolean removeSession(){
         boolean success;
@@ -236,7 +236,7 @@ public class Course implements Serializable{
 
     /**
      * A method to set the Assessment information of the calling Course object.
-     * @param assessment Assessment the assessment components of this Course object. 
+     * @param assessment Assessment component of this Course object. 
      * @return
      */
     public int setAssessment(Assessment assessment){

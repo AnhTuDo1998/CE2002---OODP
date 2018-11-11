@@ -159,8 +159,8 @@ public class Session implements Serializable{
      * A method to deregister student from the calling session. 
      * @param student Student object to be deregistered (removed) from the calling session. 
      * @return false if the process failed.
-     * @return true if the student is successfully removed from the student list of the session.
-     * @see ArrayList<Student> 
+     * Return true if the student is successfully removed from the student list of the session.
+     * @see #studentList 
      */
     public boolean deregisterStudent(Student student){
         if(student != null){
@@ -172,10 +172,10 @@ public class Session implements Serializable{
     /**
      * A method to add in student into the calling session
      * @param student Student student object to be added into this session
-     * @return int -1 if the session is full (vacancy = 0)
-     * @return int -2 if the student being added is already inside the session
-     * @return int 0 if the adding of student under the session is SUCCESS
-     * @see ArrayList<Student> 
+     * @return int -1 if the session is full (vacancy = 0),
+     * -2 if the student being added is already inside the session,
+     * and 0 if the adding of student under the session is SUCCESS
+     * @see #studentList 
      */
     public int addStudent(Student student){ //add a student into an existing group
         if(this.maxCapacity == this.numberRegistered){
@@ -192,7 +192,7 @@ public class Session implements Serializable{
     
     /**
      * A method to print out the list of student currently registered in this session. 
-     * @see ArrayList<Student> 
+     * @see #studentList
      */
     public void printSessionStudent(){
         int i;
@@ -211,8 +211,8 @@ public class Session implements Serializable{
 
     /**
      * A method to access the array of student currently registered in this session
-     * @return studentList ArrayList<Student> an array of students currently registered
-     * @see ArrayList<Student> 
+     * @return studentList an array of students currently registered
+     * @see #studentList
      */
     public ArrayList<Student> getStudentRegistered(){
         return this.studentList;
