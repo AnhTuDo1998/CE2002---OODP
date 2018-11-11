@@ -71,7 +71,6 @@ public class ScrameApp{
                         case 1: confirm = 'N';
                             while(confirm != 'Y'){
                                 try{
-                                    printSpaces();
                                     System.out.println("============================== ADD NEW STUDENT ==============================");                    
                                     System.out.println("Enter student's name: ");
                                     studentName = sc.nextLine();
@@ -88,7 +87,7 @@ public class ScrameApp{
                                     System.out.println();
                                     System.out.println("Enter student's gender: (M/F)");
                                     gender = sc.nextLine().toUpperCase().charAt(0);
-                                    System.out.println();
+                                    printSpaces();
                                 }
                                 catch(InputMismatchException e){
                                     System.out.println("Data entered is invalid, please try again!");
@@ -114,14 +113,18 @@ public class ScrameApp{
                             System.out.println("Enter the matriculation number of the student: ");
                             matricNumber = sc.nextLine();
                             student = db.getStudent(matricNumber);
-                            System.out.println(student);
-                            System.out.println("Confirm to remove? (Y/N)");
-                            confirm = sc.nextLine().toUpperCase().charAt(0);
-                            if(student != null && confirm == 'Y'){
+                            if(student!=null){
+                                System.out.println(student);
+                                System.out.println("Confirm to remove? (Y/N)");
+                                confirm = sc.nextLine().toUpperCase().charAt(0);
+                                if(confirm == 'Y'){
                                 db.removeStudent(student);
                                 System.out.println(student + " is removed!");
-                            }else{
+                                }else{
                                 System.out.println("Student not removed!");
+                                }
+                            }else{
+                                System.out.println("Student is not in our records!");
                             }
                             break;
                         case 3:
