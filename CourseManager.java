@@ -122,6 +122,7 @@ public class CourseManager{
         int[] year = new int[4];
         int totalResults = 0;
         int i = 0;
+        double totalAverageResults = 0;
         //index 0 = year1, 1 = year2, 2 = year3, 3 = year4 
         for(i = 0; i < sessionList.size(); i++){
             buffer.addAll(sessionList.get(i).getStudentRegistered());
@@ -137,6 +138,7 @@ public class CourseManager{
             for(int j = 0; j < assessmentList.size(); j++){
                 totalResults += assessmentList.get(j).retrieveAssessmentResult(registeredStudents.get(i)) * assessmentList.get(j).getWeightage() / 100;
             }
+            totalAverageResults += totalResults;
             if(totalResults > 90){
                 results[0]++;
             }else if(totalResults >80){
@@ -178,6 +180,7 @@ public class CourseManager{
         System.out.printf("Number of C        : %1$-6s (%2$-5.2f%%)\n", results[7], ((double)(results[7])/i)*100);
         System.out.printf("Number of D        : %1$-6s (%2$-5.2f%%)\n", results[8], ((double)(results[8])/i)*100); System.out.printf("Number of A        : %1$-6s (%2$-5.2f%%)\n", results[0], ((double)(results[0])/i)*100);
         System.out.printf("Number of F        : %1$-6s (%2$-5.2f%%)\n", results[9], ((double)(results[9])/i)*100);
+        System.out.printf("Average Result     : %1$-5.2f \n", (double)(totalAverageResults/i));
     }
 
     public boolean addSession(Course course){
