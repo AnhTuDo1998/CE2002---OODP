@@ -202,6 +202,7 @@ public class CourseManager{
         String group = sc.nextLine();
         System.out.println("Enter the Session Type (LAB/TUT/LEC CE1)");
         String type = sc.nextLine();
+        if(group.isEmpty() || type.isEmpty()) throw new StringIndexOutOfBoundsException();
         //get the session from database
         return course.getSession(group, type);
     }
