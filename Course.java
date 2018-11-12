@@ -191,22 +191,6 @@ public class Course implements Serializable{
             System.out.println(indexList.get(i));
         }
     }
-      
-    //check if session exist according to group name first
-    //may need to add more though
-    public int sessionExist(String sessionGroup, String type){
-        int i;
-        int index = -1;
-
-        for(i = 0; i < indexList.size(); i++){  //return index if found, return -1 if not found
-            if(indexList.get(i).getGroup().equals(sessionGroup) && indexList.get(i).getType().equals(type)){
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
 
     /**
      * A method to set the Assessment information of the calling Course object.
