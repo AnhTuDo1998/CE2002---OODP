@@ -28,10 +28,10 @@ public class Database implements Serializable{
 
     /**
      * A method to add a {@link Student} into the database of this application.
-     * @param String name of the new course.
-     * @param String course code of the new course.
-     * @param int academic units allocated to this course.
-     * @param String name of the course coordinator.
+     * @param courseName String name of the new course.
+     * @param courseCode String course code of the new course.
+     * @param AU int academic units allocated to this course.
+     * @param courseCoordinator String name of the course coordinator.
      * @return Course the newly created course.
      */
     public Course addCourse(String courseName, String courseCode, int AU, String courseCoordinator){
@@ -46,11 +46,11 @@ public class Database implements Serializable{
     
     /**
      * A method to add a {@link Student} into the database of this application.
-     * @param String name of the new student.
-     * @param String matriculation number of the new student.
-     * @param char gender of the new student.
-     * @param String name of the school of the new student.
-     * @param int current academic year of the new student.
+     * @param studentName String name of the new student.
+     * @param matricNumber String matriculation number of the new student.
+     * @param gender char gender of the new student.
+     * @param school String name of the school of the new student.
+     * @param acadYear int current academic year of the new student.
      * @return Student the newly created student.
      */
     public Student addStudent(String studentName,String  matricNumber,char gender,String school,int acadYear){
@@ -66,7 +66,7 @@ public class Database implements Serializable{
      * by iterating through its registered {@link Course} and all {@link Session} under
      * the courses, results of the student will be erased as well.
      * </p>
-     * @param Student the student object to be removed.
+     * @param student Student the student object to be removed.
      * @see Course#getAssessment
      * @see Session#getAllSession
      * @see Session#getStudentsRegistered
@@ -101,7 +101,7 @@ public class Database implements Serializable{
      * A method to remove an existing {@link Course} from the database of this application.
      * <p>
      * All students that are currently registered to this course will be deregistered.
-     * @param Course the course to be removed.
+     * @param course Course the course to be removed.
      * @see Student#deregisterCourse
      */
     public boolean removeCourse(Course course){
@@ -150,7 +150,7 @@ public class Database implements Serializable{
 
     /**
      * A method to obtain the object {@link Course} stored in the database.
-     * @param String course code of the target course.
+     * @param courseCode String course code of the target course.
      * @return Course target course object, null if not in database.
      */
     public Course getCourse(String courseCode){
@@ -162,8 +162,8 @@ public class Database implements Serializable{
 
     /**
      * A method to obtain the object {@link Student} stored in this database.
-     * @param String matriculation number of the target student.
-     * @return Student target student object, null if not in database.
+     * @param matricNumber  String matriculation number of the target student.
+     * @return  Student target student object, null if not in database.
      */
     public Student getStudent(String matricNumber){
         for(int i = 0; i < studentCatalog.size(); i++){
