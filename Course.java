@@ -2,7 +2,15 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Entity class which stores respective assessments and sessions available for this course.
+ * Entity class which stores relevant information for this course including:
+ * <ul>
+ *  <li> Collection of {@link Session}.</li>
+ *  <li> Collection of {@link Assessment} for grading.</li>
+ *  <li> Course name</li>
+ *  <li> Course code</li>
+ *  <li> Course academic units allocated </li>
+ *  <li> Name of dourse doordinator</li>
+ * </ul>
  */
 public class Course implements Serializable{
 
