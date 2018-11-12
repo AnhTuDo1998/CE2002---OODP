@@ -30,9 +30,10 @@ public class Student implements Serializable{
     }
 
     /**
-     * A method to register calling Student under Course object being parsed in.
+     * A method to register calling Student under {@link Course} object.
+     * <p> This method utilise the ArrayList and its methods
      * @param course Course object which Student is going to be registered under.
-     * @see #coursesRegistered.
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void registerCourse(Course course){
         for(int i = 0; i < coursesRegistered.size(); i++){
@@ -41,19 +42,20 @@ public class Student implements Serializable{
         coursesRegistered.add(course);
     }
     /**
-     * A method to de-register the calling Student under the Course object being parsed in.
+     * A method to de-register the calling Student under the {@link Course} object being parsed in.
+     * <p> Making use of ArrayList and its methods.
      * @param course Course object which Student is currently registerd and need to be removed/de-registered from.
      * @return boolean true if removal is successful and false if otherwise.
-     * @see #coursesRegistered for more information about boolean value being returned.
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public boolean deregisterCourse(Course course){
         return coursesRegistered.remove(course);
     }
 
     /**
-     * A method to return the list of Course objects that the calling Student is currently registered under.
+     * A method to return the array of {@link Course} objects that the calling Student is currently registered under.
      * @return ArrayList<Course> an ArrayList of Course objects the Student is currently registered under.
-     * @see #coursesRegistered for more usage of the returned array.
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public ArrayList<Course> getCourseRegistered(){
         return this.coursesRegistered;
