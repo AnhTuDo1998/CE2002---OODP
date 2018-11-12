@@ -52,7 +52,7 @@ public class CourseManager{
         return course.getAssessment();
     }
 
-    public int setAssessment(Course course){
+    public void setAssessment(Course course){
         String name;
         double weightage = 0;
         double totalWeightage = 0; //total weightage must be equal to 100
@@ -92,7 +92,7 @@ public class CourseManager{
             }
         }
         System.out.println("Results weightage completed....");
-        return 0;
+        return;
     }
     
     public void printCourseStats(Course course){
