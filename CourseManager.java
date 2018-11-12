@@ -5,16 +5,25 @@ import java.io.*;
  */
 public class CourseManager{
     /**
-     * A method to register {@link Student} object for a given {@link Course} object both being parsed in.
-     * @param student Student object to be registered 
-     * @param course Course object to add the Student object in
-     * @param group String group ID of the Session the Student need to be added
-     * @param type String type of Session
-     * @return int indicating the status of lower level method
-     * @see Course#registerStudent(Student, String, String)
+     * A method to register {@link Student} into {@link Session} stored in this Course.
+     * <p> This method take in Student object, the group and type of Session needed and then traverse the array of Session objects of the calling Course object and add the Student in by addStudent method from Session class.
+     * @param student the Student we need to register
+     * @param group the group ID of the Session
+     * @param type the type of the Session (LEC, TUT or LAB)
+     * @return int 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+     * @see Session#addStudent(Student)
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public int regStudentToCourse(Student student, Course course, String group, String type){
-        return course.registerStudent(student, group, type);
+        int result = -3;
+        ArrayList<Session> indexList = course.getAllSession();
+        for(int i = 0; i < indexList.size();  i++){
+            if(indexList.get(i).getGroup().equals(group) && indexList.get(i).getType().equals(type)){
+                result = indexList.get(i).addStudent(student);
+                //result is -1 if full, -2 if student is already inside, 0 if success
+            }
+        }
+        return result;
     }
     
     /**
@@ -55,75 +64,6 @@ public class CourseManager{
         }else{
             System.out.println("Course doesn't exist!");
         }
-    }
-
-    /**
-     * A method to return the array list of {@link Assessment} for a particular Course object being parsed in.
-     */
-    public ArrayList<Assessment> getAssessment(Course course){
-        return course.getAssessment();
-    }
-
-    /**
-     * A method to set the weightage of {@link Assessment} components of the {@link Course} parsed in.
-     * @param course The Course object whose Assessment components need to be set.
-     */
-    public void setAssessment(Course course){
-        String name;
-        double weightage = 0;
-        double totalWeightage = 0; //total weightage must be equal to 100
-        boolean finalsSet = false;
-        Scanner sc = new Scanner(System.in);
-        char confirm = 'N';
-        course.clearAssessments(); //reset assessments if already set;
-        
-        while(totalWeightage!=100){
-            try{
-                if(finalsSet){
-                    System.out.println();
-                    System.out.println("Enter assessment type: (Quiz, Lab Report)");
-                    name = sc.nextLine();
-                    System.out.println();
-                }
-                else name = "Finals";
-                System.out.println("Enter " + name + " weightage: (50, 70, 20)");
-                System.out.println("Remaining weightage left: " + (100-totalWeightage));
-                weightage = Double.parseDouble(sc.nextLine());
-                //sc.nextLine();
-                System.out.println();
-                if(weightage <= 0){
-                    throw new ArithmeticException("Error: weightage must not be negative!");
-                }
-
-                if(weightage + totalWeightage > 100){
-                    System.out.println("Invalid weightage! Should not exceed a total of 100!");
-                }
-                else{
-                    System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                    confirm = sc.nextLine().toUpperCase().charAt(0);
-                    if(confirm == 'Y'){
-                        totalWeightage += weightage;
-                        course.setAssessment(new Assessment(name,weightage));
-                        if(name.equals("Finals")) finalsSet = true;
-                        System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);
-                    }
-                    else{
-                        System.out.println(name + " component not added.");
-                    }
-                }
-            }catch(ArithmeticException e){
-                System.out.println(e.getMessage());
-            }catch(NumberFormatException e){
-                System.out.println();
-                System.out.println("Error: input is invalid!");
-                System.out.println("Please reenter!");
-            }catch(Exception e){
-                System.out.println("Error!");
-            }
-            
-        }
-        System.out.println("Results weightage completed....");
-        return;
     }
     
     /**
@@ -200,22 +140,7 @@ public class CourseManager{
         System.out.printf("Number of F        : %1$-6s (%2$-5.2f%%)\n", results[9], ((double)(results[9])/i)*100);
     }
 
-    /**
-     * A method to add new {@link Session} to the {@link Course} parameter. This is based on {@link Course#addSession()}
-     * @param course Course we need to add Session too
-     * @return boolean true or false depends on the result of {@link Course#addSession()}
-     */
-    public boolean addSession(Course course){
-        return course.addSession();
-    }
 
-    /**
-     * A method to take in {@link Course} object and print out {@link Sessions} under it. This is based on {@link Course#printSessions()}
-     * @param course Course object whose Sessions are to be printed out.
-     */
-    public void printSessions(Course course){
-        course.printSessions();
-    }
 
     /**
      * A method to de-register {@link Student} from {@link Course}. This is done by calling {@link Course#deregisterStudent(Student)}
@@ -224,15 +149,37 @@ public class CourseManager{
      * @return int indicating status of the procedure
      */
     public int deregisterStudent(Course course, Student student){
-        return course.deregisterStudent(student);
+        int sessionCount = 0;
+        ArrayList<Session> indexList = course.getAllSession();
+        for(int i = 0; i < indexList.size(); i++){
+            ArrayList<Student> students = indexList.get(i).getStudentRegistered();
+            for(int j = 0; j < students.size(); j++){
+                if(students.get(j).equals(student)){
+                    sessionCount++;
+                    students.remove(student);
+                    indexList.get(i).setNumberRegistered(indexList.get(i).getNumberRegistered()-1);
+                }
+            }
+
+            for(int z = 0; z < results.size(); z++){
+                results.get(z).removeAssessmentResult(student);
+            }
+        }
+        return sessionCount;
     }
 
-    /**
-     * A method to print out all {@link Session} under the {@link Course} being supplied. This is done by calling {@link Course#printIndexList()}
-     * @param course Course object of interest.
+     /**
+     * An utility method to print out all {@link Session} existing under the calling Course object.
+     * <p> This method traverse the ArrayList of sessions stored in the Course and print out the Session objects visited.
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printIndexList(Course course){
-        course.printIndexList();
+        int i;
+
+        System.out.println("Sessions for " + this.courseName + " " + this.courseCode);
+        for(i = 0; i < indexList.size(); i++){
+            System.out.println(indexList.get(i));
+        }
     }
 
     /**
@@ -240,45 +187,24 @@ public class CourseManager{
      * @param course Course object of interest.
      */
     public Session getCourseSession(Course course){
+        int i;
+        Session obtained = null;
+        ArrayList<Session> indexList = course.getAllSession();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Session Group ID (CE1/SEP3)");
         String group = sc.nextLine();
         System.out.println("Enter the Session Type (LAB/TUT/LEC CE1)");
         String type = sc.nextLine();
         if(group.isEmpty() || type.isEmpty()) throw new StringIndexOutOfBoundsException();
-        //get the session from database
-        return course.getSession(group, type);
-    }
+        //get the session from database   
 
-    /**
-     * A method to modify {@link Session} of a {@link Course} being parsed in
-     * @param course the Course where the modifying Session is lying in
-     * @param session the Session to be modified.
-     */
-    public void modifySession(Course course, Session session){
-        course.modifySession(session);
-    }
-
-    public void setResults(Course course, Student student){
-        int i =0;
-        Scanner sc = new Scanner(System.in);
-        Double marks;
-
-        ArrayList<Assessment> results = getAssessment(course);
-        if(course.studentRegistered(student)){
-            for (i = 0; i < results.size(); i++){
-                marks = 101.0; //just for it to satisfy the while statement
-                while(marks > 100 || marks < 0){
-                    System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
-                    marks = sc.nextDouble();
-                    sc.nextLine();
-                    course.enterResults(results.get(i), student, marks);
-                }
+        for(i = 0; i < indexList.size(); i++){
+            if(indexList.get(i).getType().equals(type) && indexList.get(i).getGroup().equals(group)){
+                obtained = indexList.get(i);
+                break;
             }
-            if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
-        } else {
-            System.out.println("Student is not registered in this course!");
         }
+        return obtained;
     }
 
     public void printStudentRegistered(Course course){
@@ -298,4 +224,6 @@ public class CourseManager{
         }
         System.out.println("============================================================================");
     }
+
+
 }
