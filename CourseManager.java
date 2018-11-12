@@ -4,19 +4,22 @@ import java.io.*;
  * A controller class, in charge of most services related to Course objects
  */
 public class CourseManager{
-    //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
     /**
-     * A method to register Student object into Course object both being parsed in.
+     * A method to register {@link Student} object for a given {@link Course} object both being parsed in.
      * @param student Student object to be registered 
      * @param course Course object to add the Student object in
-     * @param group 
-     * @param type
-     * @return 
+     * @param group String group ID of the Session the Student need to be added
+     * @param type String type of Session
+     * @return int indicating the status of lower level method
+     * @see Course#registerStudent(Student, String, String)
      */
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
     }
-  
+    
+    /**
+     * A method to check and print out the vacancy of a {@link Course} object.
+     */
     public void checkVacancy(Course course){
         if (course != null){
             course.printSessions();
@@ -26,6 +29,12 @@ public class CourseManager{
         } 
     }
 
+    /**
+     * A method to print out {@link Student} based on {@link Session}. 
+     * <p> The method get input about Session of interest from user and print out the Student under that Session.
+     * @param course The Course where we need to print out Student listing based on Sessions.
+     * @see Session#printSessionStudent()
+     */
     public void printSessionStudent(Course course){
         Scanner sc = new Scanner(System.in);
         if(course != null){
@@ -48,10 +57,17 @@ public class CourseManager{
         }
     }
 
+    /**
+     * A method to return the array list of {@link Assessment} for a particular Course object being parsed in.
+     */
     public ArrayList<Assessment> getAssessment(Course course){
         return course.getAssessment();
     }
 
+    /**
+     * A method to set the weightage of {@link Assessment} components of the {@link Course} parsed in.
+     * @param course The Course object whose Assessment components need to be set.
+     */
     public void setAssessment(Course course){
         String name;
         double weightage = 0;
@@ -110,6 +126,10 @@ public class CourseManager{
         return;
     }
     
+    /**
+     * A method to print out related {@link Course} statistics (for example number of Student in different year, different gender, grades,...)
+     * @param course Course object we need to print out statistics.
+     */
     public void printCourseStats(Course course){
         ArrayList<Assessment> assessmentList = course.getAssessment();
         ArrayList<Session> sessionList = course.getAllSession();
@@ -180,22 +200,45 @@ public class CourseManager{
         System.out.printf("Number of F        : %1$-6s (%2$-5.2f%%)\n", results[9], ((double)(results[9])/i)*100);
     }
 
+    /**
+     * A method to add new {@link Session} to the {@link Course} parameter. This is based on {@link Course#addSession()}
+     * @param course Course we need to add Session too
+     * @return boolean true or false depends on the result of {@link Course#addSession()}
+     */
     public boolean addSession(Course course){
         return course.addSession();
     }
 
+    /**
+     * A method to take in {@link Course} object and print out {@link Sessions} under it. This is based on {@link Course#printSessions()}
+     * @param course Course object whose Sessions are to be printed out.
+     */
     public void printSessions(Course course){
         course.printSessions();
     }
 
+    /**
+     * A method to de-register {@link Student} from {@link Course}. This is done by calling {@link Course#deregisterStudent(Student)}
+     * @param course Course object to be access and remove Student from
+     * @param student Student object to remove from the course
+     * @return int indicating status of the procedure
+     */
     public int deregisterStudent(Course course, Student student){
         return course.deregisterStudent(student);
     }
 
+    /**
+     * A method to print out all {@link Session} under the {@link Course} being supplied. This is done by calling {@link Course#printIndexList()}
+     * @param course Course object of interest.
+     */
     public void printIndexList(Course course){
         course.printIndexList();
     }
 
+    /**
+     * A method to return {@link Session} object under a {@link Course} object being parsed in. This is done by calling {@link }
+     * @param course Course object of interest.
+     */
     public Session getCourseSession(Course course){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Session Group ID (CE1/SEP3)");
@@ -207,6 +250,11 @@ public class CourseManager{
         return course.getSession(group, type);
     }
 
+    /**
+     * A method to modify {@link Session} of a {@link Course} being parsed in
+     * @param course the Course where the modifying Session is lying in
+     * @param session the Session to be modified.
+     */
     public void modifySession(Course course, Session session){
         course.modifySession(session);
     }
