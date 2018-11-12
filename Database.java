@@ -102,7 +102,7 @@ public class Database implements Serializable{
      * <p>
      * All students that are currently registered to this course will be deregistered.
      * @param course Course the course to be removed.
-     * @see Student#deregisterCourse
+     * @see Student#deregisterCourse(Course)
      */
     public boolean removeCourse(Course course){
     

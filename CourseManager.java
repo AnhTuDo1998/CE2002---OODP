@@ -4,14 +4,17 @@ import java.io.*;
  * A controller class, in charge of most services related to Course objects
  */
 public class CourseManager{
-    //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
     /**
-     * A method to register Student object into Course object both being parsed in.
+     * A method to register {@link Student} object into {@link Course}, which object both being parsed in.
+     * <p> In this application, we are storing Student objects inside an ArrayList, which is held by a {@link Session} object. This modeling corresponding to having Student
+     * records stored under the Session (LEC, TUT, LAB) which the Students attain. 
+     * <p> This method is therefore accessing the Course object's ArrayList of Session and then adding the Student into the corresponding Session. 
      * @param student Student object to be registered 
      * @param course Course object to add the Student object in
-     * @param group 
-     * @param type
-     * @return 
+     * @param group String group ID of the Session we going to register to
+     * @param type Type of Session we are going to register to.
+     * @return int 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+     * @see Course#registerStudent(Student, String, String)
      */
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
@@ -51,7 +54,7 @@ public class CourseManager{
     public ArrayList<Assessment> getAssessment(Course course){
         return course.getAssessment();
     }
-
+    
     public void setAssessment(Course course){
         String name;
         double weightage = 0;
@@ -214,6 +217,15 @@ public class CourseManager{
         course.modifySession(session);
     }
 
+    /**
+     * A method to enter the result of {@link Student} for a particulat {@link Course}
+     * <p> Note that we implemented a Hashmap with Student object being key and the Student's grade as stored data in {@link Assessment}.
+     * Here we are going to access that data structure to enter the result.
+     * <p> Firstly, we obtain the ArrayList of Assessment components of Course (for instance, Exam, Coursework and etc). Then we traverse
+     * this ArrayList, getting the Assessment object and hence access and modify the HashMap implemented under it via {@link Course#enterResults(Assessment, Student, double)}
+     * @param course Course object where Student's result is to be enter.
+     * @param student Student whose result for Assessment components of a Course need to be stored.
+     */
     public void setResults(Course course, Student student){
         int i =0;
         Scanner sc = new Scanner(System.in);
@@ -235,7 +247,15 @@ public class CourseManager{
             System.out.println("Student is not registered in this course!");
         }
     }
-
+    /**
+     * A method to print out all {@link Student} objects associated with the parsed in {@link Course} object.
+     * <p> As Student objects are stored in {@link Session} objects, which are stored under the Course object, we first
+     * traverse the ArrayList of Session, adding all Student objects stored in each entry into a Set.
+     * <p> We then traverse and print out the Student objects from the Set.
+     * @param course Course object whose Student objects need to be printed out.
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Set.html">Set</a>
+     */
     public void printStudentRegistered(Course course){
         ArrayList<Session> sessionList = course.getAllSession();
         ArrayList<Student> registeredStudents = new ArrayList<Student>();

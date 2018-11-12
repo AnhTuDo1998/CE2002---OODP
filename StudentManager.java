@@ -75,7 +75,7 @@ public class StudentManager{
     /**
      * A utility method to convert number mark to numerical grade-point average.
      * @param marks the numeric marks to be converted.
-     * @return the GPA of the subject.
+     * @return double the GPA of the subject.
      */
     public double marksToGPA(double marks){
         if(marks > 90) return 5.00;
