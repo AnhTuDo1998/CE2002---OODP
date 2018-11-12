@@ -35,7 +35,7 @@ public class Session implements Serializable{
     }
 
     /**
-     * A method to set the value of the calling Session object.
+     * A method to set the type of the calling Session object.
      * @param type String type of session (LEC, TUT or LAB for Lecture, Tutorial and Lab).
      */
     public void setType(String type){
@@ -156,11 +156,12 @@ public class Session implements Serializable{
     }
 
     /**
-     * A method to deregister student from the calling session. 
+     * A method to deregister {@link Student} from the calling session. This method utilise the ArrayList remove method to deregister 
+     * the Student from studentList ArrayList
      * @param student Student object to be deregistered (removed) from the calling session. 
      * @return false if the process failed.
      * Return true if the student is successfully removed from the student list of the session.
-     * @see #studentList 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public boolean deregisterStudent(Student student){
         if(student != null){
@@ -170,12 +171,12 @@ public class Session implements Serializable{
     }
 
     /**
-     * A method to add in student into the calling session
+     * A method to add in <@link Student> into the calling session. This method utilise get() and add() method of ArrayList.
      * @param student Student student object to be added into this session
      * @return int -1 if the session is full (vacancy = 0),
      * -2 if the student being added is already inside the session,
      * and 0 if the adding of student under the session is SUCCESS
-     * @see #studentList 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public int addStudent(Student student){ //add a student into an existing group
         if(this.maxCapacity == this.numberRegistered){
@@ -191,8 +192,8 @@ public class Session implements Serializable{
     }
     
     /**
-     * A method to print out the list of student currently registered in this session. 
-     * @see #studentList
+     * A method to print out the list of student currently registered in this session. This method utilise get() method of ArrayList
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printSessionStudent(){
         int i;
@@ -210,9 +211,9 @@ public class Session implements Serializable{
     }
 
     /**
-     * A method to access the array of student currently registered in this session
-     * @return studentList an array of students currently registered
-     * @see #studentList
+     * A method to access the array of {@link Student} currently registered in this session
+     * @return ArrayList<Student> an array list of students currently registered
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public ArrayList<Student> getStudentRegistered(){
         return this.studentList;

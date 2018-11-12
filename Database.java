@@ -11,7 +11,7 @@ public class Database implements Serializable{
     /**
 	 * A method to get the ArrayList of {@link Student} stored in this application.
 	 * @return ArrayList<Student> all students registered in this application.
-     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a> 
 	 */
     public ArrayList<Student> getStudentCatalog(){
         return this.studentCatalog;
@@ -60,7 +60,7 @@ public class Database implements Serializable{
     }
 
     /**
-     * A method to remove an existing student from the database of this application.
+     * A method to remove an existing {@link Student} from the database of this application.
      * <p>
      * This method will also remove all students from its registered sessions 
      * by iterating through its registered {@link Course} and all {@link Session} under
