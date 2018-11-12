@@ -281,7 +281,7 @@ public class Course implements Serializable{
     }
 
     /**
-     * A method to print out all {@link Session} under the calling Course object
+     * A method to print out all {@link Session} and their current vacancy under the calling Course object
      * <p> Traverse the ArrayList of Session objects and print out the information needed.
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */

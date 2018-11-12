@@ -19,7 +19,10 @@ public class CourseManager{
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
     }
-  
+    /**
+     * A method to check the current vacancy of {@link Course} object by printing
+     * out all Session objects under it and their vacancy. Refer to {@link Course#printSessions()} for more info.
+     */
     public void checkVacancy(Course course){
         if (course != null){
             course.printSessions();
@@ -29,6 +32,11 @@ public class CourseManager{
         } 
     }
 
+    /**
+     * A method to print out list of {@link Student} registered under a {@link Session}.
+     * This is done by finding the matching Session as described by user and print it out by {@link Session#printSessionStudent()} method.
+     * @param course Course object for Student to be printed out based on Session.
+     */
     public void printSessionStudent(Course course){
         Scanner sc = new Scanner(System.in);
         if(course != null){
@@ -51,10 +59,20 @@ public class CourseManager{
         }
     }
 
+    /**
+     * A method to return the ArrayList of {@link Assessment} components stored under
+     * the {@link Course} parsed in. This is done by {@link Course#getAssessment()} method
+     * @param course Course object whose list of Assessments is to be returned
+     * @return ArrayList<Assessment> list of Assessments under the Course.
+     */
     public ArrayList<Assessment> getAssessment(Course course){
         return course.getAssessment();
     }
-    
+    /**
+     * A method to enter the weightage for {@link Assessment} components and relevant data (example exam, coursework, etc).
+     * The ArrayList of Assessment (stored in {@link Course} object) is append the new component by {@link Course#setAssessment(Assessment)}
+     * @param course Course object which to set up Assessment components for.
+     */
     public void setAssessment(Course course){
         String name;
         double weightage = 0;
@@ -113,6 +131,11 @@ public class CourseManager{
         return;
     }
     
+    /**
+     * A method to print out statistics for {@link Course} being parsed in.
+     * These statistics are for example number of male/female, number of students by year of study and etc.
+     * @param course Course object to display Statistics for.
+     */
     public void printCourseStats(Course course){
         ArrayList<Assessment> assessmentList = course.getAssessment();
         ArrayList<Session> sessionList = course.getAllSession();
@@ -185,23 +208,50 @@ public class CourseManager{
         System.out.printf("Number of F        : %1$-6s (%2$-5.2f%%)\n", results[9], ((double)(results[9])/i)*100);
         System.out.printf("Average Result     : %1$-5.2f \n", (double)(totalAverageResults/i));
     }
-
+    /**
+     * A method to access {@link Course} and add more {@link @Session} into it. This is done by {@link Course#addSession()} which append the 
+     * get related information about the new Session and append it at the end of the ArrayList<Session> stored under Course object.
+     * @param course Course object which new Session is to be added to.
+     * @return true if success, false if failed.
+     */
     public boolean addSession(Course course){
         return course.addSession();
     }
 
+    /**
+     * A method to access {@link Course} object and print out all {@link Session} objects stored under it, including their vacancy. This is done by
+     * {@link Course#printSessions()} method, which traverse the ArrayList of Session stored under Course object and print out the entries.
+     * @param course Course object whose Session need to be printed out.
+     */
     public void printSessions(Course course){
         course.printSessions();
     }
 
+    /**
+     * A method to access {@link Course} and remove {@link @Student} from it. This is done by {@link Course#deregisterStudent(Student)}
+     * which remove Student from all {@link Session} and erase his/her {@link Assessment} data.
+     * @param course Course object which new Session is to be added to.
+     * @return true if success, false if failed.
+     */
     public int deregisterStudent(Course course, Student student){
         return course.deregisterStudent(student);
     }
-
+    /**
+     * A method to access {@link Course} object and print a list of {@link Session} objects stored under it. This is done by
+     * {@link Course#printIndexList()} method, which traverse the ArrayList of Session stored under Course object and print out the entries.
+     * @param course Course object whose Session need to be printed out.
+     */
     public void printIndexList(Course course){
         course.printIndexList();
     }
-
+    /**
+     * A method to return a {@link Session} object of the parsed in {@link Course}.
+     * <p> This is done by query user for group and type of the Session and use {@link Course#getSession(String, String)}
+     * to find and return the matching Session. In Course object, the Session object can be found 
+     * by accessing the ArrayList of Session.
+     * @param course Course object which we need to get a Session from
+     * @return Session object of interest.
+     */
     public Session getCourseSession(Course course){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Session Group ID (CE1/SEP3)");
@@ -213,6 +263,13 @@ public class CourseManager{
         return course.getSession(group, type);
     }
 
+    /**
+     * A method to access a {@link Course} object and edit the information of its {@link Session}.
+     * This is done by getting the input from users and modify via setters and getters, 
+     * shown in {@link Course#modifySession(Session)}
+     * @param course Course object which have Session to be modified
+     * @param session Session object that is being modified
+     */
     public void modifySession(Course course, Session session){
         course.modifySession(session);
     }
