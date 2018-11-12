@@ -60,14 +60,22 @@ public class Course implements Serializable{
         return this.courseCoordinator;
     }
     
-    /**
-     * A method to store the {@link Assessment} information under the calling Course object.
-     * <p> Making use of the ArrayList of Assessment by adding the parsed in Assessment object into it.
-     * @param assessment Assessment component of this Course object. 
-     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+        /**
+     * A method to return a {@link Session} under the calling Course object
+     * @param group the group ID of the Session of interest
+     * @param type the type of Session of interest (LEC, TUT or LAB)
+     * @return Session the session object of interest.
      */
-    public void setAssessment(Assessment assessment){
-        results.add(assessment);
+    public Session getSession(String group, String type){
+        int i;
+        Session obtained = null;
+        for(i = 0; i < indexList.size(); i++){
+            if(indexList.get(i).getType().equals(type) && indexList.get(i).getGroup().equals(group)){
+                obtained = indexList.get(i);
+                break;
+            }
+        }
+        return obtained;
     }
 
     /**

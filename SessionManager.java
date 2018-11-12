@@ -34,7 +34,7 @@ public class SessionManager{
         if(type.isEmpty() || group.isEmpty() || dayTime.isEmpty() || location.isEmpty()|| tutorName.isEmpty()){
             throw new StringIndexOutOfBoundsException();
         }
-        if(getSession(group, type) != null){
+        if(course.getSession(group, type) != null){
             System.out.println("This session is already in!");
         }else if(maxCapacity < 1){
             System.out.println("Please enter a valid capacity!");
