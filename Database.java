@@ -73,13 +73,14 @@ public class Database implements Serializable{
      * @see Assessment#removeAssessmentResult
      */
     public void removeStudent(Student student){
+        AssessmentManager assessMg = new AssessmentManager();
+        Course course;
         if(studentCatalog.remove(student)){
             for(int i = 0; i < courseCatalog.size(); i++){
                 //remove the assessment results for that student
+                course = courseCatalog.get(i);
                 ArrayList<Assessment> assessments = courseCatalog.get(i).getAssessment();
-                for(int z = 0; z < assessments.size(); z++){
-                    assessments.get(z).removeAssessmentResult(student);
-                }
+                assessMg.removeAssessmentResult(student, course);
                 //deregister student and increase number of vacancy by 1
                 ArrayList<Session> indexList = courseCatalog.get(i).getAllSession();
                 for(int j = 0; j < indexList.size(); j++){

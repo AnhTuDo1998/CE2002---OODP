@@ -134,8 +134,9 @@ public class AssessmentManager{
 	 * @return boolean false if the removal of Assessement result for the Student is failed, return true if the removal is successful.
 	 * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
 	 */
-	public boolean removeAssessmentResult(Student student){
-		boolean success = false; 
+	public boolean removeAssessmentResult(Student student, Course course){
+        boolean success = false; 
+        ArrayList<Assessment> assessmentResult = course.getAssessment();
 		if(assessmentResults.get(student) != null){
 			assessmentResults.remove(student);
 			success = true;

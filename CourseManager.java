@@ -175,7 +175,7 @@ public class CourseManager{
      */
     public void printIndexList(Course course){
         int i;
-
+        ArrayList<Session> indexList = course.getAllSession();
         System.out.println("Sessions for " + this.courseName + " " + this.courseCode);
         for(i = 0; i < indexList.size(); i++){
             System.out.println(indexList.get(i));
