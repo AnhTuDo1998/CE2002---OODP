@@ -16,10 +16,10 @@ public class Course implements Serializable{
 
     /**
      * Constructor for Course object, instantiating the following attributes
-     * @param courseName String name of the course object being construct, for instance "Object Oriented Design and Programming".
-     * @param courseCode String course code of the course object being construct, for instance CE2002
-     * @param AU int AU of the course object being construct.
-     * @param courseCoordinator String name of the overall coordinator of the course object being created. 
+     * @param courseName Name of the course object being constructed, for instance "Object Oriented Design and Programming".
+     * @param courseCode Course code of the course object being constructed, for instance CE2002
+     * @param AU Academic Units allocated to the course object being constructed.
+     * @param courseCoordinator Name of the overall coordinator of the course object being created. 
      */
     public Course(String courseName, String courseCode, int AU, String courseCoordinator){
         this.courseName = courseName;
@@ -30,21 +30,21 @@ public class Course implements Serializable{
 
     /**
      * A method to get the course name of the calling Course object. For example, Object Oriented Design and Programming.
-     * @return String the name of the calling Course object.
+     * @return The name of the calling Course object.
      */
     public String getCourseName(){
         return this.courseName;
     }
     /**
      * A method to get the course code of the calling Course objcect, for example CE2002.
-     * @return String the course code of the calling Course object.
+     * @return The course code of the calling Course object.
      */
     public String getCourseCode(){
         return this.courseCode;
     }
     /**
      * A method to get the AU assigned to the calling Course object
-     * @return int the AU of the calling Course object.
+     * @return The AU of the calling Course object.
      */
     public int getAU(){
         return this.AU;
@@ -52,15 +52,15 @@ public class Course implements Serializable{
 
     /**
      * A method to return the name of the overall coordinator of the calling Course object.
-     * @return String the name of the coordinator of the calling Course object
+     * @return The name of the coordinator of the calling Course object
      */
     public String getCourseCoordinator(){
         return this.courseCoordinator;
     }
     /**
      * A method to add in new Session under the calling Course object. 
-     * @return boolean false if the new Session object is not added,
-     * return true if the new Session object is added
+     * @return <i>false</i> if the new Session object is not added,
+     * return <i>true</i> if the new Session object is added
      * @see Session for Session object usage.
      * @see #indexList
      */
@@ -87,7 +87,7 @@ public class Course implements Serializable{
         int maxCapacity = sc.nextInt();
         System.out.println();
         sc.nextLine(); //capture \n
-        if(sessionExist(group, type) >= 0){
+        if(getSession(group, type) != null){
             System.out.println("This session is already in!");
         }else if(maxCapacity < 1){
             System.out.println("Please enter a valid capacity!");
@@ -98,6 +98,19 @@ public class Course implements Serializable{
     }
 
     //Modifying Session
+    /**
+     * A method to modify information regarding a {@link Session} in a particular {@link Course}.
+     * <ul>
+     *  <li>Session Type</li>
+     *  <li>Session Group ID</li>
+     *  <li>Session Timing</li>
+     *  <li>Session Location</li>
+     *  <li>Tutor's Name</li>
+     *  <li>Max capacity of session</li>
+     * </ul>
+     * @param session The target session to be modified.
+     * @return <i>true</i> if modified successfully, <i>false</i> otherwise.
+     */
     public boolean modifySession(Session session){
         boolean success = false;
         char conti = 'Y';
@@ -167,6 +180,9 @@ public class Course implements Serializable{
     }
 
     //print session catalogue
+    /**
+     * A method to print all {@link Session} contained in this course.
+     */
     public void printIndexList(){
         int i;
 
@@ -175,21 +191,7 @@ public class Course implements Serializable{
             System.out.println(indexList.get(i));
         }
     }
-
-    public Session getSession(String group, String type){
-        int i;
-        Session obtained = null;
-
-        for(i = 0; i < indexList.size(); i++){
-            if(indexList.get(i).getType().equals(type) && indexList.get(i).getGroup().equals(group)){
-                obtained = indexList.get(i);
-                break;
-            }
-        }
-        return obtained;
-    }
-       
-
+      
     //check if session exist according to group name first
     //may need to add more though
     public int sessionExist(String sessionGroup, String type){
