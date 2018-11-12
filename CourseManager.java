@@ -183,7 +183,7 @@ public class CourseManager{
         System.out.printf("Average Result     : %1$-5.2f \n", (double)(totalAverageResults/i));
     }
 
-    public boolean addSession(Course course){
+    public boolean addSession(Course course) throws EmptyInputException{
         return course.addSession();
     }
 
@@ -199,18 +199,19 @@ public class CourseManager{
         course.printIndexList();
     }
 
-    public Session getCourseSession(Course course){
+    public Session getCourseSession(Course course) throws EmptyInputException{
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Session Group ID (CE1/SEP3)");
         String group = sc.nextLine();
+        if(group.isEmpty()) throw new EmptyInputException("group");
         System.out.println("Enter the Session Type (LAB/TUT/LEC CE1)");
         String type = sc.nextLine();
-        if(group.isEmpty() || type.isEmpty()) throw new StringIndexOutOfBoundsException();
+        if(type.isEmpty()) throw new EmptyInputException("type");
         //get the session from database
         return course.getSession(group, type);
     }
 
-    public void modifySession(Course course, Session session){
+    public void modifySession(Course course, Session session) throws EmptyInputException, InputMismatchException{
         course.modifySession(session);
     }
 
@@ -220,20 +221,29 @@ public class CourseManager{
         Double marks;
 
         ArrayList<Assessment> results = getAssessment(course);
-        if(course.studentRegistered(student)){
-            for (i = 0; i < results.size(); i++){
-                marks = 101.0; //just for it to satisfy the while statement
-                while(marks > 100 || marks < 0){
-                    System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
-                    marks = sc.nextDouble();
-                    sc.nextLine();
-                    course.enterResults(results.get(i), student, marks);
+            if(course.studentRegistered(student)){
+                for (i = 0; i < results.size(); i++){
+                    marks = 101.0; //just for it to satisfy the while statement
+                    while(marks > 100 || marks < 0){
+                        try{
+                            System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
+                            marks = sc.nextDouble();
+                            sc.nextLine();
+                            if(marks < 0){
+                                throw new ArithmeticException("Error: marks cannot be negative");
+                            }
+                            course.enterResults(results.get(i), student, marks);
+                        }catch(ArithmeticException e){
+                            System.out.println(e.getMessage());
+                            continue;
+                        }   
+                    }
                 }
+                if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
+            } else {
+                System.out.println("Student is not registered in this course!");
             }
-            if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
-        } else {
-            System.out.println("Student is not registered in this course!");
-        }
+            
     }
 
     public void printStudentRegistered(Course course){
