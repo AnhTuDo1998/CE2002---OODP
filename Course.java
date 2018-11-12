@@ -97,34 +97,6 @@ public class Course implements Serializable{
         return success;
     }
 
-    //Remove session
-    /**
-     * A method to remove a Session under this calling Course object.
-     * @return boolean false if the removal of the Session is unsuccessful, 
-     * return true if the removal is successful.
-     * @see #indexList
-     */
-    public boolean removeSession(){
-        boolean success;
-        Scanner sc = new Scanner(System.in);
-        String group;
-        int index;
-        String type;
-
-        printIndexList();
-        System.out.println("Which session do you want to remove?");
-        group = sc.nextLine();
-        System.out.println("Remove TUT or LAB?");
-        type = sc.nextLine();
-        index = sessionExist(group, type);
-        if(index >= 0){
-            success = indexList.remove(indexList.get(index)); //if removed then return true
-            return success;
-        }else{
-            return false; //else false
-        }
-    }
-
     //Modifying Session
     public boolean modifySession(Session session){
         boolean success = false;

@@ -16,28 +16,7 @@ public class CourseManager{
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
     }
-
-    //find a way to delete seperate session ?
-    //move IO to main interface, print all courses before calling this method, pass course as parameter
-    // public void removeSession(Course course){
-    //     int i;
-    //     boolean success = false;
-    //     String courseCode;
-
-    //     //printCourseCatalog();
-    //     if (course != null){
-    //         success = course.removeSession(); //will return true or false depends on whether the session is created
-    //     }
-    //     //session created successfully
-    //     if(success){
-    //         System.out.println("Session for " + course.getCourseCode() + " is deleted successfully!");
-    //     }
-        
-    //     else{
-    //         System.out.println("Session is not added! Session does not exist");
-    //     }
-    // }
-    
+  
     public void checkVacancy(Course course){
         if (course != null){
             course.printSessions();
