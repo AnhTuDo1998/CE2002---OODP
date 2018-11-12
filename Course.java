@@ -87,7 +87,7 @@ public class Course implements Serializable{
         int maxCapacity = sc.nextInt();
         System.out.println();
         sc.nextLine(); //capture \n
-        if(sessionExist(group, type) >= 0){
+        if(getSession(group, type) != null){
             System.out.println("This session is already in!");
         }else if(maxCapacity < 1){
             System.out.println("Please enter a valid capacity!");
@@ -188,32 +188,14 @@ public class Course implements Serializable{
         }
         return obtained;
     }
-       
-
-    //check if session exist according to group name first
-    //may need to add more though
-    public int sessionExist(String sessionGroup, String type){
-        int i;
-        int index = -1;
-
-        for(i = 0; i < indexList.size(); i++){  //return index if found, return -1 if not found
-            if(indexList.get(i).getGroup().equals(sessionGroup) && indexList.get(i).getType().equals(type)){
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
 
     /**
      * A method to set the Assessment information of the calling Course object.
      * @param assessment Assessment component of this Course object. 
      * @return
      */
-    public int setAssessment(Assessment assessment){
+    public void setAssessment(Assessment assessment){
         results.add(assessment);
-        return 0;
     }
 
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
