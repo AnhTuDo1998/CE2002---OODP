@@ -56,6 +56,7 @@ public class ScrameApp{
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
             sc.nextLine();
+            printSpaces();
             switch(choice){
                 case 1: //add a student
                     printSpaces();
@@ -74,15 +75,20 @@ public class ScrameApp{
                                     System.out.println("============================== ADD NEW STUDENT ==============================");                    
                                     System.out.println("Enter student's name: ");
                                     studentName = sc.nextLine();
+                                    System.out.println();
                                     System.out.println("Enter student's matric No.: ");
                                     matricNumber = sc.nextLine();
+                                    System.out.println();
                                     System.out.println("Enter student's school (SCSE): ");
                                     school = sc.nextLine();
+                                    System.out.println();
                                     System.out.println("Enter student's year of study: ");
                                     acadYear = sc.nextInt();
                                     sc.nextLine();
+                                    System.out.println();
                                     System.out.println("Enter student's gender: (M/F)");
                                     gender = sc.nextLine().toUpperCase().charAt(0);
+                                    printSpaces();
                                 }
                                 catch(InputMismatchException e){
                                     System.out.println("Data entered is invalid, please try again!");
@@ -108,14 +114,18 @@ public class ScrameApp{
                             System.out.println("Enter the matriculation number of the student: ");
                             matricNumber = sc.nextLine();
                             student = db.getStudent(matricNumber);
-                            System.out.println(student);
-                            System.out.println("Confirm to remove? (Y/N)");
-                            confirm = sc.nextLine().toUpperCase().charAt(0);
-                            if(student != null && confirm == 'Y'){
+                            if(student!=null){
+                                System.out.println(student);
+                                System.out.println("Confirm to remove? (Y/N)");
+                                confirm = sc.nextLine().toUpperCase().charAt(0);
+                                if(confirm == 'Y'){
                                 db.removeStudent(student);
                                 System.out.println(student + " is removed!");
-                            }else{
+                                }else{
                                 System.out.println("Student not removed!");
+                                }
+                            }else{
+                                System.out.println("Student is not in our records!");
                             }
                             break;
                         case 3:
@@ -145,13 +155,17 @@ public class ScrameApp{
                                         System.out.println("============================== ADD NEW COURSE ==============================");                    
                                         System.out.println("Enter course name: (Computer Vision/Object-Orientated Design & Programming)");
                                         courseName = sc.nextLine();
+                                        System.out.println();
                                         System.out.println("Enter course code: (CE2005/CE4001/CZ1023)");
                                         courseCode = sc.nextLine();
+                                        System.out.println();
                                         System.out.println("Enter course AU: (2/3)");
                                         AU = sc.nextInt();
                                         sc.nextLine();
+                                        System.out.println();
                                         System.out.println("Enter name of course coordinator: ");
                                         courseCoordinator = sc.nextLine();
+                                        System.out.println();
                                     }
                                     catch(InputMismatchException e){
                                         System.out.println("Data entered is invalid, please try again!");
@@ -204,6 +218,8 @@ public class ScrameApp{
                         }
                         break;
                 case 3: 
+                    printSpaces();
+                    System.out.println("=============================== REGISTRATION =============================");
                     System.out.println("1. Register a student ");
                     System.out.println("2. Unregister a student ");
                     System.out.println("3. Menu");

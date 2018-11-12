@@ -1,12 +1,18 @@
 import java.util.*;
 import java.io.*;
-
+/**
+ * A controller class, in charge of most services related to Course objects
+ */
 public class CourseManager{
-    
-    //rmb to implement return int
-
-
     //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+    /**
+     * A method to register Student object into Course object both being parsed in.
+     * @param student Student object to be registered 
+     * @param course Course object to add the Student object in
+     * @param group 
+     * @param type
+     * @return 
+     */
     public int regStudentToCourse(Student student, Course course, String group, String type){
         return course.registerStudent(student, group, type);
     }
@@ -78,14 +84,17 @@ public class CourseManager{
         
         while(totalWeightage!=100){
             if(finalsSet){
+                System.out.println();
                 System.out.println("Enter assessment type: (Quiz, Lab Report)");
                 name = sc.nextLine();
+                System.out.println();
             }
             else name = "Finals";
             System.out.println("Enter " + name + " weightage: (50, 70, 20)");
             System.out.println("Remaining weightage left: " + (100-totalWeightage));
             weightage = sc.nextDouble();
             sc.nextLine();
+            System.out.println();
             if(weightage + totalWeightage > 100){
                 System.out.println("Invalid weightage! Should not exceed a total of 100!");
             }
@@ -125,6 +134,7 @@ public class CourseManager{
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
+        ScrameApp.printSpaces();
         for(i = 0; i < registeredStudents.size(); i++){
             year[registeredStudents.get(i).getAcadYear()-1]++;
             if(registeredStudents.get(i).getGender() == ('M')) totalMale++;
@@ -154,26 +164,26 @@ public class CourseManager{
             }else results[9]++;
         }
         System.out.println("Printing course statistics for " + course);
-        System.out.println("====== Gender Distribution =====");
+        System.out.println("========== Gender Distribution ========");
         // i is currently the total number of students in this course
-        System.out.println("Male  : " + totalMale + " (" + ((double)(totalMale)/i)*100 + "%)");
-        System.out.println("Female: " + totalFemale  + " (" + ((double)(totalFemale)/i)*100 + "%)");
-        System.out.println("====== Year Distribution =====");
-        System.out.println("Year 1: " + year[0]+ " (" + ((double)(year[0])/i)*100 + "%)");
-        System.out.println("Year 2: " + year[1]+ " (" + ((double)(year[1])/i)*100 + "%)");
-        System.out.println("Year 3: " + year[2]+ " (" + ((double)(year[2])/i)*100 + "%)");
-        System.out.println("Year 4: " + year[3]+ " (" + ((double)(year[3])/i)*100 + "%)");
-        System.out.println("====== Grade Distribution =====");
-        System.out.println("A+ : " + results[0]+ " (" + ((double)(results[0])/i)*100 + "%)");
-        System.out.println("A  : " + results[1]+ " (" + ((double)(results[1])/i)*100 + "%)");
-        System.out.println("A- : " + results[2]+ " (" + ((double)(results[2])/i)*100 + "%)");
-        System.out.println("B+ : " + results[3]+ " (" + ((double)(results[3])/i)*100 + "%)");
-        System.out.println("B  : " + results[4]+ " (" + ((double)(results[4])/i)*100 + "%)");
-        System.out.println("B- : " + results[5]+ " (" + ((double)(results[5])/i)*100 + "%)");
-        System.out.println("C+ : " + results[6]+ " (" + ((double)(results[6])/i)*100 + "%)");
-        System.out.println("C  : " + results[7]+ " (" + ((double)(results[7])/i)*100 + "%)");
-        System.out.println("D  : " + results[8]+ " (" + ((double)(results[8])/i)*100 + "%)");
-        System.out.println("F  : " + results[9]+ " (" + ((double)(results[9])/i)*100 + "%)");
+        System.out.printf("Number of Males    : %1$-6s (%2$-5.2f%%)\n", totalMale, ((double)(totalMale)/i)*100);
+        System.out.printf("Number of Females  : %1$-6s (%2$-5.2f%%)\n", totalFemale, ((double)(totalFemale)/i)*100);
+        System.out.println("========== Year Distribution ==========");
+        System.out.printf("Number of Year 1   : %1$-6s (%2$-5.2f%%)\n", year[0], ((double)(year[0])/i)*100);
+        System.out.printf("Number of Year 2   : %1$-6s (%2$-5.2f%%)\n", year[1], ((double)(year[1])/i)*100);
+        System.out.printf("Number of Year 3   : %1$-6s (%2$-5.2f%%)\n", year[2], ((double)(year[2])/i)*100);
+        System.out.printf("Number of Year 4   : %1$-6s (%2$-5.2f%%)\n", year[3], ((double)(year[3])/i)*100);
+        System.out.println("========== Grade Distribution =========");
+        System.out.printf("Number of A+       : %1$-6s (%2$-5.2f%%)\n", results[0], ((double)(results[0])/i)*100);
+        System.out.printf("Number of A        : %1$-6s (%2$-5.2f%%)\n", results[1], ((double)(results[1])/i)*100);
+        System.out.printf("Number of A-       : %1$-6s (%2$-5.2f%%)\n", results[2], ((double)(results[2])/i)*100);
+        System.out.printf("Number of B+       : %1$-6s (%2$-5.2f%%)\n", results[3], ((double)(results[3])/i)*100);
+        System.out.printf("Number of B        : %1$-6s (%2$-5.2f%%)\n", results[4], ((double)(results[4])/i)*100);
+        System.out.printf("Number of B-       : %1$-6s (%2$-5.2f%%)\n", results[5], ((double)(results[5])/i)*100);
+        System.out.printf("Number of C+       : %1$-6s (%2$-5.2f%%)\n", results[6], ((double)(results[6])/i)*100);
+        System.out.printf("Number of C        : %1$-6s (%2$-5.2f%%)\n", results[7], ((double)(results[7])/i)*100);
+        System.out.printf("Number of D        : %1$-6s (%2$-5.2f%%)\n", results[8], ((double)(results[8])/i)*100); System.out.printf("Number of A        : %1$-6s (%2$-5.2f%%)\n", results[0], ((double)(results[0])/i)*100);
+        System.out.printf("Number of F        : %1$-6s (%2$-5.2f%%)\n", results[9], ((double)(results[9])/i)*100);
     }
 
     public boolean addSession(Course course){

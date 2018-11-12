@@ -16,7 +16,7 @@ public class Course implements Serializable{
 
     /**
      * Constructor for Course object, instantiating the following attributes
-     * @param courseName String name of the course object being construct, for instance "Object Oriented Design & Programming".
+     * @param courseName String name of the course object being construct, for instance "Object Oriented Design and Programming".
      * @param courseCode String course code of the course object being construct, for instance CE2002
      * @param AU int AU of the course object being construct.
      * @param courseCoordinator String name of the overall coordinator of the course object being created. 
@@ -29,7 +29,7 @@ public class Course implements Serializable{
     }
 
     /**
-     * A method to get the course name of the calling Course object. For example, Object Oriented Design & Programming.
+     * A method to get the course name of the calling Course object. For example, Object Oriented Design and Programming.
      * @return String the name of the calling Course object.
      */
     public String getCourseName(){
@@ -59,27 +59,33 @@ public class Course implements Serializable{
     }
     /**
      * A method to add in new Session under the calling Course object. 
-     * @return boolean false if the new Session object is not added.
-     * @return boolean true if the new Session object is added
+     * @return boolean false if the new Session object is not added,
+     * return true if the new Session object is added
      * @see Session for Session object usage.
-     * @see ArrayList<Session> 
+     * @see #indexList
      */
     public boolean addSession(){
         boolean success = false;
-
+        ScrameApp.printSpaces();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter session type: (LEC/TUT/LAB)");
         String type = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session group : (SEP1/CE3/SEA2)");
         String group = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
         String dayTime = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session location: (LT19a/TRx44/SWLAB3)");
         String location = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session tutor name: ");
         String tutorName = sc.nextLine();
+        System.out.println();
         System.out.println("Enter session's max capacity: ");
         int maxCapacity = sc.nextInt();
+        System.out.println();
         sc.nextLine(); //capture \n
         if(sessionExist(group, type) >= 0){
             System.out.println("This session is already in!");
@@ -94,9 +100,9 @@ public class Course implements Serializable{
     //Remove session
     /**
      * A method to remove a Session under this calling Course object.
-     * @return boolean false if the removal of the Session is unsuccessful.
-     * @return boolean true if the removal of the Session is successful.
-     * @see ArrayList<Session>
+     * @return boolean false if the removal of the Session is unsuccessful, 
+     * return true if the removal is successful.
+     * @see #indexList
      */
     public boolean removeSession(){
         boolean success;
@@ -175,10 +181,9 @@ public class Course implements Serializable{
                     System.out.println("Old session's max capacity: " + session.getMaxCapacity());
                     System.out.println("Enter session's new max capacity: ");
                     int maxCapacity = sc.nextInt();
-                    if(maxCapacity < session.getNumberRegistered()){
-                        System.out.println("Error!! Number of student registered exceed the new max capacity!");
-                        sc.nextLine();
-                        break;
+                    if(session.getNumberRegistered()> maxCapacity){
+                        System.out.println("Please enter a valid capacity!");
+                        return false;
                     }
                     session.setMaxCapacity(maxCapacity);
                     sc.nextLine();
@@ -236,7 +241,7 @@ public class Course implements Serializable{
 
     /**
      * A method to set the Assessment information of the calling Course object.
-     * @param assessment Assessment the assessment components of this Course object. 
+     * @param assessment Assessment component of this Course object. 
      * @return
      */
     public int setAssessment(Assessment assessment){
