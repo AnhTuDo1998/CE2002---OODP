@@ -102,4 +102,44 @@ public class AssessmentManager{
     public void enterResults(Assessment assessment, Student student, double marks){
         assessment.storeAssessmentResult(student, marks);
     }
+
+    /**
+	 * A method to store store the marks of {@link Student} by inserting
+	 * into a <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
+	 * @param student Student student object to store mark/grade in.
+	 * @param marks double the mark/grad to be stored in for the Student object.
+	 */
+	public void storeAssessmentResult(Student student, double marks){
+		assessmentResults.put(student, marks);
+	}
+
+	/**
+	 * A method to return the grade/mark of the calling Assessment object for the {@link Student} object being parsed in.
+	 * @param student Student student who grade/mark to be searched and returned.
+	 * @return double the grade/mark of the Assessment of the student being parse in if succeed, else return 0.
+	 * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
+	 */
+	public double retrieveAssessmentResult(Student student){
+		if(assessmentResults.get(student)!= null){
+			return assessmentResults.get(student);
+		}
+		else{
+			return 0;  // for checking purpose
+		}
+	}
+
+	/**
+	 * A method to remove the grade/mark of {@link Student} object under the calling Assessment object.
+	 * @param student Student object whose Assessment result is removed.
+	 * @return boolean false if the removal of Assessement result for the Student is failed, return true if the removal is successful.
+	 * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
+	 */
+	public boolean removeAssessmentResult(Student student){
+		boolean success = false; 
+		if(assessmentResults.get(student) != null){
+			assessmentResults.remove(student);
+			success = true;
+		}
+		return success;
+	}
 }

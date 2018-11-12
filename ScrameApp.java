@@ -16,6 +16,8 @@ public class ScrameApp{
         Database db = loadData(fileName);
         StudentManager studMg = new StudentManager();
         CourseManager courseMg = new CourseManager();
+        AssessmentManager assessMg = new AssessmentManager();
+        SessionManager sessMg = new SessionManager();
         int choice;
         int result;
         String type;
@@ -190,7 +192,7 @@ public class ScrameApp{
                                 System.out.println(course + " is added.");
                                 db.printCourseCatalog();
                                 do{
-                                    added = courseMg.addSession(course);
+                                    added = sessMg.addSession(course);
                                     if(!added) continue; //ensures at least one is added!
                                     System.out.println("Do you want to add more session? Y/N");
                                     addMore = sc.nextLine().toUpperCase().charAt(0);
@@ -252,7 +254,7 @@ public class ScrameApp{
                                 break;
                             }
                             else{
-                                courseMg.printSessions(course);
+                                sessMg.printSessions(course);
                                 System.out.println("Please enter the group ID: (SEP1/CE3)");
                                 group = sc.nextLine();
                                 System.out.println("Please enter the session type: (LEC/TUT/LAB)");
@@ -271,7 +273,7 @@ public class ScrameApp{
                             }
                             break;
                         case 2: //unregister a student
-                            System.out.println("============================== UNREGISTER STUDENT ==============================");                    
+                            System.out.println("============================== DEREGISTER STUDENT ==============================");                    
                             db.printStudentCatalog();
                             System.out.println("Enter the student matriculation number: ");
                             matricNumber = sc.nextLine();
@@ -311,7 +313,7 @@ public class ScrameApp{
                         //get the session from database
                         session = courseMg.getCourseSession(course);
                         if (session != null){
-                            courseMg.modifySession(course, session);
+                            sessMg.modifySession(session);
                         }else{
                             System.out.println("Session does not exist!");
                         }
@@ -350,7 +352,7 @@ public class ScrameApp{
                         System.out.println("Error! Course isn't in our records!");
                         break;
                     }
-                    courseMg.setAssessment(course);
+                    assessMg.setAssessment(course);
                     break;
                 case 8: //enter coursework mark
                     System.out.println("============================== ENTER MARKS ==============================");
@@ -368,7 +370,7 @@ public class ScrameApp{
                         System.out.println("Student or course entered is not in our records!");
                     }
                     else {
-                        courseMg.setResults(course, student);
+                        assessMg.setResults(course, student);
                     }
                     break;
                 case 9: //save data
