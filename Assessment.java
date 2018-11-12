@@ -57,7 +57,6 @@ public class Assessment implements Serializable{
 	 * into a <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
 	 * @param student Student student object to store mark/grade in.
 	 * @param marks double the mark/grad to be stored in for the Student object.
-	 * @see #assessmentResults
 	 */
 	public void storeAssessmentResult(Student student, double marks){
 		assessmentResults.put(student, marks);
@@ -67,7 +66,7 @@ public class Assessment implements Serializable{
 	 * A method to return the grade/mark of the calling Assessment object for the {@link Student} object being parsed in.
 	 * @param student Student student who grade/mark to be searched and returned.
 	 * @return double the grade/mark of the Assessment of the student being parse in if succeed, else return 0.
-	 * @see #assessmentResults
+	 * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
 	 */
 	public double retrieveAssessmentResult(Student student){
 		if(assessmentResults.get(student)!= null){
@@ -82,7 +81,7 @@ public class Assessment implements Serializable{
 	 * A method to remove the grade/mark of {@link Student} object under the calling Assessment object.
 	 * @param student Student object whose Assessment result is removed.
 	 * @return boolean false if the removal of Assessement result for the Student is failed, return true if the removal is successful.
-	 * @see #assessmentResults
+	 * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
 	 */
 	public boolean removeAssessmentResult(Student student){
 		boolean success = false; 
