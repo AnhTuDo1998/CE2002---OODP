@@ -432,7 +432,7 @@ public class ScrameApp{
         }finally{
                 System.out.println();
                 System.out.println("Returning you back to the main menu...");
-                System.out.println("Press any key to continue...");
+                System.out.println("Press enter key to continue...");
                 sc.nextLine();
                 printSpaces();
                 saveData(fileName, db);

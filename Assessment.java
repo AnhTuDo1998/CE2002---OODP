@@ -30,7 +30,7 @@ public class Assessment implements Serializable{
 
 	/**
 	 * A method to return the weightage of the calling Assessment object/component. 
-	 * @return String the name of calling Assessment object/component.
+	 * @return double the weightage of the Assessment object/component.
 	 */
     public Double getWeightage(){
         return this.weightage;
@@ -53,7 +53,8 @@ public class Assessment implements Serializable{
     } 
 	
 	/**
-	 * A method to store the calling Assessment object result for a Student object being parsed in
+	 * A method to store store the marks of {@link Student} by inserting
+	 * into a <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
 	 * @param student Student student object to store mark/grade in.
 	 * @param marks double the mark/grad to be stored in for the Student object.
 	 * @see #assessmentResults
@@ -63,7 +64,7 @@ public class Assessment implements Serializable{
 	}
 
 	/**
-	 * A method to return the grade/mark of the calling Assessment object for the Student object being parsed in.
+	 * A method to return the grade/mark of the calling Assessment object for the {@link Student} object being parsed in.
 	 * @param student Student student who grade/mark to be searched and returned.
 	 * @return double the grade/mark of the Assessment of the student being parse in if succeed, else return 0.
 	 * @see #assessmentResults
@@ -78,7 +79,7 @@ public class Assessment implements Serializable{
 	}
 
 	/**
-	 * A method to remove the grade/mark of Student object under the calling Assessment object.
+	 * A method to remove the grade/mark of {@link Student} object under the calling Assessment object.
 	 * @param student Student object whose Assessment result is removed.
 	 * @return boolean false if the removal of Assessement result for the Student is failed, return true if the removal is successful.
 	 * @see #assessmentResults
