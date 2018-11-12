@@ -8,24 +8,24 @@ public class StudentManager{
      * A utility method to update/synchronise the Course taken by Student.
      * @param course Course object that Student is registered but need update
      * @param student Student object that need to be updated
-     * @see Student#registerCourse(Course)
+     * @see Student#registerCourse
      */
     public void updateCourseTaken(Course course, Student student){
         student.registerCourse(course);
     }
 
     /**
-     * A method to print out the transcript of Student object parsed in.
-     * The transcript involved total grade of the Student for the semester and the results of Assessment components under each Course object that
-     * Student is registered in
-     * <p> First get the list of Course that Student is registered in. Next, declare and instantiate an empty list of Assessment objects to traverse later.
-     * <p> Traverse the list of Course courseRegistered for the Student and access the list of Assessment components under each Course object being visited.
+     * A method to print out the transcript of {@link Student} object being parsed in.
+     * <p>The transcript involved total grade of the Student for the semester and the results of Assessment components under each Course object that
+     * Student is registered in.
+     * <p> First get the array of {@link Course} that Student is registered in. Next, declare and instantiate an empty array of {@link Assessment} objects to traverse later.
+     * <p> Traverse the array of Course courseRegistered for the Student and access the list of Assessment components under each Course object being visited.
      * By traversing this list of Assessment objects, print out the individual grade/marks for the components under the visited Course' Assessment. 
      * When last Assessment component is printed out, move to the next Course in the list. 
      * <p> Repeat until all Course objects in the list is visited. 
+     * <p> This method make use of ArrayList methods for processing
      * @param student Student object whose transcript need to be print out.
-     * @see #courseRegistered 
-     * @see #results
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printTranscript(Student student){
         ScrameApp.printSpaces();
@@ -71,16 +71,19 @@ public class StudentManager{
      * A method to control the removal of Student from Course (both passed in)
      * @param student Student object that is of our interest to remove from the Course
      * @param course Course object where the Student must be removed from
-     * @see Student#deregisterCourse(Course) for more information
+     * @see Student#deregisterCourse
      */
     public void deregisterCourse(Student student, Course course){
         student.deregisterCourse(course);
     }
 
     /**
-     * A method to print all Course the Student object is registered under. This is done by getting the list of Course the student is registered under and print out.
+     * A method to print all Course the Student object is registered under. 
+     * <p>This is done by getting the array of {@link Course}
+     * the student is registered under and print out. We are utilising ArrayList and its methods for this method.
      * @param student Student object who we need to print out all the Course objects he/she is registered under
-     * @see Student#getCourseRegistered()
+     * @see Student#getCourseRegistered
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printCourseRegistered(Student student){
         int i =0;
