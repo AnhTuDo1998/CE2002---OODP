@@ -37,6 +37,7 @@ public class ScrameApp{
         printSpaces();
         printTitle();
         while (cont){
+            try{
             System.out.println("==================================================== MENU ====================================================");             
             System.out.println("1. Add/Remove a student ");
             System.out.println("2. Add/Remove a course");
@@ -384,7 +385,20 @@ public class ScrameApp{
         System.out.println("Press any key to continue...");
         sc.nextLine();
         printSpaces();
+            }catch(StringIndexOutOfBoundsException e){
+                System.out.println("Invalid input!");
+                continue;
+            }catch(InputMismatchException e){
+                System.out.println("Please enter accordingly to the field required!");
+                continue;
+            }catch(Exception e){
+                System.out.println("Error!");
+                continue;
+            }finally{
+                saveData(fileName, db);
+            }
         }
+    
     }
 
     public static Database loadData(String filename) {
@@ -456,14 +470,7 @@ public class ScrameApp{
         System.out.println("                                     ~ Welcome to the SCRAME APP ~                                  ");
         System.out.println("                                        ~ Presented by Group 3 ~                                    ");
         System.out.println("                                      Press Enter Key to Continue                                   ");
-        try
-        {
-            System.in.read();
-        }  
-        catch(Exception e)
-        {
-            System.out.println("Error !");
-        }  
+        sc.nextLine(); 
     }
             
     public static void printSpaces(){
