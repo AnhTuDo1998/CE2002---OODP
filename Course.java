@@ -64,7 +64,7 @@ public class Course implements Serializable{
      * @see Session for Session object usage.
      * @see #indexList
      */
-    public boolean addSession(){
+    public boolean addSession() throws StringIndexOutOfBoundsException{
         boolean success = false;
         ScrameApp.printSpaces();
         Scanner sc = new Scanner(System.in);
@@ -87,6 +87,9 @@ public class Course implements Serializable{
         int maxCapacity = sc.nextInt();
         System.out.println();
         sc.nextLine(); //capture \n
+        if(type.isEmpty() || group.isEmpty() || dayTime.isEmpty() || location.isEmpty()|| tutorName.isEmpty()){
+            throw new StringIndexOutOfBoundsException();
+        }
         if(sessionExist(group, type) >= 0){
             System.out.println("This session is already in!");
         }else if(maxCapacity < 1){

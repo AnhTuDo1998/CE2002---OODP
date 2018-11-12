@@ -83,34 +83,49 @@ public class CourseManager{
         course.clearAssessments(); //reset assessments if already set;
         
         while(totalWeightage!=100){
-            if(finalsSet){
+            try{
+                if(finalsSet){
+                    System.out.println();
+                    System.out.println("Enter assessment type: (Quiz, Lab Report)");
+                    name = sc.nextLine();
+                    System.out.println();
+                }
+                else name = "Finals";
+                System.out.println("Enter " + name + " weightage: (50, 70, 20)");
+                System.out.println("Remaining weightage left: " + (100-totalWeightage));
+                weightage = Double.parseDouble(sc.nextLine());
+                //sc.nextLine();
                 System.out.println();
-                System.out.println("Enter assessment type: (Quiz, Lab Report)");
-                name = sc.nextLine();
-                System.out.println();
-            }
-            else name = "Finals";
-            System.out.println("Enter " + name + " weightage: (50, 70, 20)");
-            System.out.println("Remaining weightage left: " + (100-totalWeightage));
-            weightage = sc.nextDouble();
-            sc.nextLine();
-            System.out.println();
-            if(weightage + totalWeightage > 100){
-                System.out.println("Invalid weightage! Should not exceed a total of 100!");
-            }
-            else{
-                System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
-                confirm = sc.nextLine().toUpperCase().charAt(0);
-                if(confirm == 'Y'){
-                    totalWeightage += weightage;
-                    course.setAssessment(new Assessment(name,weightage));
-                    if(name.equals("Finals")) finalsSet = true;
-                    System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);
+                if(weightage <= 0){
+                    throw new ArithmeticException("Error: weightage must not be negative!");
+                }
+
+                if(weightage + totalWeightage > 100){
+                    System.out.println("Invalid weightage! Should not exceed a total of 100!");
                 }
                 else{
-                    System.out.println(name + " component not added.");
+                    System.out.println("Confirm entry of \"" + name + "\" weightage: " + weightage + "? (Y/N)");
+                    confirm = sc.nextLine().toUpperCase().charAt(0);
+                    if(confirm == 'Y'){
+                        totalWeightage += weightage;
+                        course.setAssessment(new Assessment(name,weightage));
+                        if(name.equals("Finals")) finalsSet = true;
+                        System.out.println("Results component \"" + name + "\" is added with a weightage of " + weightage);
+                    }
+                    else{
+                        System.out.println(name + " component not added.");
+                    }
                 }
+            }catch(ArithmeticException e){
+                System.out.println(e.getMessage());
+            }catch(NumberFormatException e){
+                System.out.println();
+                System.out.println("Error: input is invalid!");
+                System.out.println("Please reenter!");
+            }catch(Exception e){
+                System.out.println("Error!");
             }
+            
         }
         System.out.println("Results weightage completed....");
         return 0;
