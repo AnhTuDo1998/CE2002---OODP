@@ -123,7 +123,7 @@ public class SessionManager{
         }while(conti == 'Y');
         return success;         
     }
-    
+
     /**
      * A method to print out all {@link Session} under the calling Course object
      * <p> Traverse the ArrayList of Session objects and print out the information needed.
@@ -137,4 +137,50 @@ public class SessionManager{
         }
     }
 
+     /**
+     * A method to add in <@link Student> into the calling session. This method utilise get() and add() method of ArrayList.
+     * @param student Student student object to be added into this session
+     * @return int -1 if the session is full (vacancy = 0),
+     * -2 if the student being added is already inside the session,
+     * and 0 if the adding of student under the session is SUCCESS
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+     */
+    public int addStudent(Student student){ //add a student into an existing group
+        if(this.maxCapacity == this.numberRegistered){
+            return -1; //group is already full
+        } else {
+            for(int i = 0; i < studentList.size(); i++){
+                if(studentList.get(i) == student) return -2;
+            }
+            this.numberRegistered++;
+            studentList.add(student);
+            return 0; //student added
+        }
+    }
+
+     /**
+     * A method to deregister {@link Student} from the calling session. This method utilise the ArrayList remove method to deregister 
+     * the Student from studentList ArrayList
+     * @param student Student object to be deregistered (removed) from the calling session. 
+     * @return false if the process failed.
+     * Return true if the student is successfully removed from the student list of the session.
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+     */
+    public boolean deregisterStudent(Student student){
+        if(student != null){
+            return studentList.remove(student);
+        }
+        return false;
+    }
+
+    /**
+     * A method to print out the list of student currently registered in this session. This method utilise get() method of ArrayList
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+     */
+    public void printSessionStudent(){
+        int i;
+        for(i = 0; i < studentList.size(); i++){
+            System.out.println(studentList.get(i));
+        }
+    }
 }
