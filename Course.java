@@ -1,11 +1,20 @@
 import java.util.*;
 import java.io.*;
 
+/**
+ * Entity class which stores respective assessments and sessions available for this course.
+ */
 public class Course implements Serializable{
-    //Record of Session (Tut, Lab and Lecture) under a course.
+
+    /**
+     * Record of {@link Session} (Tut, Lab and Lecture) under this course.
+     */
     private ArrayList<Session> indexList = new ArrayList<Session>();
-    //Record of Assessment (Exam and Coursework) under a course.
-    //index 0 is equivalent to exam marks, the rest are coursemarks.
+
+    /**
+     * Record of {@link Assessment} (Exam and Coursework) under this course.
+     * Index 0 is reserved for final marks, the rest are coursemarks.
+     */
     private ArrayList<Assessment> results = new ArrayList<Assessment>();  //arrayList of hashmaps.
 
     //Other relevant information of a course.
@@ -179,7 +188,6 @@ public class Course implements Serializable{
         
     }
 
-    //print session catalogue
     /**
      * A method to print all {@link Session} contained in this course.
      */
@@ -193,16 +201,22 @@ public class Course implements Serializable{
     }
 
     /**
-     * A method to set the Assessment information of the calling Course object.
+     * A method to set the {@link Assessment} information of the calling Course object
+     * by storing it in an ArrayList of Assessment.
      * @param assessment Assessment component of this Course object. 
-     * @return
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
-    public int setAssessment(Assessment assessment){
+    public void setAssessment(Assessment assessment){
         results.add(assessment);
-        return 0;
     }
 
-    //return 0 if added successfully, -1 if full, -2 if student is inside -3 if group does not exist
+    /**
+     * A method to register a {@link Student} for a {@link Session}.
+     * @param student Student object to be registered.
+     * @param group
+     * @param type
+     * @return 0 if added successfully, -1 if session is full, -2 if student was previously registered already, -3 if wrong group info was entered.
+     */
     public int registerStudent(Student student, String group, String type){
         int result = -3;
         for(int i = 0; i < indexList.size();  i++){
@@ -214,6 +228,12 @@ public class Course implements Serializable{
         return result;
     }
 
+    /**
+     * A method to deregister a {@link Student} from this course. All relevant sessions 
+     * and results from the target student is also removed.
+     * @param student Target student object to be removed from this course.
+     * @return int Total count of sessions deregistered the target student.
+     */
     public int deregisterStudent(Student student){
         int sessionCount = 0;
         for(int i = 0; i < indexList.size(); i++){
@@ -233,6 +253,9 @@ public class Course implements Serializable{
         return sessionCount;
     }
 
+    /**
+     * A method to print all {@link Session} in this course.
+     */
     public void printSessions(){
         for (int i = 0; i < indexList.size(); i++){
             System.out.println(indexList.get(i) + " | Vacancy: " 
@@ -240,10 +263,16 @@ public class Course implements Serializable{
         }
     }
 
+    /**
+     * @return {@link #results}
+     */
     public ArrayList<Assessment> getAssessment(){
         return this.results;
     }
 
+    /**
+     * For formatted printing in table view.
+     */
     public String toString(){
         String codeFormat = "|| %1$6s :";
         String nameFormat = " %2$-30s ";
@@ -253,10 +282,19 @@ public class Course implements Serializable{
         return String.format(format, this.courseCode, this.courseName, "Coordinator: " + this.courseCoordinator, "AU: " + this.AU);
     }
 
+    /**
+     * @return {@link #indexList}
+     */
     public ArrayList<Session> getAllSession(){
         return this.indexList;
     }
 
+    /**
+     * A method to check if {@link Student} is already registered in this course, by 
+     * iterating through all the {@link Session}.
+     * @param student target student object to check.
+     * @return <i>true</i> if student is already registered, <i>false</i> if student is not registered.
+     */
     public boolean studentRegistered(Student student){
         for(int i = 0; i < indexList.size(); i++){
             if(indexList.get(i).getStudentRegistered().contains(student)) return true;
@@ -264,10 +302,19 @@ public class Course implements Serializable{
         return false;
     }
 
+    /**
+     * A method to reset existing {@link Assessment}, called in {@link CourseManager#setAssessment}.
+     */
     public void clearAssessments(){
         results.clear();
     }
 
+    /**
+     * A method to enter marks for a {@link Student} for a particular {@link Assessment}.
+     * @param assessment Assessment object to be entered.
+     * @param student Student object to be graded.
+     * @param marks Marks of the student for the particular assessment (Max marks: 100).
+     */
     public void enterResults(Assessment assessment, Student student, double marks){
         assessment.storeAssessmentResult(student, marks);
     }
