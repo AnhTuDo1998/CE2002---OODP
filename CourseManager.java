@@ -258,6 +258,13 @@ public class CourseManager{
      */
     public Session getCourseSession(Course course) throws EmptyInputException{
         //get the session from database
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Session Group ID (CE1/SEP3)");
+        String group = sc.nextLine();
+        if(group.isEmpty()) throw new EmptyInputException("group");
+        System.out.println("Enter the Session Type (LAB/TUT/LEC CE1)");
+        String type = sc.nextLine();
+        if(type.isEmpty()) throw new EmptyInputException("type");
         return course.getSession(group, type);
     }
 

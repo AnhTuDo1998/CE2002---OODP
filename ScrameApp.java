@@ -90,13 +90,24 @@ public class ScrameApp{
                                     System.out.println("Enter student's school (SCSE): ");
                                     school = sc.nextLine();
                                     System.out.println();
-                                    System.out.println("Enter student's year of study: ");
+                                    System.out.println("Enter student's year of study: (1~4)");
                                     acadYear = sc.nextInt();
                                     sc.nextLine();
+                                    if(acadYear < 1 || acadYear > 4){
+                                        System.out.println("Enter a value between 1 and 4");
+                                        acadYear = sc.nextInt();
+                                        sc.nextLine();
+                                        if(acadYear < 1 || acadYear > 4) throw new InputMismatchException("Error: entered an invalid academic year value");
+                                    }
                                     System.out.println();
                                     System.out.println("Enter student's gender: (M/F)");
                                     gender = sc.nextLine().toUpperCase().charAt(0);
-                                    if(gender != 'M' && gender != 'F') throw new InputMismatchException("Error: entered an invalid gender type");
+                                    if(gender != 'M' && gender != 'F'){
+                                        System.out.println("Enter either M or F");
+                                        gender = sc.nextLine().toUpperCase().charAt(0);
+                                        sc.nextLine();
+                                        if(gender != 'M' && gender != 'F') throw new InputMismatchException("Error: entered an invalid gender type");
+                                    } 
                                     printSpaces();
                                 
                                 if(studentName.isEmpty() || matricNumber.isEmpty() || school.isEmpty()){
