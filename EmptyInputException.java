@@ -1,3 +1,6 @@
+/**
+ * This is a user-defined excaption class to handle enpty input error from user.
+ */
 public class EmptyInputException extends Exception{
 
     String messages = "";
