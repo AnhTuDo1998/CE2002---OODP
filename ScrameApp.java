@@ -100,7 +100,7 @@ public class ScrameApp{
                                     printSpaces();
                                 
                                 if(studentName.isEmpty() || matricNumber.isEmpty() || school.isEmpty()){
-                                    throw new StringIndexOutOfBoundsException();
+                                    throw new EmptyInputException();
                                 }
                                 if(db.getStudent(matricNumber) != null){
                                     System.out.println("Student with matric number " + matricNumber + " already exists!");
@@ -127,7 +127,7 @@ public class ScrameApp{
                             db.printStudentCatalog();
                             System.out.println("Enter the matriculation number of the student: ");
                             matricNumber = sc.nextLine();
-                            if(matricNumber.isEmpty()) throw new StringIndexOutOfBoundsException();
+                            if(matricNumber.isEmpty()) throw new EmptyInputException("matricNumber");
                             student = db.getStudent(matricNumber);
                             if(student!=null){
                                 System.out.println(student);
@@ -182,7 +182,7 @@ public class ScrameApp{
                                     System.out.println();
                                     
                                     if(courseName.isEmpty() || courseCode.isEmpty() || courseCode.isEmpty()) 
-                                        throw new StringIndexOutOfBoundsException();
+                                        throw new EmptyInputException();
                                     System.out.println(courseCode + " " + courseName + " AU: " + AU + " by " + courseCoordinator);
                                     System.out.println("Are you sure you want to add in this course? (Y/N)");
                                     confirm = sc.nextLine().toUpperCase().charAt(0);
@@ -214,7 +214,7 @@ public class ScrameApp{
                                 db.printCourseCatalog();
                                 System.out.println("Enter the course code you want to remove: ");
                                 courseCode = sc.nextLine();
-                                if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                                if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                                 course = db.getCourse(courseCode);
                                 if(course != null){
                                     System.out.println("Are you sure you want to remove " + course + " ? (Y/N)");
@@ -254,7 +254,7 @@ public class ScrameApp{
                             courseCode = sc.nextLine();
                             student = db.getStudent(matricNumber);
                             course = db.getCourse(courseCode);
-                            if(courseCode.isEmpty() || matricNumber.isEmpty()) throw new StringIndexOutOfBoundsException();
+                            if(courseCode.isEmpty() || matricNumber.isEmpty()) throw new EmptyInputException();
                             //if any of them do not exist
                             if (student == null || course == null){ 
                                 System.out.println("Student or course is not in our records!");
@@ -266,7 +266,7 @@ public class ScrameApp{
                                 group = sc.nextLine();
                                 System.out.println("Please enter the session type: (LEC/TUT/LAB)");
                                 type = sc.nextLine();
-                                if(group.isEmpty() || type.isEmpty()) throw new StringIndexOutOfBoundsException();
+                                if(group.isEmpty() || type.isEmpty()) throw new EmptyInputException();
                                 result = courseMg.regStudentToCourse(student, course, group, type);
                                 switch (result){
                                     case 0: 
@@ -284,12 +284,12 @@ public class ScrameApp{
                             db.printStudentCatalog();
                             System.out.println("Enter the student matriculation number: ");
                             matricNumber = sc.nextLine();
-                            if(matricNumber.isEmpty()) throw new StringIndexOutOfBoundsException();
+                            if(matricNumber.isEmpty()) throw new EmptyInputException("matricNumber");
                             student = db.getStudent(matricNumber);
                             if(student!=null) studMg.printCourseRegistered(student);
                             System.out.println("Enter the course code you want to remove the student from");
                             courseCode = sc.nextLine();
-                            if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                            if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                             course = db.getCourse(courseCode);
                             if(course != null && student != null){
                                 if(courseMg.deregisterStudent(course, student) > 0){
@@ -311,7 +311,7 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter the course code you want to modify sessions: ");
                     courseCode = sc.nextLine();
-                    if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                     course = db.getCourse(courseCode);
                     // course exists
                     if(course != null){
@@ -335,7 +335,7 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter the course code you need check vacancy for: ");
                     courseCode = sc.nextLine();
-                    if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                     course = db.getCourse(courseCode);
                     courseMg.checkVacancy(course);
                     break;
@@ -344,7 +344,7 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Please enter the course code that you would like to print out the student list");
                     courseCode = sc.nextLine();
-                    if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                     course = db.getCourse(courseCode);
                     courseMg.printSessionStudent(course);
                     break;
@@ -353,7 +353,7 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
-                    if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                     course = db.getCourse(courseCode);
                     if(course == null){
                         System.out.println("Error! Course isn't in our records!");
@@ -366,12 +366,12 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter course: ");
                     courseCode = sc.nextLine();
-                    if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                     course = db.getCourse(courseCode);
                     if(course != null) courseMg.printStudentRegistered(course);
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    if(matricNumber.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(matricNumber.isEmpty()) throw new EmptyInputException("matricNumber");
                     student = db.getStudent(matricNumber);
                     if(course == null || student == null){
                         System.out.println("Student or course entered is not in our records!");
@@ -389,7 +389,7 @@ public class ScrameApp{
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
-                    if(courseCode.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(courseCode.isEmpty()) throw new EmptyInputException("courseCode");
                     course = db.getCourse(courseCode);
                     if(course == null){
                         System.out.println("Error! Course is not in our records!");
@@ -402,7 +402,7 @@ public class ScrameApp{
                     db.printStudentCatalog();
                     System.out.println("Enter student's matriculation number: ");
                     matricNumber = sc.nextLine();
-                    if(matricNumber.isEmpty()) throw new StringIndexOutOfBoundsException();
+                    if(matricNumber.isEmpty()) throw new EmptyInputException("matricNumber");
                     student = db.getStudent(matricNumber);
                     if(student == null){
                         System.out.println("Error! Student is not in our records!");
@@ -426,8 +426,7 @@ public class ScrameApp{
                 default:
                     System.out.println("Invalid choice, please try again!");
             }
-            }catch(StringIndexOutOfBoundsException e){
-            System.out.println("Error: input must not be blank");
+        }catch(EmptyInputException e){
             continue;
         }catch(InputMismatchException e){
             if(e.getMessage() != null)

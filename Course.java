@@ -65,7 +65,7 @@ public class Course implements Serializable{
      * @return boolean false if the new Session object is not added, true if the new Session object is added
      * @see <a href = "https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
      */
-    public boolean addSession() throws StringIndexOutOfBoundsException{
+    public boolean addSession() throws EmptyInputException{
         boolean success = false;
         ScrameApp.printSpaces();
         Scanner sc = new Scanner(System.in);
@@ -89,7 +89,7 @@ public class Course implements Serializable{
         System.out.println();
         sc.nextLine(); //capture \n
         if(type.isEmpty() || group.isEmpty() || dayTime.isEmpty() || location.isEmpty()|| tutorName.isEmpty()){
-            throw new StringIndexOutOfBoundsException();
+            throw new EmptyInputException();
         }
         if(getSession(group, type) != null){
             System.out.println("This session is already in!");
@@ -108,7 +108,7 @@ public class Course implements Serializable{
      * @param session The Session that need modification (for example changing any of the following: Type, Group ID, Timing, ...)
      * @return boolean true if the modification is successful and false if otherwise.
      */
-    public boolean modifySession(Session session){
+    public boolean modifySession(Session session) throws EmptyInputException, InputMismatchException{
         boolean success = false;
         char conti = 'Y';
         int choice;
@@ -128,6 +128,7 @@ public class Course implements Serializable{
                     System.out.println("Old session's type: " + session.getType());
                     System.out.println("Enter new session's type: (LEC/TUT/LAB)");
                     String type = sc.nextLine();
+                    if(type.isEmpty()) throw new EmptyInputException("type");
                     session.setType(type);
                     success = true;
                     break;
@@ -135,6 +136,7 @@ public class Course implements Serializable{
                     System.out.println("Old session's group: " + session.getGroup());
                     System.out.println("Enter new session's group : (SEP1/CE3/SEA2)");
                     String group = sc.nextLine();
+                    if(group.isEmpty()) throw new EmptyInputException("group");
                     session.setGroup(group);
                     success = true;
                     break;
@@ -142,6 +144,7 @@ public class Course implements Serializable{
                     System.out.println("Old session's timing: " + session.getDayTime());
                     System.out.println("Enter new session's timing: (Mon 15:00 - 17:00/ Fri 09:00 - 11:00)");
                     String dayTime = sc.nextLine();
+                    if(dayTime.isEmpty()) throw new EmptyInputException("dayTime");
                     session.setDayTime(dayTime);
                     success = true;
                     break;
@@ -149,6 +152,7 @@ public class Course implements Serializable{
                     System.out.println("Old session's location: " + session.getLocation());
                     System.out.println("Enter new session's location: (LT19a/TRx44/SWLAB3)");
                     String location = sc.nextLine();
+                    if(location.isEmpty()) throw new EmptyInputException("location");
                     session.setLocation(location);
                     success = true;
                     break;
@@ -156,6 +160,7 @@ public class Course implements Serializable{
                     System.out.println("Old session's tutor name: " + session.getTutorName());
                     System.out.println("Enter new session's tutor name: ");
                     String tutorName = sc.nextLine();
+                    if(tutorName.isEmpty()) throw new EmptyInputException("tutorName");
                     session.setTutorName(tutorName);
                     success = true;
                     break;
