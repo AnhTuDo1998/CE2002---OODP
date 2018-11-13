@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 /**
- * 
+ * An entity class to store related information about a Course.
+ * This Class is also hosting the ArrayList for {@link Session} and ArrayList for {@link Assessment}.
  */
 public class Course implements Serializable{
     //Record of Session (Tut, Lab and Lecture) under a course.
@@ -62,7 +63,7 @@ public class Course implements Serializable{
     /**
      * A method to add in new {@link Session} under the calling Course object (making use of ArrayList for storage). 
      * @return boolean false if the new Session object is not added, true if the new Session object is added
-     * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
+     * @see <a href = "https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
      */
     public boolean addSession() throws StringIndexOutOfBoundsException{
         boolean success = false;
@@ -253,13 +254,13 @@ public class Course implements Serializable{
      * Else, continue until no more unvisited Student under the current Session.
      * <p> We then remove all the Assessment results of the Student by traversing and removing from the array list of hashmap that stored all 
      * result for the student for the course.
-     * @param student
+     * @param student Student to be removed.
      * @return int number of Session that the Student were removed from for debugging purpose.
      * @see Session#getStudentRegistered()
      * @see Session#setNumberRegistered(int)
      * @see Assessment#removeAssessmentResult(Student)
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
-     * @see <a href = https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
+     * @see <a href = "https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
      */
     public int deregisterStudent(Student student){
         int sessionCount = 0;
@@ -294,7 +295,7 @@ public class Course implements Serializable{
 
     /**
      * A method to return the ArrayList of {@link Assessment} objects under the calling Course
-     * @return ArrayList<Assessment> the array storiing the Assessment objects (each object correspond to 1 component such as Final exam, quiz, etc)
+     * @return ArrayList of Assessment objects (each object correspond to 1 component such as Final exam, quiz, etc)
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public ArrayList<Assessment> getAssessment(){
