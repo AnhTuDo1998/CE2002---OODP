@@ -2,7 +2,8 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This is an entity class to contain information about sessions/classes (Lecture, Tutorial, Laboratory).
+ * This is an entity class to store related information about sessions/classes (Lecture, Tutorial, Laboratory).
+ * The Session objects are stored in an ArrayList under a {@link Course} object.
  */
 public class Session implements Serializable{
     private String type; //lec OR tut or lab
@@ -171,7 +172,7 @@ public class Session implements Serializable{
     }
 
     /**
-     * A method to add in <@link Student> into the calling session. This method utilise get() and add() method of ArrayList.
+     * A method to add in {@link Student} into the calling session. This method utilise get() and add() method of ArrayList.
      * @param student Student student object to be added into this session
      * @return int -1 if the session is full (vacancy = 0),
      * -2 if the student being added is already inside the session,
@@ -212,7 +213,7 @@ public class Session implements Serializable{
 
     /**
      * A method to access the array of {@link Student} currently registered in this session
-     * @return ArrayList<Student> an array list of students currently registered
+     * @return ArrayList of students currently registered.
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public ArrayList<Student> getStudentRegistered(){

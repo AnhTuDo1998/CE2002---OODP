@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 /**
- * A controller class to be in-charge of most services related to Student objects
+ * A controller class to handle most services related to Student objects
  */
 public class StudentManager{
     /**
@@ -56,7 +56,7 @@ public class StudentManager{
 
     /**
      * A utility method to convert number mark to letter grade.
-     * @param double the numeric marks to be converted
+     * @param marks double the numeric marks to be converted
      * @return String the letter grade of the numeric mark being queried.
      */
     public String marksToGrade(double marks){

@@ -2,7 +2,9 @@ import java.util.*;
 import java.io.*;
 
 /**
- * An entity class to store relevant information of a student
+ * An entity class to store relevant information of a student.
+ * This class is hosting the ArrayList of {@link Course} objects that the Student is registered under.
+ * Student objects are stored in ArrayList under {@link Session} object
  */
 public class Student implements Serializable{
     private String studentName;
@@ -54,7 +56,7 @@ public class Student implements Serializable{
 
     /**
      * A method to return the array of {@link Course} objects that the calling Student is currently registered under.
-     * @return ArrayList<Course> an ArrayList of Course objects the Student is currently registered under.
+     * @return an ArrayList of Course objects the Student is currently registered under.
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public ArrayList<Course> getCourseRegistered(){

@@ -2,7 +2,8 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This is an entity class that mainly stores all data related to this application.
+ * An entity class that mainly stores all data related to this application. 
+ * This class is based on the interface
  */
 public class Database implements Serializable{
     private ArrayList<Student> studentCatalog= new ArrayList<Student>();
@@ -10,7 +11,7 @@ public class Database implements Serializable{
 
     /**
 	 * A method to get the ArrayList of {@link Student} stored in this application.
-	 * @return ArrayList<Student> all students registered in this application.
+	 * @return ArrayList of all students registered in this application.
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a> 
 	 */
     public ArrayList<Student> getStudentCatalog(){
@@ -19,7 +20,7 @@ public class Database implements Serializable{
 
     /**
      * A method to get the ArrayList of {@link Course} stored in this application.
-     * @return ArrayList<Course> all courses registered in this application.
+     * @return ArrayList of all courses registered in this application.
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public ArrayList<Course> getCourseCatalog(){
@@ -67,10 +68,10 @@ public class Database implements Serializable{
      * the courses, results of the student will be erased as well.
      * </p>
      * @param student Student the student object to be removed.
-     * @see Course#getAssessment
-     * @see Session#getAllSession
-     * @see Session#getStudentsRegistered
-     * @see Assessment#removeAssessmentResult
+     * @see Course#getAssessment()
+     * @see Course#getAllSession()
+     * @see Session#getStudentRegistered()
+     * @see Assessment#removeAssessmentResult(Student)
      */
     public void removeStudent(Student student){
         if(studentCatalog.remove(student)){
@@ -103,6 +104,7 @@ public class Database implements Serializable{
      * All students that are currently registered to this course will be deregistered.
      * @param course Course the course to be removed.
      * @see Student#deregisterCourse(Course)
+     * @return boolean true if there exist Course to be removed, else false
      */
     public boolean removeCourse(Course course){
     

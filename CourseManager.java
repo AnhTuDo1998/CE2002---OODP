@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 /**
- * A controller class, in charge of most services related to Course objects
+ * A controller class to handle most services related to Course objects.
  */
 public class CourseManager{
     /**
@@ -22,6 +22,7 @@ public class CourseManager{
     /**
      * A method to check the current vacancy of {@link Course} object by printing
      * out all Session objects under it and their vacancy. Refer to {@link Course#printSessions()} for more info.
+     * @param course Course object which has vacancy of Sessions to be printed out.
      */
     public void checkVacancy(Course course){
         if (course != null){
@@ -63,7 +64,7 @@ public class CourseManager{
      * A method to return the ArrayList of {@link Assessment} components stored under
      * the {@link Course} parsed in. This is done by {@link Course#getAssessment()} method
      * @param course Course object whose list of Assessments is to be returned
-     * @return ArrayList<Assessment> list of Assessments under the Course.
+     * @return ArrayList of Assessments under the Course.
      */
     public ArrayList<Assessment> getAssessment(Course course){
         return course.getAssessment();
@@ -210,8 +211,8 @@ public class CourseManager{
     }
 
     /**
-     * A method to access {@link Course} and add more {@link @Session} into it. This is done by {@link Course#addSession()} which append the 
-     * get related information about the new Session and append it at the end of the ArrayList<Session> stored under Course object.
+     * A method to access {@link Course} and add more {@link Session} into it. This is done by {@link Course#addSession()} which append the 
+     * get related information about the new Session and append it at the end of the ArrayList of Session objects stored under Course object.
      * @param course Course object which new Session is to be added to.
      * @return true if success, false if failed.
      */
@@ -229,9 +230,10 @@ public class CourseManager{
     }
 
     /**
-     * A method to access {@link Course} and remove {@link @Student} from it. This is done by {@link Course#deregisterStudent(Student)}
+     * A method to access {@link Course} and remove {@link Student} from it. This is done by {@link Course#deregisterStudent(Student)}
      * which remove Student from all {@link Session} and erase his/her {@link Assessment} data.
      * @param course Course object which new Session is to be added to.
+     * @param student Student object to be removed.
      * @return true if success, false if failed.
      */
     public int deregisterStudent(Course course, Student student){

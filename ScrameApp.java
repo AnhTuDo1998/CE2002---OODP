@@ -5,8 +5,17 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.awt.Graphics;
-
+/**
+ * Main boundary class for S.C.R.A.M.E Application, which is a console-base student register system.
+ * This class is in charge of interacting with users and delegate jobs and data to {@link Database},
+ * {@link CourseManager} and {@link @StudentManager} for processing.
+ */
 public class ScrameApp{
+	/**
+	 * Main thread of the S.C.R.A.M.E Application. This method is called when the
+	 * application is activated and remains open unitl the user exit the application.
+	 * @param args empty String buffer.
+	 */
     public static void main(String[] args) {
         Scanner sc = new Scanner (System.in);
         Student student;
@@ -438,7 +447,11 @@ public class ScrameApp{
             }
         }
     }
-
+    /**
+     * A method to load data stored inside a file into the application return the updated {@link Database}.
+     * @param filename String name of the file data is load from
+     * @return the updated Database for SCRAME
+     */
     public static Database loadData(String filename) {
 		Database db = null;
 		FileInputStream fis = null;
@@ -466,7 +479,11 @@ public class ScrameApp{
         }
         return (new Database());
 	}
-
+    /**
+     * A method to save data stored in the {@link Database} into an external file.
+     * @param filename String the name of the file to stored data in
+     * @param db Database hosting all information relevant to SCRAME application.
+     */
 	public static void saveData(String filename, Database db) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
@@ -481,7 +498,9 @@ public class ScrameApp{
 		}
     }
 
-    //print the title SCRAME
+    /**
+     * A method to print out title of the application with nice format.
+     */
     public static void printTitle(){
         int width = 110; //set the width and height of the view
         int height = 20;
@@ -510,7 +529,9 @@ public class ScrameApp{
         System.out.println("                                      Press Enter Key to Continue                                   ");
         sc.nextLine(); 
     }
-            
+    /**
+     * A method to print blank spaces for nice display.      
+     */
     public static void printSpaces(){
         for(int i =0; i< 100; i++){
             System.out.println();
