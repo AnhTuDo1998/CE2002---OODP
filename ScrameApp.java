@@ -8,7 +8,7 @@ import java.awt.Graphics;
 /**
  * Main boundary class for S.C.R.A.M.E Application, which is a console-base student register system.
  * This class is in charge of interacting with users and delegate jobs and data to {@link Database},
- * {@link CourseManager} and {@link @StudentManager} for processing.
+ * {@link CourseManager} and {@link StudentManager} for processing.
  */
 public class ScrameApp{
 	/**

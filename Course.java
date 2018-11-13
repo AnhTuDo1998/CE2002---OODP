@@ -63,6 +63,7 @@ public class Course implements Serializable{
     /**
      * A method to add in new {@link Session} under the calling Course object (making use of ArrayList for storage). 
      * @return boolean false if the new Session object is not added, true if the new Session object is added
+     * @throws EmptyInputException if empty space is entered instead of information from users
      * @see <a href = "https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"> HashMap </a>
      */
     public boolean addSession() throws EmptyInputException{
@@ -107,6 +108,8 @@ public class Course implements Serializable{
      * field of information for that session.
      * @param session The Session that need modification (for example changing any of the following: Type, Group ID, Timing, ...)
      * @return boolean true if the modification is successful and false if otherwise.
+     * @throws EmptyInputException for empty input from the users.
+     * @throws InputMismatchException if the input given by users is mismatch with the data type required.
      */
     public boolean modifySession(Session session) throws EmptyInputException, InputMismatchException{
         boolean success = false;

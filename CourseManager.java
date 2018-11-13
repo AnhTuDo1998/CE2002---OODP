@@ -215,6 +215,7 @@ public class CourseManager{
      * get related information about the new Session and append it at the end of the ArrayList of Session objects stored under Course object.
      * @param course Course object which new Session is to be added to.
      * @return true if success, false if failed.
+     * @throws EmptyInputException for empty input from user instead of information needed.
      */
     public boolean addSession(Course course) throws EmptyInputException{
         return course.addSession();
@@ -255,8 +256,16 @@ public class CourseManager{
      * by accessing the ArrayList of Session.
      * @param course Course object which we need to get a Session from
      * @return Session object of interest.
+     * @throws EmptyInputException for empty input from user.
      */
     public Session getCourseSession(Course course) throws EmptyInputException{
+    	Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Session Group ID (CE1/SEP3)");
+        String group = sc.nextLine();
+        if(group.isEmpty()) throw new EmptyInputException("group");
+        System.out.println("Enter the Session Type (LAB/TUT/LEC CE1)");
+        String type = sc.nextLine();
+        if(type.isEmpty()) throw new EmptyInputException("type");
         //get the session from database
         return course.getSession(group, type);
     }
@@ -267,6 +276,8 @@ public class CourseManager{
      * shown in {@link Course#modifySession(Session)}
      * @param course Course object which have Session to be modified
      * @param session Session object that is being modified
+     * @throws EmptyInputException for empty input from user.
+     * @throws InputMismatchException if user's input is not matching with data type required.
      */
     public void modifySession(Course course, Session session) throws EmptyInputException, InputMismatchException{
         course.modifySession(session);
