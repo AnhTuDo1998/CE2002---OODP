@@ -81,6 +81,13 @@ public class CourseManager{
         boolean finalsSet = false;
         Scanner sc = new Scanner(System.in);
         char confirm = 'N';
+        if(course.getAssessment().size()>0){
+            System.out.println("=============================== WARNING ==============================");
+            System.out.println("Assessment weightages are already set! Are you sure you want to proceed?");
+            System.out.println("Doing so will WIPE ALL existing results and weightages!");
+            System.out.printf("(Y/N) : ");
+            if (sc.nextLine().toUpperCase().charAt(0) != 'Y') return;
+        }
         course.clearAssessments(); //reset assessments if already set;
         
         while(totalWeightage!=100){
@@ -208,6 +215,8 @@ public class CourseManager{
         System.out.printf("Number of D        : %1$-6s (%2$-5.2f%%)\n", results[8], ((double)(results[8])/i)*100); System.out.printf("Number of A        : %1$-6s (%2$-5.2f%%)\n", results[0], ((double)(results[0])/i)*100);
         System.out.printf("Number of F        : %1$-6s (%2$-5.2f%%)\n", results[9], ((double)(results[9])/i)*100);
         System.out.printf("Average Result     : %1$-5.2f \n", (double)(totalAverageResults/i));
+        System.out.println();
+        System.out.printf("Total students     : %d", i);
     }
 
     /**
