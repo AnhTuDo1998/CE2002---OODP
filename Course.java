@@ -225,11 +225,10 @@ public class Course implements Serializable{
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printIndexList(){
-        int i;
 
         System.out.println("Sessions for " + this.courseName + " " + this.courseCode);
-        for(i = 0; i < indexList.size(); i++){
-            System.out.println(indexList.get(i));
+        for(Session session: indexList){
+            System.out.println(session);
         }
     }
 
@@ -240,12 +239,11 @@ public class Course implements Serializable{
      * @return Session the session object of interest.
      */
     public Session getSession(String group, String type){
-        int i;
         Session obtained = null;
 
-        for(i = 0; i < indexList.size(); i++){
-            if(indexList.get(i).getType().equals(type) && indexList.get(i).getGroup().equals(group)){
-                obtained = indexList.get(i);
+        for(Session session: indexList){
+            if(session.getType().equals(type) && session.getGroup().equals(group)){
+                obtained = session;
                 break;
             }
         }
@@ -274,9 +272,9 @@ public class Course implements Serializable{
      */
     public int registerStudent(Student student, String group, String type){
         int result = -3;
-        for(int i = 0; i < indexList.size();  i++){
-            if(indexList.get(i).getGroup().equals(group) && indexList.get(i).getType().equals(type)){
-                result = indexList.get(i).addStudent(student);
+        for(Session session: indexList){
+            if(session.getGroup().equals(group) && session.getType().equals(type)){
+                result = session.addStudent(student);
                 //result is -1 if full, -2 if student is already inside, 0 if success
             }
         }
@@ -302,18 +300,18 @@ public class Course implements Serializable{
      */
     public int deregisterStudent(Student student){
         int sessionCount = 0;
-        for(int i = 0; i < indexList.size(); i++){
-            ArrayList<Student> students = indexList.get(i).getStudentRegistered();
-            for(int j = 0; j < students.size(); j++){
-                if(students.get(j).equals(student)){
+        for(Session session:indexList){
+            ArrayList<Student> students = session.getStudentRegistered();
+            for(Student registeredStudent: students){
+                if(registeredStudent.equals(student)){
                     sessionCount++;
                     students.remove(student);
-                    indexList.get(i).setNumberRegistered(indexList.get(i).getNumberRegistered()-1);
+                    session.setNumberRegistered(session.getNumberRegistered()-1);
                 }
             }
 
-            for(int z = 0; z < results.size(); z++){
-                results.get(z).removeAssessmentResult(student);
+            for(Assessment assessment: results){
+                assessment.removeAssessmentResult(student);
             }
         }
         return sessionCount;
@@ -325,9 +323,9 @@ public class Course implements Serializable{
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printSessions(){
-        for (int i = 0; i < indexList.size(); i++){
-            System.out.println(indexList.get(i) + " | Vacancy: " 
-            + indexList.get(i).getVacancy() + "/" + indexList.get(i).getMaxCapacity());
+        for (Session session: indexList){
+            System.out.println(session + " | Vacancy: " 
+            + session.getVacancy() + "/" + session.getMaxCapacity());
         }
     }
 
@@ -367,8 +365,8 @@ public class Course implements Serializable{
      * @return boolean true if the Student is under the Course, else false is returned.
      */
     public boolean studentRegistered(Student student){
-        for(int i = 0; i < indexList.size(); i++){
-            if(indexList.get(i).getStudentRegistered().contains(student)) return true;
+        for(Session session: indexList){
+            if(session.getStudentRegistered().contains(student)) return true;
         }
         return false;
     }

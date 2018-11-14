@@ -37,19 +37,21 @@ public class StudentManager{
         double totalGPA = 0;
         int totalAU = 0;
         String grade = "F";
-        for(int i = 0; i < courseRegistered.size(); i++){
+        int currentAU = 0;
+        for(Course course:courseRegistered){ 
             totalResults = 0;
-            results = courseRegistered.get(i).getAssessment();
-            System.out.println(courseRegistered.get(i));
-            for(int j = 0; j < results.size(); j++){
-                System.out.printf("%1$35s Marks : %2$1s (%3$2s%%)\n", results.get(j).getAssessmentName(), results.get(j).retrieveAssessmentResult(student), results.get(j).getWeightage());
-                totalResults += results.get(j).retrieveAssessmentResult(student) * results.get(j).getWeightage() / 100;
+            results = course.getAssessment(); //return an arraylist of assessment
+            System.out.println(course);
+            for(Assessment assessment : results ){
+                System.out.printf("%1$35s Marks : %2$1s (%3$2s%%)\n", assessment.getAssessmentName(), assessment.retrieveAssessmentResult(student), assessment.getWeightage());
+                totalResults += assessment.retrieveAssessmentResult(student) * assessment.getWeightage() / 100;
             }
             System.out.println("======================= Final Grade: " + marksToGrade(totalResults) + " ======= GPA: " + marksToGPA(totalResults) + " =============================");
             System.out.println("======================================================================================");
             System.out.println();
-            totalAU += courseRegistered.get(i).getAU();
-            totalGPA += courseRegistered.get(i).getAU()*marksToGPA(totalResults);
+            currentAU = course.getAU();
+            totalAU += currentAU;
+            totalGPA += currentAU*marksToGPA(totalResults);
         }
         System.out.println("====================================== CGPA : " + totalGPA/totalAU + " ===================================");
     }
@@ -110,12 +112,11 @@ public class StudentManager{
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void printCourseRegistered(Student student){
-        int i =0;
         ArrayList<Course> courseRegistered = student.getCourseRegistered();
         System.out.println("======================================================================================");
         System.out.println("================================= Course Registered ==================================");
-        for(i = 0; i < courseRegistered.size(); i++){
-            System.out.println(courseRegistered.get(i));
+        for(Course course: courseRegistered){
+            System.out.println(course);
         }
         System.out.println("======================================================================================");
     }

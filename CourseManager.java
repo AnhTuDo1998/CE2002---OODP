@@ -143,8 +143,9 @@ public class CourseManager{
      * A method to print out statistics for {@link Course} being parsed in.
      * These statistics are for example number of male/female, number of students by year of study and etc.
      * @param course Course object to display Statistics for.
+     * @throws InputMismatchException if string is entered instead of a number.
      */
-    public void printCourseStats(Course course){
+    public void printCourseStats(Course course) throws InputMismatchException{
         ArrayList<Assessment> assessmentList = course.getAssessment();
         ArrayList<Session> sessionList = course.getAllSession();
         ArrayList<Student> registeredStudents = new ArrayList<Student>();
@@ -164,8 +165,8 @@ public class CourseManager{
         double totalAverageResults = 0;
 
         //index 0 = year1, 1 = year2, 2 = year3, 3 = year4 
-        for(i = 0; i < sessionList.size(); i++){
-            buffer.addAll(sessionList.get(i).getStudentRegistered());
+        for(Session session : sessionList){
+            buffer.addAll(session.getStudentRegistered());
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
@@ -176,7 +177,7 @@ public class CourseManager{
         System.out.println("3. Coursework marks");
         choice = sc.nextInt();
         sc.nextLine();
-        switch(choice){
+        switch(choice){ 
             case 1:  size = assessmentList.size();
                 start = 0;
                 totalWeightage = 100;
@@ -346,17 +347,17 @@ public class CourseManager{
 
         ArrayList<Assessment> results = getAssessment(course);
             if(course.studentRegistered(student)){
-                for (i = 0; i < results.size(); i++){
+                for (Assessment assessment : results){
                     marks = 101.0; //just for it to satisfy the while statement
                     while(marks > 100 || marks < 0){
                         try{
-                            System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
+                            System.out.println("Enter results the following component: " + assessment.getAssessmentName());
                             marks = sc.nextDouble();
                             sc.nextLine();
                             if(marks < 0){
                                 throw new ArithmeticException("Error: marks cannot be negative");
                             }
-                            course.enterResults(results.get(i), student, marks);
+                            course.enterResults(assessment, student, marks);
                         }catch(ArithmeticException e){
                             System.out.println(e.getMessage());
                             continue;
@@ -382,16 +383,15 @@ public class CourseManager{
         ArrayList<Session> sessionList = course.getAllSession();
         ArrayList<Student> registeredStudents = new ArrayList<Student>();
         Set<Student> buffer = new HashSet<>();
-        int i=0;
-        for(i = 0; i < sessionList.size(); i++){
-            buffer.addAll(sessionList.get(i).getStudentRegistered());
+        for(Session session : sessionList){
+            buffer.addAll(session.getStudentRegistered());
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
         System.out.println("============================================================================");
         System.out.println("========================== Student Registered ==============================");
-        for(i = 0; i < registeredStudents.size(); i++){
-            System.out.println(registeredStudents.get(i));
+        for(Student student: registeredStudents){
+            System.out.println(student);
         }
         System.out.println("============================================================================");
     }
