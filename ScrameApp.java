@@ -43,6 +43,7 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
+        printSpaces();
         printTitle();
         while (cont){
             try{
@@ -59,8 +60,10 @@ public class ScrameApp{
                             + "||     8: Enter marks for students                      ||\n"
                             + "||     9: Save Data                                     ||\n"
                             + "||    10: Print course statistics                       ||\n"
-                            + "||    11: Print student transcript                      ||\n"
-                            + "||    12: Quit                                          ||\n"
+                            + "||    11: Print student transcript.                     ||\n"
+                            + "||    12: Show all course(s).                           ||\n"
+                            + "||    13: Show all student(s).                          ||\n"
+                            + "||    14: Quit                                          ||\n"
                             + "|========================================================|\n");
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
@@ -396,7 +399,7 @@ public class ScrameApp{
                     System.out.println("============================== DATA SAVED ==============================");
                     break;
                 case 10: //print course stats
-                    System.out.println("============================== SHOW COURSE CATALOG ==============================");
+                    System.out.println("============================== SHOW COURSE STATISTICS ==============================");
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
