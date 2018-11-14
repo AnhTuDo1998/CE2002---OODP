@@ -143,8 +143,9 @@ public class CourseManager{
      * A method to print out statistics for {@link Course} being parsed in.
      * These statistics are for example number of male/female, number of students by year of study and etc.
      * @param course Course object to display Statistics for.
+     * @throws InputMismatchException if string is entered instead of a number.
      */
-    public void printCourseStats(Course course){
+    public void printCourseStats(Course course) throws InputMismatchException{
         ArrayList<Assessment> assessmentList = course.getAssessment();
         ArrayList<Session> sessionList = course.getAllSession();
         ArrayList<Student> registeredStudents = new ArrayList<Student>();
@@ -176,7 +177,7 @@ public class CourseManager{
         System.out.println("3. Coursework marks");
         choice = sc.nextInt();
         sc.nextLine();
-        switch(choice){
+        switch(choice){ 
             case 1:  size = assessmentList.size();
                 start = 0;
                 totalWeightage = 100;
