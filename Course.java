@@ -70,9 +70,23 @@ public class Course implements Serializable{
         boolean success = false;
         ScrameApp.printSpaces();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter session type: (LEC/TUT/LAB)");
-        String type = sc.nextLine();
+        String type;
+
+        System.out.println("Enter session type:");
+        System.out.printf("1 for Lecture, 2 for Tutorial, 3 for Lab:  ");
+        switch(sc.nextInt()){
+            case 1: type = "LEC";
+                    break;
+            case 2: type = "TUT";
+                    break;
+            case 3: type = "LAB";
+                    break;
+            default:
+                    sc.nextLine();
+                    return false;
+        }
         System.out.println();
+        sc.nextLine();
         System.out.println("Enter session group : (SEP1/CE3/SEA2)");
         String group = sc.nextLine();
         System.out.println();
