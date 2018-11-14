@@ -155,22 +155,21 @@ public class CourseManager{
         int totalFemale = 0;
         int[] year = new int[4];
         int totalResults = 0;
-        int i = 0;
         double totalAverageResults = 0;
         //index 0 = year1, 1 = year2, 2 = year3, 3 = year4 
-        for(i = 0; i < sessionList.size(); i++){
-            buffer.addAll(sessionList.get(i).getStudentRegistered());
+        for(Session session : sessionList){
+            buffer.addAll(session.getStudentRegistered());
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
         ScrameApp.printSpaces();
-        for(i = 0; i < registeredStudents.size(); i++){
-            year[registeredStudents.get(i).getAcadYear()-1]++;
-            if(registeredStudents.get(i).getGender() == ('M')) totalMale++;
+        for(Student student: registeredStudents){
+            year[student.getAcadYear()-1]++;
+            if(student.getGender() == ('M')) totalMale++;
             else totalFemale++;
             totalResults = 0;
-            for(int j = 0; j < assessmentList.size(); j++){
-                totalResults += assessmentList.get(j).retrieveAssessmentResult(registeredStudents.get(i)) * assessmentList.get(j).getWeightage() / 100;
+            for(Assessment assessment: assessmentList){
+                totalResults += assessment.retrieveAssessmentResult(student) * assessment.getWeightage() / 100;
             }
             totalAverageResults += totalResults;
             if(totalResults > 90){
@@ -308,17 +307,17 @@ public class CourseManager{
 
         ArrayList<Assessment> results = getAssessment(course);
             if(course.studentRegistered(student)){
-                for (i = 0; i < results.size(); i++){
+                for (Assessment assessment : results){
                     marks = 101.0; //just for it to satisfy the while statement
                     while(marks > 100 || marks < 0){
                         try{
-                            System.out.println("Enter results the following component: " + results.get(i).getAssessmentName());
+                            System.out.println("Enter results the following component: " + assessment.getAssessmentName());
                             marks = sc.nextDouble();
                             sc.nextLine();
                             if(marks < 0){
                                 throw new ArithmeticException("Error: marks cannot be negative");
                             }
-                            course.enterResults(results.get(i), student, marks);
+                            course.enterResults(assessment, student, marks);
                         }catch(ArithmeticException e){
                             System.out.println(e.getMessage());
                             continue;
@@ -344,16 +343,15 @@ public class CourseManager{
         ArrayList<Session> sessionList = course.getAllSession();
         ArrayList<Student> registeredStudents = new ArrayList<Student>();
         Set<Student> buffer = new HashSet<>();
-        int i=0;
-        for(i = 0; i < sessionList.size(); i++){
-            buffer.addAll(sessionList.get(i).getStudentRegistered());
+        for(Session session : sessionList){
+            buffer.addAll(session.getStudentRegistered());
             //get all registered students, using set to remove duplicates
         }
         registeredStudents.addAll(buffer);
         System.out.println("============================================================================");
         System.out.println("========================== Student Registered ==============================");
-        for(i = 0; i < registeredStudents.size(); i++){
-            System.out.println(registeredStudents.get(i));
+        for(Student student: registeredStudents){
+            System.out.println(student);
         }
         System.out.println("============================================================================");
     }

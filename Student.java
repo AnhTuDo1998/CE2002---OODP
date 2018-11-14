@@ -38,8 +38,8 @@ public class Student implements Serializable{
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
     public void registerCourse(Course course){
-        for(int i = 0; i < coursesRegistered.size(); i++){
-            if(coursesRegistered.get(i) == course) return; //if course is already registered, ignore
+        for(Course courseRegistered: coursesRegistered){
+            if(courseRegistered == course) return; //if course is already registered, ignore
         }
         coursesRegistered.add(course);
     }
