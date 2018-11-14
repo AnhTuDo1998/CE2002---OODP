@@ -6,13 +6,37 @@ import java.io.*;
  * The Session objects are stored in an ArrayList under a {@link Course} object.
  */
 public class Session implements Serializable{
-    private String type; //lec OR tut or lab
+    /**
+     * The type of Session (for example LEC, TUT or LAB)
+     */
+    private String type;
+    /**
+     * The group ID of Session (for example CE1)
+     */
     private String group;
+    /**
+     * The timing of the Session (for example Mon 14:30 - 16:30)
+     */
     private String dayTime;
+    /**
+     * The venue of the Session (for example HW-Lab3, LHN Tr+16)
+     */
     private String location;
+    /**
+     * The name of tutor in charge for the Session 
+     */
     private String tutorName;
+    /**
+     * The max number of Student the Session can accomodate
+     */
     private int maxCapacity;
+    /**
+     * The number of Student currently registered for the Session
+     */
     private int numberRegistered;
+    /**
+     * The ArrayList of Student registered for this Session
+     */
     private ArrayList<Student> studentList = new ArrayList<Student>();
     
     /**

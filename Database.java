@@ -6,7 +6,13 @@ import java.io.*;
  * This class is based on the interface
  */
 public class Database implements Serializable{
+    /**
+     * The ArrayList of Students for the application at the moment
+     */
     private ArrayList<Student> studentCatalog= new ArrayList<Student>();
+    /**
+     * The ArrayList of Courses for the application at the moment
+     */
     private ArrayList<Course> courseCatalog = new ArrayList<Course>();
 
     /**

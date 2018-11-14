@@ -5,16 +5,32 @@ import java.io.*;
  * This Class is also hosting the ArrayList for {@link Session} and ArrayList for {@link Assessment}.
  */
 public class Course implements Serializable{
-    //Record of Session (Tut, Lab and Lecture) under a course.
+    /** 
+     * Record of Session (Tut, Lab and Lecture) under a course.
+    */
     private ArrayList<Session> indexList = new ArrayList<Session>();
-    //Record of Assessment (Exam and Coursework) under a course.
-    //index 0 is equivalent to exam marks, the rest are coursemarks.
+
+    /**
+     * Record of Assessment (Exam and Coursework) under a course.Index 0 is equivalent to exam marks, the rest are coursemarks.
+    */
     private ArrayList<Assessment> results = new ArrayList<Assessment>();  //arrayList of hashmaps.
 
     //Other relevant information of a course.
+    /**
+     * The name of the Course. For example "Object Oriented Design and Programming"
+     */
     private String courseName;
+    /**
+     * The course code of the Course. For example CZ2002.
+     */
     private String courseCode;
+    /**
+     * The AU of the Course. Example: 3.
+     */
     private int AU;
+    /**
+     * The name of in-charge professor. 
+     */
     private String courseCoordinator;
 
     /**

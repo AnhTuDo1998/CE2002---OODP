@@ -7,12 +7,33 @@ import java.io.*;
  * Student objects are stored in ArrayList under {@link Session} object
  */
 public class Student implements Serializable{
+    /**
+     * The name of the Student
+     */
     private String studentName;
+    /**
+     * The matriculation number of the Student
+     */
     private String matricNumber;
+    /** 
+     * The school that the Student is based in. For example SCSE.
+     */
     private String school;
+    /**
+     * The year of study of the Student. For example 1-4.
+     */
     private int acadYear;
+    /**
+     * The gender of the Student. M for Male and F for female.
+     */
     private char gender;
-    private ArrayList<Course> coursesRegistered = new ArrayList<Course>(); //arraylist of course codes registered
+    /**
+     * The ArrayList storing Courses that the Student is enrolled in
+     */
+    private ArrayList<Course> coursesRegistered = new ArrayList<Course>();
+    /**
+     * The total AU that the Student is taking for the current instance.
+     */
     private int totalAU = 0;
 
     /**
