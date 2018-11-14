@@ -149,14 +149,20 @@ public class CourseManager{
         ArrayList<Session> sessionList = course.getAllSession();
         ArrayList<Student> registeredStudents = new ArrayList<Student>();
         Set<Student> buffer = new HashSet<>();
+        Scanner sc = new Scanner(System.in);
         int[] results = new int[10];
         //index 0 = A+, 1 = A....9 = F
         int totalMale = 0;
         int totalFemale = 0;
         int[] year = new int[4];
-        int totalResults = 0;
+        double totalResults = 0;
         int i = 0;
+        int choice = 0;
+        int start=0;
+        int size=0;
+        double totalWeightage = 100;
         double totalAverageResults = 0;
+
         //index 0 = year1, 1 = year2, 2 = year3, 3 = year4 
         for(i = 0; i < sessionList.size(); i++){
             buffer.addAll(sessionList.get(i).getStudentRegistered());
@@ -164,15 +170,48 @@ public class CourseManager{
         }
         registeredStudents.addAll(buffer);
         ScrameApp.printSpaces();
+        System.out.println("Which statistics do you want to print (Enter a number)?");
+        System.out.println("1. Overall marks");
+        System.out.println("2. Finals marks");
+        System.out.println("3. Coursework marks");
+        choice = sc.nextInt();
+        sc.nextLine();
+        switch(choice){
+            case 1:  size = assessmentList.size();
+                start = 0;
+                totalWeightage = 100;
+                System.out.println("================================ OVERALL STATISTICS ================================");
+                break;
+            case 2:  size = 1;
+                start = 0;
+                totalWeightage = assessmentList.get(0).getWeightage();
+                System.out.println("================================ FINALS STATISTICS ================================");
+                break;
+            case 3:  size = assessmentList.size();
+                start = 1;
+                totalWeightage = 100 - assessmentList.get(0).getWeightage();
+                System.out.println("================================ COURSEWORK STATISTICS ================================");
+                break;
+            default: 
+                size = assessmentList.size();
+                start = 0;
+                totalWeightage = 100;
+                System.out.println("================================ OVERALL STATISTICS ================================");
+                break;
+
+        }        
+        System.out.println("Printing course statistics for " + course);
+        System.out.println("= MATRICULATION NUMBER == RESULT ====");
         for(i = 0; i < registeredStudents.size(); i++){
             year[registeredStudents.get(i).getAcadYear()-1]++;
             if(registeredStudents.get(i).getGender() == ('M')) totalMale++;
             else totalFemale++;
             totalResults = 0;
-            for(int j = 0; j < assessmentList.size(); j++){
-                totalResults += assessmentList.get(j).retrieveAssessmentResult(registeredStudents.get(i)) * assessmentList.get(j).getWeightage() / 100;
+            for(int j = start; j < size; j++){
+                totalResults += assessmentList.get(j).retrieveAssessmentResult(registeredStudents.get(i)) * assessmentList.get(j).getWeightage() /totalWeightage;
             }
             totalAverageResults += totalResults;
+            System.out.printf("       %-15s  : %-5.2f%%\n", registeredStudents.get(i).getMatricNumber(), totalResults);
             if(totalResults > 90){
                 results[0]++;
             }else if(totalResults >80){
@@ -193,7 +232,6 @@ public class CourseManager{
                 results[8]++;
             }else results[9]++;
         }
-        System.out.println("Printing course statistics for " + course);
         System.out.println("========== Gender Distribution ========");
         // i is currently the total number of students in this course
         System.out.printf("Number of Males    : %1$-6s (%2$-5.2f%%)\n", totalMale, ((double)(totalMale)/i)*100);
