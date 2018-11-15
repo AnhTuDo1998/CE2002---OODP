@@ -364,7 +364,7 @@ public class CourseManager{
                         }   
                     }
                 }
-                if(i == 0) System.out.println("Error! Course Weightage is not set yet!");
+                if(results.size() == 0) System.out.println("Error! Course Weightage is not set yet!");
             } else {
                 System.out.println("Student is not registered in this course!");
             }
