@@ -162,6 +162,10 @@ public class Course implements Serializable{
                     System.out.println("Enter new session's type: (LEC/TUT/LAB)");
                     String type = sc.nextLine();
                     if(type.isEmpty()) throw new EmptyInputException("type");
+                    if(getSession(session.getGroup(),type) != null){
+                        System.out.println("Error: the session with the same name and type already exist!");
+                        break;
+                    }
                     session.setType(type);
                     success = true;
                     break;
@@ -170,6 +174,10 @@ public class Course implements Serializable{
                     System.out.println("Enter new session's group : (SEP1/CE3/SEA2)");
                     String group = sc.nextLine();
                     if(group.isEmpty()) throw new EmptyInputException("group");
+                    if(getSession(group, session.getType()) != null){
+                        System.out.println("Error: the session with the same name and type already exist!");
+                        break;
+                    }
                     session.setGroup(group);
                     success = true;
                     break;
