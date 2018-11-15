@@ -1,5 +1,5 @@
 /**
- * This is a user-defined excaption class to handle enpty input error from user.
+ * This is a user-defined exception class to handle empty input error from user.
  */
 public class EmptyInputException extends Exception{
 
