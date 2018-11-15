@@ -6,9 +6,17 @@ import java.io.*;
  * The Assessment objects are stored in an ArrayList under the entity {@link Course} class.
  */
 public class Assessment implements Serializable{
-
-    private String assessmentName;
-    private Double weightage;
+	/**
+	 * The name of the Assessment component.
+	 */
+	private String assessmentName;
+	/**
+	 * The weightage of the Assessment component.
+	 */
+	private Double weightage;
+	/**
+	 * A HashMap storing marks of Student. Student is key and marks is the stored value.
+	 */
 	private HashMap<Student, Double> assessmentResults = new HashMap<Student, Double>();
 	
 	/**

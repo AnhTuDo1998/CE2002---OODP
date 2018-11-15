@@ -43,25 +43,27 @@ public class ScrameApp{
         ArrayList<Assessment> results;
         int i = 0;
         double marks = 0;
-        printSpaces();
         printTitle();
         while (cont){
             try{
-            System.out.println("==================================================== MENU ====================================================");             
-            System.out.println("1. Add/Remove a student ");
-            System.out.println("2. Add/Remove a course");
-            System.out.println("3. Register/Unregister student for a course");
-            System.out.println("4. Modify Session");
-            System.out.println("5. Check available slot in a class");
-            System.out.println("6. Print student list");
-            System.out.println("7. Enter course's assessment weightage");
-            System.out.println("8. Enter coursework mark");
-            System.out.println("9. Save data");
-            System.out.println("10. Print course statistics");
-            System.out.println("11. Print student transcript");
-            System.out.println("12. Print all courses");
-            System.out.println("13. Print all students");
-            System.out.println("14. Exit");
+            System.out.printf("|========================================================|\n"
+                            + "|                         MENU                           |\n"
+                            + "|========================================================|\n"
+                            + "||     1: Add/Remove a student.                         ||\n"
+                            + "||     2: Add/Remove a course.                          ||\n"
+                            + "||     3: Register/deregister student for a course.     ||\n"
+                            + "||     4: Modify a session.                             ||\n"
+                            + "||     5: Check available slot in a course.             ||\n"
+                            + "||     6: Print student list by session.                ||\n"
+                            + "||     7. Enter course assessment components weightage  ||\n"
+                            + "||     8: Enter marks for students                      ||\n"
+                            + "||     9: Save Data                                     ||\n"
+                            + "||    10: Print course statistics                       ||\n"
+                            + "||    11: Print student transcript.                     ||\n"
+                            + "||    12: Show all course(s).                           ||\n"
+                            + "||    13: Show all student(s).                          ||\n"
+                            + "||    14: Quit                                          ||\n"
+                            + "|========================================================|\n");
             System.out.print("Enter your action: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -84,17 +86,22 @@ public class ScrameApp{
                                     System.out.println("Enter student's name: ");
                                     studentName = sc.nextLine();
                                     System.out.println();
+                                    if(!studentName.matches("[a-zA-Z\\s]*")){
+                                        System.out.print("Enter a valid name: ");
+                                        studentName = sc.nextLine();
+                                        if(!studentName.matches("[a-zA-Z\\s]*"))  throw new InputMismatchException("Error: enter alphabets only");
+                                    }
                                     System.out.println("Enter student's matric No.: ");
-                                    matricNumber = sc.nextLine();
+                                    matricNumber = sc.nextLine().toUpperCase();
                                     System.out.println();
                                     System.out.println("Enter student's school (SCSE): ");
-                                    school = sc.nextLine();
+                                    school = sc.nextLine().toUpperCase();
                                     System.out.println();
                                     System.out.println("Enter student's year of study: (1~4)");
                                     acadYear = sc.nextInt();
                                     sc.nextLine();
                                     if(acadYear < 1 || acadYear > 4){
-                                        System.out.println("Enter a value between 1 and 4");
+                                        System.out.print("Enter a value between 1 and 4: ");
                                         acadYear = sc.nextInt();
                                         sc.nextLine();
                                         if(acadYear < 1 || acadYear > 4) throw new InputMismatchException("Error: entered an invalid academic year value");
@@ -115,6 +122,7 @@ public class ScrameApp{
                                 }
                                 if(db.getStudent(matricNumber) != null){
                                     System.out.println("Student with matric number " + matricNumber + " already exists!");
+                                    break;
                                 }
                                 else{
                                     System.out.println("Student: "+ studentName +", Matric Number: " + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
@@ -396,7 +404,7 @@ public class ScrameApp{
                     System.out.println("============================== DATA SAVED ==============================");
                     break;
                 case 10: //print course stats
-                    System.out.println("============================== SHOW COURSE CATALOG ==============================");
+                    System.out.println("============================== SHOW COURSE STATISTICS ==============================");
                     db.printCourseCatalog();
                     System.out.println("Enter course code:");
                     courseCode = sc.nextLine();
@@ -442,11 +450,14 @@ public class ScrameApp{
         }catch(InputMismatchException e){
             if(e.getMessage() != null)
                 System.out.println(e.getMessage());
-            else
-                System.out.println("Error: invalid input");
+            else{
+                System.out.println("Error: invalid input (Press enter)");
+                sc.nextLine();
+            }
             continue;
         }catch(Exception e){
-            System.out.println("Error: input is invalid");
+            System.out.println("Error: input is invalid (Press enter)");
+            sc.nextLine();
             continue;
         }finally{
                 System.out.println();
