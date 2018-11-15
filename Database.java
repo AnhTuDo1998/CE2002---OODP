@@ -145,6 +145,7 @@ public class Database implements Serializable{
         System.out.println("================================== Student ====================================");
         for (Student student: studentCatalog){
             System.out.println(i + ". " + student );
+            i++;
         }
         System.out.println("===============================================================================");
         System.out.println();

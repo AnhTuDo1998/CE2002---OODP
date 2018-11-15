@@ -87,17 +87,22 @@ public class ScrameApp{
                                     System.out.println("Enter student's name: ");
                                     studentName = sc.nextLine();
                                     System.out.println();
+                                    if(!studentName.matches("[a-zA-Z\\s]*")){
+                                        System.out.print("Enter a valid name: ");
+                                        studentName = sc.nextLine();
+                                        if(!studentName.matches("[a-zA-Z\\s]*"))  throw new InputMismatchException("Error: enter alphabets only");
+                                    }
                                     System.out.println("Enter student's matric No.: ");
-                                    matricNumber = sc.nextLine();
+                                    matricNumber = sc.nextLine().toUpperCase();
                                     System.out.println();
                                     System.out.println("Enter student's school (SCSE): ");
-                                    school = sc.nextLine();
+                                    school = sc.nextLine().toUpperCase();
                                     System.out.println();
                                     System.out.println("Enter student's year of study: (1~4)");
                                     acadYear = sc.nextInt();
                                     sc.nextLine();
                                     if(acadYear < 1 || acadYear > 4){
-                                        System.out.println("Enter a value between 1 and 4");
+                                        System.out.print("Enter a value between 1 and 4: ");
                                         acadYear = sc.nextInt();
                                         sc.nextLine();
                                         if(acadYear < 1 || acadYear > 4) throw new InputMismatchException("Error: entered an invalid academic year value");
@@ -118,6 +123,7 @@ public class ScrameApp{
                                 }
                                 if(db.getStudent(matricNumber) != null){
                                     System.out.println("Student with matric number " + matricNumber + " already exists!");
+                                    break;
                                 }
                                 else{
                                     System.out.println("Student: "+ studentName +", Matric Number: " + matricNumber + ", "+ school + " Year " + acadYear + " , "+gender);
