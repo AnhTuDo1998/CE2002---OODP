@@ -21,12 +21,12 @@ public class CourseManager{
     }
     /**
      * A method to check the current vacancy of {@link Course} object by printing
-     * out all Session objects under it and their vacancy. Refer to {@link Course#printVacancy()} for more info.
+     * out all Session objects under it and their vacancy. Refer to {@link Course#printSessions()} for more info.
      * @param course Course object which has vacancy of Sessions to be printed out.
      */
     public void checkVacancy(Course course){
         if (course != null){
-            course.printVacancy();
+            course.printSessions();
         }
         else{
             System.out.println("Course does not exist");
@@ -271,11 +271,11 @@ public class CourseManager{
 
     /**
      * A method to access {@link Course} object and print out all {@link Session} objects stored under it, including their vacancy. This is done by
-     * {@link Course#printVacancy()} method, which traverse the ArrayList of Session stored under Course object and print out the entries.
+     * {@link Course#printSessions()} method, which traverse the ArrayList of Session stored under Course object and print out the entries.
      * @param course Course object whose Session need to be printed out.
      */
-    public void printVacancy(Course course){
-        course.printVacancy();
+    public void printSessions(Course course){
+        course.printSessions();
     }
 
     /**
