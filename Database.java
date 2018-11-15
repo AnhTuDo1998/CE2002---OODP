@@ -94,6 +94,7 @@ public class Database implements Serializable{
                         if(obtainedStudent.equals(student)){
                             studentList.remove(student);
                             session.setNumberRegistered(session.getNumberRegistered()-1);
+                            break;
                         }
                     }
                 }

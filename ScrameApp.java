@@ -280,7 +280,7 @@ public class ScrameApp{
                                 break;
                             }
                             else{
-                                courseMg.printVacancy(course);
+                                courseMg.printSessions(course);
                                 System.out.println("Please enter the group ID: (SEP1/CE3)");
                                 group = sc.nextLine();
                                 System.out.println("Please enter the session type: (LEC/TUT/LAB)");
@@ -457,6 +457,7 @@ public class ScrameApp{
             continue;
         }catch(Exception e){
             System.out.println("Error: input is invalid (Press enter)");
+            e.printStackTrace();
             sc.nextLine();
             continue;
         }finally{

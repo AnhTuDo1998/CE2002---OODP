@@ -322,7 +322,7 @@ public class Course implements Serializable{
      * <p> Traverse the ArrayList of Session objects and print out the information needed.
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
      */
-    public void printVacancy(){
+    public void printSessions(){
         for (Session session: indexList){
             System.out.println(session + " | Vacancy: " 
             + session.getVacancy() + "/" + session.getMaxCapacity());
