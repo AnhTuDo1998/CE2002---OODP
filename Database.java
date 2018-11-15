@@ -6,7 +6,13 @@ import java.io.*;
  * This class is based on the interface
  */
 public class Database implements Serializable{
+    /**
+     * The ArrayList of Students for the application at the moment
+     */
     private ArrayList<Student> studentCatalog= new ArrayList<Student>();
+    /**
+     * The ArrayList of Courses for the application at the moment
+     */
     private ArrayList<Course> courseCatalog = new ArrayList<Course>();
 
     /**
@@ -38,7 +44,6 @@ public class Database implements Serializable{
     public Course addCourse(String courseName, String courseCode, int AU, String courseCoordinator){
 
         Course created = null;
-        
         
         created = new Course(courseName, courseCode, AU, courseCoordinator);
         courseCatalog.add(created);
@@ -75,20 +80,20 @@ public class Database implements Serializable{
      */
     public void removeStudent(Student student){
         if(studentCatalog.remove(student)){
-            for(int i = 0; i < courseCatalog.size(); i++){
+            for(Course course:courseCatalog){
                 //remove the assessment results for that student
-                ArrayList<Assessment> assessments = courseCatalog.get(i).getAssessment();
-                for(int z = 0; z < assessments.size(); z++){
-                    assessments.get(z).removeAssessmentResult(student);
+                ArrayList<Assessment> assessments = course.getAssessment();
+                for(Assessment assessment: assessments){
+                    assessment.removeAssessmentResult(student);
                 }
                 //deregister student and increase number of vacancy by 1
-                ArrayList<Session> indexList = courseCatalog.get(i).getAllSession();
-                for(int j = 0; j < indexList.size(); j++){
-                    ArrayList<Student> studentList = indexList.get(j).getStudentRegistered();
-                    for(int k = 0; k < studentList.size(); k++){
-                        if(studentList.get(i).equals(student)){
+                ArrayList<Session> indexList = course.getAllSession();
+                for(Session session : indexList){
+                    ArrayList<Student> studentList = session.getStudentRegistered();
+                    for(Student obtainedStudent:studentList){
+                        if(obtainedStudent.equals(student)){
                             studentList.remove(student);
-                            indexList.get(j).setNumberRegistered(indexList.get(j).getNumberRegistered()-1);
+                            session.setNumberRegistered(session.getNumberRegistered()-1);
                         }
                     }
                 }
@@ -111,8 +116,8 @@ public class Database implements Serializable{
         //return deleted course, null ff none
         if (course != null){
             if(courseCatalog.remove(course)){
-                for(int i = 0 ; i < studentCatalog.size(); i++){
-                    studentCatalog.get(i).deregisterCourse(course);
+                for(Student student: studentCatalog){
+                    student.deregisterCourse(course);
                 }
                 return true;
             } //will return true or false depends on whether the session is created
@@ -124,12 +129,13 @@ public class Database implements Serializable{
      * A method to print out all existing {@link Course} in the database of this application.
      */
     public void printCourseCatalog(){
-        int i;
+        int i = 1;
         System.out.println("Course in current Catalog: ");
         System.out.println("========================================================================================");
         System.out.println("======================================= Course =========================================");
-        for (i = 0; i < courseCatalog.size(); i++){
-            System.out.println((i+1) + ". " +courseCatalog.get(i));
+        for (Course course: courseCatalog){
+            System.out.println(i + ". " +course);
+            i++;
         }
         System.out.println("========================================================================================");
         System.out.println();
@@ -139,12 +145,12 @@ public class Database implements Serializable{
      * A method to print out all existing {@link Student} in the database of this application.
      */
     public void printStudentCatalog(){
-        int i;
+        int i = 1;
         System.out.println("All students in record: ");
         System.out.println("===============================================================================");
         System.out.println("================================== Student ====================================");
-        for (i = 0; i < studentCatalog.size(); i++){
-            System.out.println((i+1)+ ". " + studentCatalog.get(i) );
+        for (Student student: studentCatalog){
+            System.out.println(i + ". " + student );
         }
         System.out.println("===============================================================================");
         System.out.println();
@@ -156,8 +162,8 @@ public class Database implements Serializable{
      * @return Course target course object, null if not in database.
      */
     public Course getCourse(String courseCode){
-        for(int i = 0; i < courseCatalog.size(); i++){
-            if(courseCatalog.get(i).getCourseCode().equals(courseCode)) return courseCatalog.get(i);
+        for(Course course: courseCatalog){
+            if(course.getCourseCode().equals(courseCode)) return course;
         }
         return null;
     }
@@ -168,8 +174,8 @@ public class Database implements Serializable{
      * @return  Student target student object, null if not in database.
      */
     public Student getStudent(String matricNumber){
-        for(int i = 0; i < studentCatalog.size(); i++){
-            if(studentCatalog.get(i).getMatricNumber().equals(matricNumber)) return studentCatalog.get(i);
+        for(Student student: studentCatalog){
+            if(student.getMatricNumber().equals(matricNumber)) return student;
         }
         return null;
     }
